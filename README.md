@@ -12,15 +12,16 @@ npm install --save base-elements-react
 
 ## Usage
 
-### Import component
+### Importing component
 
-Import any component
+Import any component from `'base-elements-react'`
+Import css file separately
 
 ```tsx
 import React, { Component } from 'react'
 
 import Button from 'base-elements-react'
-import 'base-elements-react/dist/index.css'
+import 'base-elements-react/index.css'
 
 class Example extends Component {
   render() {
@@ -29,9 +30,9 @@ class Example extends Component {
 }
 ```
 
-### Use custom theme
+### Using custom theme
 
-Use custom themes using `ThemeWrapper`
+Use custom themes by wrapping components with `ThemeWrapper`
 
 ```tsx
 import React from 'react';
