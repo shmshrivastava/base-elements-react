@@ -1,6 +1,6 @@
 # base-elements-react
 
-> fully customizable UI elements library for react
+> Fully customizable React UI elements library
 
 [![NPM](https://img.shields.io/npm/v/base-elements-react.svg)](https://www.npmjs.com/package/base-elements-react) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
@@ -12,18 +12,99 @@ npm install --save base-elements-react
 
 ## Usage
 
+Import any component
+
 ```tsx
 import React, { Component } from 'react'
 
-import MyComponent from 'base-elements-react'
+import Button from 'base-elements-react'
 import 'base-elements-react/dist/index.css'
 
 class Example extends Component {
   render() {
-    return <MyComponent />
+    return <Button>Click Here<Button>
   }
 }
 ```
+
+Use custom themes using `ThemeWrapper`
+
+```tsx
+import React from 'react';
+
+import 'base-elements-react/dist/index.css';
+import { Button, ThemeWrapper } from 'base-elements-react/dist';
+
+const themes = [
+  {
+    id: 'light',
+    vars: {
+      colors: {
+        primaryColor: '#29B6F6',
+        primaryColorHover: '#03A9F4',
+        primaryColorDisabled: '#4FC3F7',
+        primaryColorBackground: '#E1F5FE'
+      }
+    }
+  }
+];
+
+const App = () => {
+  return (
+    <ThemeWrapper themes={themes} currentThemeId='light'>
+      <Button>Click Here</Button>
+    </ThemeWrapper>
+  );
+};
+```
+
+Default theme
+
+```json
+{
+  "id": "default",
+  "vars": {
+    "colors": {
+      "fontColor": "#000",
+      "fontColorLight": "#222",
+      "fontColorLighter": "#555",
+      "fontColorInverted": "#FFFFFF",
+      "primaryColor": "#00ACC1",
+      "primaryColorHover": "#00838F",
+      "primaryColorDisabled": "#006064",
+      "primaryColorBackground": "#B2EBF2",
+      "secondaryColor": "#455A64",
+      "secondaryColorHover": "#37474F",
+      "secondaryColorDisabled": "#263238",
+      "neutralColor": "#FFFFFF",
+      "shadowColor": "#00000040",
+      "stateSuccessColor": "#4CAF50",
+      "stateNeutralColor": "#607D8B",
+      "stateErrorColor": "#F44336",
+      "textFieldBorderColor": "#888"
+    },
+    "spacings": {
+      "padding": "12px",
+      "paddingSmall": "8px",
+      "paddingLarge": "16px",
+      "margin": "12px",
+      "marginSmall": "8px",
+      "marginLarge": "16px",
+      "borderRadius": "4px",
+      "textFieldBorderWidth": "1px",
+      "textFieldBorderWidthFocus": "2px"
+    },
+    "others": {
+      "shadowDims": "0 0 6px 0",
+      "shadowDimsLight": "0 0 3px 0",
+      "shadowDimsHeavy": "0 0 10px 0",
+      "buttonBorder": "none"
+    }
+  }
+}
+```
+
+**Note**: The theme json creates css vars on your root element. These vars are then referred throughout the library.
 
 ## License
 

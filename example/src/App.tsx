@@ -1,15 +1,27 @@
 import React from 'react';
 
 import 'base-elements-react/dist/index.css';
-import { Button, ExampleComponent, TextField } from 'base-elements-react/dist';
+import { Button, ThemeWrapper } from 'base-elements-react/dist';
+
+const themes = [
+  {
+    id: 'light',
+    vars: {
+      colors: {
+        primaryColor: '#29B6F6',
+        primaryColorHover: '#03A9F4',
+        primaryColorDisabled: '#4FC3F7',
+        primaryColorBackground: '#E1F5FE'
+      }
+    }
+  }
+];
 
 const App = () => {
   return (
-    <div>
-      <ExampleComponent text='Create React Library Example 😄' />
-      <Button>Click Here</Button>
-      <TextField multiline />
-    </div>
+    <ThemeWrapper themes={themes} currentThemeId='light'>
+      <Button disabled>Click Here</Button>
+    </ThemeWrapper>
   );
 };
 

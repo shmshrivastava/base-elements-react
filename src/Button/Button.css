@@ -5,6 +5,10 @@
   border: var(--buttonBorder);
 }
 
+.Button:disabled {
+  cursor: none;
+}
+
 .Button:not(.Button--plain) {
   padding: var(--paddingSmall) var(--padding);
 }
@@ -16,6 +20,10 @@
 
 .Button--primary:hover {
   background-color: var(--primaryColorHover);
+}
+
+.Button--primary:disabled {
+  background-color: var(--primaryColorDisabled);
 }
 
 .Button--plain {

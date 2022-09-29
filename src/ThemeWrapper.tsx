@@ -25,20 +25,22 @@ function getCurrentSelectedTheme(themes: Theme[], currentThemeId?: string) {
     (theme) => theme.id === selectedThemeId
   )[0];
 
-  return selectedTheme ? { ...defaultTheme, ...selectedTheme } : selectedTheme;
+  return selectedTheme
+    ? { ...defaultTheme, ...selectedTheme }
+    : { ...defaultTheme, ...themes[0] };
 }
 
 export function setThemeVariables(themes: Theme[], currentThemeId?: string) {
   const theme = getCurrentSelectedTheme(themes || [], currentThemeId);
   const root =
     document.querySelector<HTMLElement>(':root') || document.documentElement;
-  Object.keys(theme.vars?.colors).forEach((colorKey) => {
+  Object.keys(theme.vars?.colors || []).forEach((colorKey) => {
     root.style.setProperty(`--${colorKey}`, theme.vars?.colors[colorKey]);
   });
-  Object.keys(theme.vars?.spacings).forEach((spacingKey) => {
+  Object.keys(theme.vars?.spacings || []).forEach((spacingKey) => {
     root.style.setProperty(`--${spacingKey}`, theme.vars?.spacings[spacingKey]);
   });
-  Object.keys(theme.vars?.others).forEach((otherKey) => {
+  Object.keys(theme.vars?.others || []).forEach((otherKey) => {
     root.style.setProperty(`--${otherKey}`, theme.vars?.others[otherKey]);
   });
 }
@@ -49,7 +51,7 @@ interface ThemeWrapperProps {
   children?: React.ReactNode;
 }
 
-export const ThemeWrapper = ({
+const ThemeWrapper = ({
   themes,
   currentThemeId,
   children
@@ -57,3 +59,5 @@ export const ThemeWrapper = ({
   setThemeVariables(themes || [], currentThemeId);
   return <React.Fragment>{children}</React.Fragment>;
 };
+
+export default ThemeWrapper;
