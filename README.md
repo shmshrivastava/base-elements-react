@@ -14,14 +14,15 @@ npm install --save base-elements-react
 
 ### Importing component
 
-Import any component from `'base-elements-react'`
+Import any component from `'base-elements-react'`.
+
 Import css file separately
 
 ```tsx
 import React, { Component } from 'react'
 
 import Button from 'base-elements-react'
-import 'base-elements-react/index.css'
+import 'base-elements-react/dist/index.css'
 
 class Example extends Component {
   render() {
