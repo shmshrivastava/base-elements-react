@@ -1,0 +1,24 @@
+.Button {
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: var(--borderRadius);
+  border: var(--buttonBorder);
+}
+
+.Button:not(.Button--plain) {
+  padding: var(--paddingSmall) var(--padding);
+}
+
+.Button--primary {
+  background-color: var(--primaryColor);
+  color: var(--fontColorInverted);
+}
+
+.Button--primary:hover {
+  background-color: var(--primaryColorHover);
+}
+
+.Button--plain {
+  background-color: transparent;
+  border: none;
+}

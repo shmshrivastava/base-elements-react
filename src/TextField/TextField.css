@@ -1,0 +1,11 @@
+.TextField {
+  padding: var(--paddingSmall);
+  outline: none;
+  border: var(--textFieldBorderWidth) solid var(--textFieldBorderColor);
+  font: inherit;
+}
+
+.TextField:focus {
+  border-color: var(--primaryColor);
+  border-width: var(--textFieldBorderWidthFocus);
+}
