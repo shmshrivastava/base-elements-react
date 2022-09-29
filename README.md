@@ -12,6 +12,8 @@ npm install --save base-elements-react
 
 ## Usage
 
+### Import component
+
 Import any component
 
 ```tsx
@@ -26,6 +28,8 @@ class Example extends Component {
   }
 }
 ```
+
+### Use custom theme
 
 Use custom themes using `ThemeWrapper`
 
@@ -58,7 +62,7 @@ const App = () => {
 };
 ```
 
-Default theme
+**Default theme**
 
 ```json
 {
