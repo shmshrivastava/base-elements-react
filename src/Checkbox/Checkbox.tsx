@@ -9,8 +9,6 @@ interface CheckboxProps extends React.ComponentPropsWithoutRef<'input'> {
 const componentConfig: ComponentConfig = {
   styleKeys: ['padding', 'margin'],
   classGenerator: {
-    appearance: { type: 'value', default: 'primary' },
-    loading: { type: 'boolean', default: false },
     disabled: { type: 'boolean', default: false }
   }
 };
@@ -19,7 +17,7 @@ export const Checkbox = React.forwardRef<
   HTMLInputElement,
   React.PropsWithChildren<CheckboxProps>
 >((props, ref) => {
-  const classNames = getClassName('Checkbox', componentConfig, props, 'dumb');
+  const classNames = getClassName('Checkbox', componentConfig, props);
   return (
     <input ref={ref} {...props} className={classNames} type='checkbox'>
       {props.children}
