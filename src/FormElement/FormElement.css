@@ -1,0 +1,15 @@
+.FormElement {
+}
+
+.FormElement label {
+  font-weight: bold;
+}
+
+.FormElement .FormElementContent {
+  margin-top: var(--gapSmall);
+}
+
+.FormElement .FormElementError {
+  color: red;
+  font-size: small;
+}

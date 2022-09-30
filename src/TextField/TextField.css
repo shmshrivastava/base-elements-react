@@ -3,6 +3,7 @@
   outline: none;
   border: var(--textFieldBorderWidth) solid var(--textFieldBorderColor);
   font: inherit;
+  border-radius: var(--borderRadius);
 }
 
 .TextField:focus {

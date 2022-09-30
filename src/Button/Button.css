@@ -11,11 +11,11 @@
 
 .Button:not(.Button--plain) {
   padding: var(--paddingSmall) var(--padding);
+  color: var(--fontColorInverted);
 }
 
 .Button--primary {
   background-color: var(--primaryColor);
-  color: var(--fontColorInverted);
 }
 
 .Button--primary:hover {

@@ -27,6 +27,9 @@
       "marginSmall": "8px",
       "marginLarge": "16px",
       "borderRadius": "4px",
+      "gap": "8px",
+      "gapSmall": "4px",
+      "gapLarge": "12px",
       "textFieldBorderWidth": "1px",
       "textFieldBorderWidthFocus": "2px"
     },

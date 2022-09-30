@@ -33,7 +33,13 @@ class Example extends Component {
 
 ### Using custom theme
 
-Use custom themes by wrapping components with `ThemeWrapper`
+Use custom themes by wrapping components with `ThemeWrapper`.
+
+You can pass theme jsons to `ThemeWrapper` component.
+
+The theme json creates css variables on your root element. These variables are then referred throughout the library.
+
+These css variables do not replace existing root variables. So if required css variables are already set in the root element, then this approach can be skipped.
 
 ```tsx
 import React from 'react';
@@ -97,6 +103,9 @@ const App = () => {
       "marginSmall": "8px",
       "marginLarge": "16px",
       "borderRadius": "4px",
+      "gap": "8px",
+      "gapSmall": "4px",
+      "gapLarge": "12px",
       "textFieldBorderWidth": "1px",
       "textFieldBorderWidthFocus": "2px"
     },
@@ -109,8 +118,6 @@ const App = () => {
   }
 }
 ```
-
-**Note**: The theme json creates css vars on your root element. These vars are then referred throughout the library.
 
 ## License
 

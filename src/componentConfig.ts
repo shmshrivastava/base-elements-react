@@ -27,12 +27,15 @@ function getAdditionalClassesForConfig(
 export function getClassName(
   componentName: string,
   componentConfig: ComponentConfig,
-  props: any
+  props: any,
+  additionalClassName?: string
 ) {
   const additionalClassesForConfig = getAdditionalClassesForConfig(
     componentName,
     componentConfig.classGenerator,
     props
   );
-  return `${componentName} ${additionalClassesForConfig || ''}`;
+  return `${additionalClassName || ''}${
+    additionalClassName ? ' ' : ''
+  }${componentName} ${additionalClassesForConfig || ''}`;
 }

@@ -30,17 +30,23 @@ function getCurrentSelectedTheme(themes: Theme[], currentThemeId?: string) {
     : { ...defaultTheme, ...themes[0] };
 }
 
+function filterInitialRootVars(varObject: any) {
+  return Object.keys(varObject || {}).filter(
+    (varKey) => !BaseElementsReact.initialRootVars.includes(`--${varKey}`)
+  );
+}
+
 export function setThemeVariables(themes: Theme[], currentThemeId?: string) {
   const theme = getCurrentSelectedTheme(themes || [], currentThemeId);
   const root =
     document.querySelector<HTMLElement>(':root') || document.documentElement;
-  Object.keys(theme.vars?.colors || []).forEach((colorKey) => {
+  filterInitialRootVars(theme.vars?.colors).forEach((colorKey) => {
     root.style.setProperty(`--${colorKey}`, theme.vars?.colors[colorKey]);
   });
-  Object.keys(theme.vars?.spacings || []).forEach((spacingKey) => {
+  filterInitialRootVars(theme.vars?.spacings).forEach((spacingKey) => {
     root.style.setProperty(`--${spacingKey}`, theme.vars?.spacings[spacingKey]);
   });
-  Object.keys(theme.vars?.others || []).forEach((otherKey) => {
+  filterInitialRootVars(theme.vars?.others).forEach((otherKey) => {
     root.style.setProperty(`--${otherKey}`, theme.vars?.others[otherKey]);
   });
 }
