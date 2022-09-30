@@ -1,14 +1,7 @@
 import * as React from 'react';
 import { ComponentConfig, getClassName } from '../componentConfig';
+import FormField, { FormFieldProps } from '../FormField';
 import './TextField.css';
-
-interface TextAreaProps extends React.ComponentPropsWithoutRef<'textarea'> {
-  className?: string;
-}
-
-interface InputProps extends React.ComponentPropsWithoutRef<'input'> {
-  className?: string;
-}
 
 const componentConfig: ComponentConfig = {
   styleKeys: [],
@@ -17,9 +10,18 @@ const componentConfig: ComponentConfig = {
   }
 };
 
+interface InputProps extends React.ComponentPropsWithoutRef<'input'> {
+  className?: string;
+}
+
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
   (props, ref) => {
-    const classNames = getClassName('TextField', componentConfig, props);
+    const classNames = getClassName(
+      'Input',
+      componentConfig,
+      props,
+      'TextFieldElement'
+    );
     return (
       <input ref={ref} {...props} className={classNames}>
         {props.children}
@@ -28,9 +30,13 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
   }
 );
 
+interface TextAreaProps extends React.ComponentPropsWithoutRef<'textarea'> {
+  className?: string;
+}
+
 export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
   (props, ref) => {
-    const classNames = getClassName('TextField', componentConfig, props);
+    const classNames = getClassName('TextArea', componentConfig, props);
     return (
       <textarea ref={ref} {...props} className={classNames}>
         {props.children}
@@ -55,9 +61,9 @@ interface TextAreaFieldRenderProps extends TextAreaProps {
   multiline?: true;
 }
 
-type TextFieldProps = InputFieldProps | TextAreaFieldProps;
+type TextFieldElementProps = InputFieldProps | TextAreaFieldProps;
 
-export const TextField = (props: TextFieldProps) => {
+export const TextFieldElement = (props: TextFieldElementProps) => {
   const isMultiline = props.multiline;
   let renderProps;
   if (isMultiline) {
@@ -65,11 +71,27 @@ export const TextField = (props: TextFieldProps) => {
     delete renderProps.multiline;
     return <TextArea {...renderProps} />;
   }
-
   renderProps = { ...props } as InputFieldRenderProps;
   delete renderProps.multiline;
   return <Input {...renderProps} />;
 };
+
+export type TextFieldProps = TextFieldElementProps & FormFieldProps;
+
+export const TextField = React.forwardRef<HTMLDivElement, TextFieldProps>(
+  (props, ref) => {
+    const textFieldElementProps = props;
+    delete textFieldElementProps.label;
+    delete textFieldElementProps.error;
+    return (
+      <FormField ref={ref} label={props.label} error={props.error}>
+        <TextFieldElement
+          {...(textFieldElementProps as TextFieldElementProps)}
+        />
+      </FormField>
+    );
+  }
+);
 
 export default TextField;
 

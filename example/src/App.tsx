@@ -4,7 +4,6 @@ import './App.css';
 import 'base-elements-react/dist/index.css';
 import {
   Button,
-  FormElement,
   TextField,
   ThemeWrapper,
   Checkbox
@@ -42,6 +41,8 @@ function TextFieldDemo() {
   return (
     <ComponentDemo>
       <TextField
+        label='Form Field 1'
+        error='Invalid data'
         value={singleLineValue}
         onChange={(e: SyntheticEvent<EventTarget>) =>
           setSingleLineValue((e.target as HTMLInputElement).value)
@@ -50,27 +51,13 @@ function TextFieldDemo() {
       <br />
       <TextField
         multiline
+        label='Form Field 2'
+        error='Invalid data'
         value={multiLineValue}
         onChange={(e: SyntheticEvent<EventTarget>) =>
           setMultiLineValue((e.target as HTMLInputElement).value)
         }
       />
-    </ComponentDemo>
-  );
-}
-
-function FormElementDemo() {
-  const [singleLineValue, setSingleLineValue] = useState<string>('');
-  return (
-    <ComponentDemo>
-      <FormElement label='Form Field 1' error='Invalid data'>
-        <TextField
-          value={singleLineValue}
-          onChange={(e: SyntheticEvent<EventTarget>) =>
-            setSingleLineValue((e.target as HTMLInputElement).value)
-          }
-        />
-      </FormElement>
     </ComponentDemo>
   );
 }
@@ -84,6 +71,7 @@ function CheckboxDemo() {
         onChange={(e: SyntheticEvent<EventTarget>) =>
           setChecked((e.target as HTMLInputElement).checked)
         }
+        label='A checkbox'
       />
     </ComponentDemo>
   );
@@ -97,7 +85,6 @@ const App = () => {
       <ThemeWrapper themes={themes} currentThemeId='light'>
         <ButtonDemo />
         <TextFieldDemo />
-        <FormElementDemo />
         <CheckboxDemo />
       </ThemeWrapper>
     </div>

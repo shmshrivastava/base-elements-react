@@ -4,6 +4,7 @@ import './Checkbox.css';
 
 interface CheckboxProps extends React.ComponentPropsWithoutRef<'input'> {
   className?: string;
+  label?: string;
 }
 
 const componentConfig: ComponentConfig = {
@@ -14,14 +15,16 @@ const componentConfig: ComponentConfig = {
 };
 
 export const Checkbox = React.forwardRef<
-  HTMLInputElement,
+  HTMLDivElement,
   React.PropsWithChildren<CheckboxProps>
 >((props, ref) => {
   const classNames = getClassName('Checkbox', componentConfig, props);
   return (
-    <input ref={ref} {...props} className={classNames} type='checkbox'>
-      {props.children}
-    </input>
+    <div ref={ref} className={classNames}>
+      <input {...props} type='checkbox'>
+        {props.children}
+      </input>
+    </div>
   );
 });
 

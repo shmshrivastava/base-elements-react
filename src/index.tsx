@@ -1,9 +1,9 @@
 import * as React from 'react';
-import './styles.module.css';
+import './styles.css';
 import { setThemeVariables } from './ThemeWrapper';
 export { default as Button } from './Button';
 export { default as TextField } from './TextField';
-export { default as FormElement } from './FormElement';
+export { default as FormField } from './FormField';
 export { default as ThemeWrapper } from './ThemeWrapper';
 export { default as Checkbox } from './Checkbox';
 

@@ -1,0 +1,16 @@
+.FormField {
+}
+
+.FormField label {
+  font-weight: bold;
+}
+
+.FormField .FormFieldElement {
+  margin-top: var(--gapSmall);
+}
+
+.FormField .FormFieldError {
+  color: red;
+  font-size: small;
+  margin-top: var(--gapSmall);
+}

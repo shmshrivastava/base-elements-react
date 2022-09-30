@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { ComponentConfig, getClassName } from '../componentConfig';
-import './FormElement.css';
+import './FormField.css';
 
-interface FormElementProps extends React.ComponentPropsWithoutRef<'div'> {
+export interface FormFieldProps extends React.ComponentPropsWithoutRef<'div'> {
   className?: string;
   label?: string;
   error?: string;
@@ -16,21 +16,21 @@ const componentConfig: ComponentConfig = {
   }
 };
 
-export const FormElement = React.forwardRef<
+export const FormField = React.forwardRef<
   HTMLDivElement,
-  React.PropsWithChildren<FormElementProps>
+  React.PropsWithChildren<FormFieldProps>
 >((props, ref) => {
   const { label, error, children } = props;
-  const classNames = getClassName('FormElement', componentConfig, props);
+  const classNames = getClassName('FormField', componentConfig, props);
   return (
     <div ref={ref} className={classNames}>
       <label>{label}</label>
-      <div className='FormElementContent'>{children}</div>
-      {error && <span className='FormElementError'>{error}</span>}
+      <div className='FormFieldElement'>{children}</div>
+      {error && <span className='FormFieldError'>{error}</span>}
     </div>
   );
 });
 
-export default FormElement;
+export default FormField;
 
-FormElement.displayName = 'FormElement';
+FormField.displayName = 'FormField';
