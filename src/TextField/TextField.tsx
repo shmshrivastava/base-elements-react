@@ -22,13 +22,11 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
       props,
       'TextFieldElement'
     );
-    return (
-      <input ref={ref} {...props} className={classNames}>
-        {props.children}
-      </input>
-    );
+    return <input ref={ref} {...props} className={classNames} />;
   }
 );
+
+Input.displayName = 'Input';
 
 interface TextAreaProps extends React.ComponentPropsWithoutRef<'textarea'> {
   className?: string;
@@ -36,14 +34,17 @@ interface TextAreaProps extends React.ComponentPropsWithoutRef<'textarea'> {
 
 export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
   (props, ref) => {
-    const classNames = getClassName('TextArea', componentConfig, props);
-    return (
-      <textarea ref={ref} {...props} className={classNames}>
-        {props.children}
-      </textarea>
+    const classNames = getClassName(
+      'TextArea',
+      componentConfig,
+      props,
+      'TextFieldElement'
     );
+    return <textarea ref={ref} {...props} className={classNames} />;
   }
 );
+
+TextArea.displayName = 'TextArea';
 
 interface InputFieldProps extends InputProps {
   multiline?: false;
@@ -84,7 +85,13 @@ export const TextField = React.forwardRef<HTMLDivElement, TextFieldProps>(
     delete textFieldElementProps.label;
     delete textFieldElementProps.error;
     return (
-      <FormField ref={ref} label={props.label} error={props.error}>
+      <FormField
+        ref={ref}
+        label={props.label}
+        labelPosition={props.labelPosition}
+        error={props.error}
+        className={props.className + ' TextField-Container'}
+      >
         <TextFieldElement
           {...(textFieldElementProps as TextFieldElementProps)}
         />

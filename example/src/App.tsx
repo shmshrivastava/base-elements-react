@@ -6,7 +6,8 @@ import {
   Button,
   TextField,
   ThemeWrapper,
-  Checkbox
+  Checkbox,
+  CheckboxField
 } from 'base-elements-react/dist';
 
 const themes = [
@@ -67,6 +68,13 @@ function CheckboxDemo() {
   return (
     <ComponentDemo>
       <Checkbox
+        checked={checked}
+        onChange={(e: SyntheticEvent<EventTarget>) =>
+          setChecked((e.target as HTMLInputElement).checked)
+        }
+      />
+      <br />
+      <CheckboxField
         checked={checked}
         onChange={(e: SyntheticEvent<EventTarget>) =>
           setChecked((e.target as HTMLInputElement).checked)

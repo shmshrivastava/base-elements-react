@@ -2,10 +2,10 @@ import * as React from 'react';
 import './styles.css';
 import { setThemeVariables } from './ThemeWrapper';
 export { default as Button } from './Button';
-export { default as TextField } from './TextField';
+export { default as TextField, Input, TextArea } from './TextField';
 export { default as FormField } from './FormField';
 export { default as ThemeWrapper } from './ThemeWrapper';
-export { default as Checkbox } from './Checkbox';
+export { default as Checkbox, CheckboxField } from './Checkbox';
 
 interface Props {
   text: string;

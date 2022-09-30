@@ -14,15 +14,15 @@
   color: var(--fontColorInverted);
 }
 
-.Button--primary {
+.Button--appearance-primary {
   background-color: var(--primaryColor);
 }
 
-.Button--primary:hover {
+.Button--appearance-primary:hover {
   background-color: var(--primaryColorHover);
 }
 
-.Button--primary:disabled {
+.Button--appearance-primary:disabled {
   background-color: var(--primaryColorDisabled);
 }
 

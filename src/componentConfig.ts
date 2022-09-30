@@ -12,7 +12,9 @@ function getAdditionalClassesForConfig(
   Object.keys(classGenerator).forEach((prop) => {
     const propConfig = classGenerator[prop];
     if (propConfig.type === 'value') {
-      classes += ` ${baseClassName}--${props[prop] || propConfig.default}`;
+      classes += ` ${baseClassName}--${prop}-${
+        props[prop] || propConfig.default
+      }`;
       return;
     }
     if (propConfig.type === 'boolean') {

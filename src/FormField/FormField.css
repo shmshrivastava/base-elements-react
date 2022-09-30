@@ -1,15 +1,37 @@
 .FormField {
 }
 
-.FormField label {
-  font-weight: bold;
-}
-
-.FormField .FormFieldElement {
+.FormField.FormField--labelPosition-top
+  .FormField-ElementContainer
+  .FormField-Element {
   margin-top: var(--gapSmall);
 }
 
-.FormField .FormFieldError {
+.FormField.FormField--labelPosition-bottom
+  .FormField-ElementContainer
+  .FormField-Element {
+  margin-bottom: var(--gapSmall);
+}
+
+.FormField.FormField--labelPosition-left .FormField-ElementContainer,
+.FormField.FormField--labelPosition-right .FormField-ElementContainer {
+  display: flex;
+}
+
+.FormField.FormField--labelPosition-left .FormField-ElementContainer label {
+  margin-right: var(--gapSmall);
+}
+
+.FormField.FormField--labelPosition-right .FormField-ElementContainer label {
+  margin-left: var(--gapSmall);
+}
+
+.FormField.FormField--labelPosition-left .FormField-ElementContainer label,
+.FormField.FormField--labelPosition-right .FormField-ElementContainer label {
+  flex-grow: 1;
+}
+
+.FormField .FormField-Error {
   color: red;
   font-size: small;
   margin-top: var(--gapSmall);

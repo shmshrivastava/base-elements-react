@@ -37,7 +37,8 @@
       "shadowDims": "0 0 6px 0",
       "shadowDimsLight": "0 0 3px 0",
       "shadowDimsHeavy": "0 0 10px 0",
-      "buttonBorder": "none"
+      "buttonBorder": "none",
+      "labelFontWeight": "normal"
     }
   },
   "components": {
