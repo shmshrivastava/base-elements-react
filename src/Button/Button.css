@@ -2,11 +2,11 @@
   cursor: pointer;
   font-weight: bold;
   border-radius: var(--borderRadius);
-  border: var(--buttonBorder);
+  border: none;
 }
 
 .Button:disabled {
-  cursor: none;
+  cursor: not-allowed;
 }
 
 .Button:not(.Button--plain) {
@@ -14,19 +14,102 @@
   color: var(--fontColorInverted);
 }
 
-.Button--appearance-primary {
+.Button.Button--appearance-primary {
   background-color: var(--primaryColor);
 }
 
-.Button--appearance-primary:hover {
+.Button.Button--appearance-primary:hover {
   background-color: var(--primaryColorHover);
 }
 
-.Button--appearance-primary:disabled {
+.Button.Button--appearance-primary:disabled {
   background-color: var(--primaryColorDisabled);
 }
 
-.Button--plain {
+.Button.Button--appearance-secondary {
+  background-color: var(--secondaryColor);
+}
+
+.Button.Button--appearance-secondary:hover {
+  background-color: var(--secondaryColorHover);
+}
+
+.Button.Button--appearance-secondary:disabled {
+  background-color: var(--secondaryColorDisabled);
+}
+
+.Button.Button--appearance-danger {
+  background-color: var(--dangerColor);
+}
+
+.Button.Button--appearance-danger:hover {
+  background-color: var(--dangerColorHover);
+}
+
+.Button.Button--appearance-danger:disabled {
+  background-color: var(--dangerColorDisabled);
+}
+
+.Button.Button--appearance-outline {
+  padding: calc(var(--paddingSmall) - 2px) calc(var(--padding) - 2px);
+  background-color: var(--neutralColor);
+  color: var(--primaryColor);
+  border: 2px solid var(--primaryColor);
+}
+
+.Button.Button--appearance-outline:hover {
+  color: var(--primaryColorHover);
+  border: 2px solid var(--primaryColorHover);
+}
+
+.Button.Button--appearance-outline:disabled {
+  color: var(--primaryColorDisabled);
+  border: 2px solid var(--primaryColorDisabled);
+}
+
+.Button.Button--plain,
+.Button.Button--plain:hover,
+.Button.Button--plain:disabled {
   background-color: transparent;
   border: none;
+  padding: 0;
+}
+
+.Button.Button--plain.Button--appearance-primary,
+.Button.Button--plain.Button--appearance-outline {
+  color: var(--primaryColor);
+}
+
+.Button.Button--plain.Button--appearance-primary:hover,
+.Button.Button--plain.Button--appearance-outline:hover {
+  color: var(--primaryColorHover);
+}
+
+.Button.Button--plain.Button--appearance-primary:disabled,
+.Button.Button--plain.Button--appearance-outline:disabled {
+  color: var(--primaryColorDisabled);
+}
+
+.Button.Button--plain.Button--appearance-secondary {
+  color: var(--secondaryColor);
+}
+
+.Button.Button--plain.Button--appearance-secondary:hover {
+  color: var(--secondaryColorHover);
+}
+
+.Button.Button--plain.Button--appearance-secondary:disabled {
+  color: var(--secondaryColorDisabled);
+}
+
+.Button.Button--plain.Button--appearance-danger {
+  color: var(--dangerColor);
+}
+
+.Button.Button--plain.Button--appearance-danger:hover {
+  color: var(--dangerColorHover);
+}
+
+.Button.Button--plain.Button--appearance-danger:disabled {
+  color: var(--dangerColorDisabled);
 }

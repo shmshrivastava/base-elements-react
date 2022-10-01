@@ -37,7 +37,8 @@ export function getClassName(
     componentConfig.classGenerator,
     props
   );
-  return `${additionalClassName || ''}${
-    additionalClassName ? ' ' : ''
-  }${componentName} ${additionalClassesForConfig || ''}`;
+  const className = `${additionalClassName || ''} ${componentName} ${
+    additionalClassesForConfig || ''
+  }`;
+  return className.trim().replace(/(\s{2,})+/g, ' ');
 }

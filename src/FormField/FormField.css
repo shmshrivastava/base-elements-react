@@ -13,6 +13,11 @@
   margin-bottom: var(--gapSmall);
 }
 
+.FormField.FormField--required .FormField-ElementContainer label::after {
+  content: var(--requiredMarker);
+  color: var(--dangerColor);
+}
+
 .FormField.FormField--labelPosition-left .FormField-ElementContainer,
 .FormField.FormField--labelPosition-right .FormField-ElementContainer {
   display: flex;

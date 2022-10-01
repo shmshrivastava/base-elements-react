@@ -7,6 +7,7 @@ export interface FormFieldProps extends React.ComponentPropsWithoutRef<'div'> {
   label?: string;
   error?: string;
   labelPosition?: 'top' | 'right' | 'bottom' | 'left';
+  required?: boolean;
 }
 
 const componentConfig: ComponentConfig = {
@@ -14,6 +15,7 @@ const componentConfig: ComponentConfig = {
   classGenerator: {
     error: { type: 'boolean', default: false },
     label: { type: 'boolean', default: false },
+    required: { type: 'boolean', default: false },
     labelPosition: { type: 'value', default: 'top' }
   }
 };

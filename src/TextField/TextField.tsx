@@ -90,7 +90,8 @@ export const TextField = React.forwardRef<HTMLDivElement, TextFieldProps>(
         label={props.label}
         labelPosition={props.labelPosition}
         error={props.error}
-        className={props.className + ' TextField-Container'}
+        required={props.required}
+        className={`${props.className || ''} TextField-Container`}
       >
         <TextFieldElement
           {...(textFieldElementProps as TextFieldElementProps)}

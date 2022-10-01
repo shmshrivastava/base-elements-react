@@ -31,7 +31,40 @@ function ComponentDemo({ children }: React.PropsWithChildren) {
 function ButtonDemo() {
   return (
     <ComponentDemo>
-      <Button onClick={() => console.log('Button Clicked')}>Click Here</Button>
+      <Button onClick={() => console.log('Primary Button Clicked')}>
+        Primary
+      </Button>{' '}
+      <Button
+        onClick={() => console.log('Secondary Button Clicked')}
+        appearance='secondary'
+      >
+        Secondary
+      </Button>{' '}
+      <Button
+        onClick={() => console.log('Danger Button Clicked')}
+        appearance='danger'
+      >
+        Secondary
+      </Button>{' '}
+      <Button
+        onClick={() => console.log('Outline Button Clicked')}
+        appearance='outline'
+      >
+        Outline
+      </Button>{' '}
+      <Button onClick={() => console.log('Plain Button Clicked')} plain>
+        Plain
+      </Button>{' '}
+      <Button
+        appearance='secondary'
+        onClick={() => console.log('Plain Button Clicked')}
+        plain
+      >
+        Plain Secondary
+      </Button>{' '}
+      <Button onClick={() => console.log('Primary Button Clicked')} disabled>
+        Primary Disabled
+      </Button>
     </ComponentDemo>
   );
 }
@@ -44,6 +77,8 @@ function TextFieldDemo() {
       <TextField
         label='Form Field 1'
         error='Invalid data'
+        placeholder='Single line data'
+        required
         value={singleLineValue}
         onChange={(e: SyntheticEvent<EventTarget>) =>
           setSingleLineValue((e.target as HTMLInputElement).value)

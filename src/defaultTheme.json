@@ -12,6 +12,9 @@
       "secondaryColor": "#455A64",
       "secondaryColorHover": "#37474F",
       "secondaryColorDisabled": "#263238",
+      "dangerColor": "#F44336",
+      "dangerColorHover": "#E53935",
+      "dangerColorDisabled": "#D32F2F",
       "neutralColor": "#FFFFFF",
       "shadowColor": "#00000040",
       "stateSuccessColor": "#4CAF50",
@@ -37,8 +40,8 @@
       "shadowDims": "0 0 6px 0",
       "shadowDimsLight": "0 0 3px 0",
       "shadowDimsHeavy": "0 0 10px 0",
-      "buttonBorder": "none",
-      "labelFontWeight": "normal"
+      "labelFontWeight": "normal",
+      "requiredMarker": "*"
     }
   },
   "components": {

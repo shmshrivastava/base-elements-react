@@ -40,7 +40,8 @@ export const CheckboxField = React.forwardRef<
       label={props.label}
       labelPosition={props.labelPosition || 'right'}
       error={props.error}
-      className={props.className + ' Checkbox-Container'}
+      required={props.required}
+      className={`${props.className || ''} Checkbox-Container`}
     >
       <Checkbox {...props} />
     </FormField>

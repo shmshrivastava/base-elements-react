@@ -4,6 +4,8 @@ import './Button.css';
 
 interface ButtonProps extends React.ComponentPropsWithoutRef<'button'> {
   className?: string;
+  plain?: boolean;
+  appearance?: 'primary' | 'secondary' | 'danger' | 'outline';
 }
 
 const componentConfig: ComponentConfig = {
@@ -11,7 +13,8 @@ const componentConfig: ComponentConfig = {
   classGenerator: {
     appearance: { type: 'value', default: 'primary' },
     loading: { type: 'boolean', default: false },
-    disabled: { type: 'boolean', default: false }
+    disabled: { type: 'boolean', default: false },
+    plain: { type: 'boolean', default: false }
   }
 };
 
@@ -20,8 +23,10 @@ export const Button = React.forwardRef<
   React.PropsWithChildren<ButtonProps>
 >((props, ref) => {
   const classNames = getClassName('Button', componentConfig, props);
+  const renderProps = { ...props };
+  delete renderProps.plain;
   return (
-    <button ref={ref} {...props} className={classNames}>
+    <button ref={ref} {...renderProps} className={classNames}>
       {props.children}
     </button>
   );
