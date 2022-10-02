@@ -4,7 +4,7 @@ import './FormField.css';
 
 export interface FormFieldProps extends React.ComponentPropsWithoutRef<'div'> {
   className?: string;
-  label?: string;
+  label?: string | React.ReactNode;
   error?: string;
   labelPosition?: 'top' | 'right' | 'bottom' | 'left';
   required?: boolean;

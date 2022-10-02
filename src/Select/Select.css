@@ -1,0 +1,7 @@
+.Select > .Popover > .PopoverBody > .Card {
+  padding: 0;
+}
+
+.SelectOption {
+  padding: var(--paddingSmall);
+}

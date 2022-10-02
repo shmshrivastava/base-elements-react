@@ -1,5 +1,6 @@
 import React, { SyntheticEvent, useState } from 'react';
 import './App.css';
+import { ReactComponent as StarIcon } from './icons/star.svg';
 
 import 'base-elements-react/dist/index.css';
 import {
@@ -7,7 +8,11 @@ import {
   TextField,
   ThemeWrapper,
   Checkbox,
-  CheckboxField
+  CheckboxField,
+  Select,
+  SelectOption,
+  Card,
+  Popover
 } from 'base-elements-react/dist';
 
 const themes = [
@@ -120,15 +125,64 @@ function CheckboxDemo() {
   );
 }
 
+function SelectDemo() {
+  const [value, setValue] = useState<string | undefined | null>(null);
+  return (
+    <ComponentDemo>
+      <Select value={value} onValueChange={setValue}>
+        <SelectOption value='apple'>Apple</SelectOption>
+        <SelectOption value='mango'>Mango</SelectOption>
+        <SelectOption value='star'>
+          <div style={{ backgroundColor: 'red' }}>
+            <StarIcon /> Star
+          </div>
+        </SelectOption>
+      </Select>
+    </ComponentDemo>
+  );
+}
+
+function CardDemo() {
+  return (
+    <ComponentDemo>
+      <Card elevation='low'>Low card component :p</Card>
+      <br />
+      <Card>Normal card component :p</Card>
+      <br />
+      <Card elevation='high'>High card component :p</Card>
+    </ComponentDemo>
+  );
+}
+
+function PopoverDemo() {
+  const [open, setOpen] = useState<boolean>(false);
+
+  return (
+    <ComponentDemo>
+      <Popover
+        anchor={<Button onClick={() => setOpen(!open)}>Toggle Popover</Button>}
+        open={open}
+      >
+        Hello!
+      </Popover>
+    </ComponentDemo>
+  );
+}
+
 const App = () => {
   return (
     <div className='App'>
-      <div>Base Elements React - Demo</div>
+      <div style={{ display: 'flex', alignItems: 'flex-end' }}>
+        Base Elements React - Demo <StarIcon />
+      </div>
       <br />
       <ThemeWrapper themes={themes} currentThemeId='light'>
         <ButtonDemo />
         <TextFieldDemo />
         <CheckboxDemo />
+        <SelectDemo />
+        <CardDemo />
+        <PopoverDemo />
       </ThemeWrapper>
     </div>
   );

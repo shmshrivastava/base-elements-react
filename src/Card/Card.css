@@ -1,0 +1,18 @@
+.Card {
+  background-color: var(--neutralColor);
+  box-shadow: var(--shadowDims) var(--shadowColor);
+  padding: var(--padding);
+  border-radius: var(--borderRadius);
+}
+
+.Card.Card--elevation-low {
+  box-shadow: var(--shadowDimsLight) var(--shadowColor);
+}
+
+.Card.Card--elevation-normal {
+  box-shadow: var(--shadowDims) var(--shadowColor);
+}
+
+.Card.Card--elevation-high {
+  box-shadow: var(--shadowDimsHeavy) var(--shadowColor);
+}
