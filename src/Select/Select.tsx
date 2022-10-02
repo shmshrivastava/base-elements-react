@@ -18,8 +18,9 @@ interface SelectProps {
     | React.Dispatch<React.SetStateAction<string | undefined | null>>;
 }
 
-interface SelectOptionProps extends React.ComponentPropsWithoutRef<'option'> {
+interface SelectOptionProps extends React.ComponentPropsWithoutRef<'div'> {
   value: string;
+  onClick?: React.MouseEventHandler<HTMLDivElement>;
 }
 
 const componentConfig: ComponentConfig = {
@@ -36,7 +37,7 @@ export const SelectOption = React.forwardRef<
 >((props, ref) => {
   const classNames = getClassName('SelectOption', componentConfig, props);
   return (
-    <div ref={ref} className={classNames} data-value={props.value}>
+    <div ref={ref} className={classNames} data-value={props.value} {...props}>
       {props.children}
     </div>
   );
@@ -62,12 +63,22 @@ export const Select = React.forwardRef<
   });
 
   const value =
-    props.value ||
+    (props.value &&
+      options &&
+      options.length > 0 &&
+      options.filter((op) => op.value === props.value)[0].label) ||
     props.placeholder ||
     (options && options.length > 0 ? options[0].label : '');
 
   const renderProps = { ...props };
   delete renderProps.options;
+
+  const handleValueChange = (value: SelectProps['value']) => {
+    if (props.onValueChange) {
+      props.onValueChange(value);
+    }
+    setShowOptions(false);
+  };
 
   return (
     <div ref={ref} className={classNames}>
@@ -75,9 +86,15 @@ export const Select = React.forwardRef<
         anchor={<div onClick={() => setShowOptions(!showOptions)}>{value}</div>}
         open={showOptions}
         onOutsideClick={() => setShowOptions(false)}
+        xLocation='snap_left_edge'
+        yLocation='bottom_cover_anchor'
       >
         {options.map((option) => (
-          <SelectOption value={option.value} key={option.value}>
+          <SelectOption
+            onClick={() => handleValueChange(option.value)}
+            value={option.value}
+            key={option.value}
+          >
             {option.label}
           </SelectOption>
         ))}

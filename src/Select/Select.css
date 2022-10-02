@@ -1,3 +1,7 @@
+.Select {
+  width: min-content;
+}
+
 .Select > .Popover > .PopoverBody > .Card {
   padding: 0;
 }

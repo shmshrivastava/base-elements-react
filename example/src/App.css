@@ -6,3 +6,12 @@
   margin: 10px;
   padding: 10px;
 }
+
+.component-demo.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.component-demo > * {
+  margin: 5px;
+}

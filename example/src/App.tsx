@@ -29,8 +29,15 @@ const themes = [
   }
 ];
 
-function ComponentDemo({ children }: React.PropsWithChildren) {
-  return <div className='component-demo'>{children}</div>;
+interface ComponentDemoProps {
+  row?: boolean;
+}
+
+function ComponentDemo({
+  children,
+  row
+}: React.PropsWithChildren<ComponentDemoProps>) {
+  return <div className={`component-demo ${row ? 'row' : ''}`}>{children}</div>;
 }
 
 function ButtonDemo() {
@@ -156,12 +163,143 @@ function CardDemo() {
 
 function PopoverDemo() {
   const [open, setOpen] = useState<boolean>(false);
+  const toggleOpen = () => setOpen(!open);
+  const close = () => setOpen(false);
 
   return (
-    <ComponentDemo>
+    <ComponentDemo row>
       <Popover
-        anchor={<Button onClick={() => setOpen(!open)}>Toggle Popover</Button>}
+        anchor={<Button onClick={toggleOpen}>Toggle Popover</Button>}
         open={open}
+        onOutsideClick={close}
+        xLocation='snap_left_edge'
+        yLocation='top'
+      >
+        Hello!
+      </Popover>
+      <Popover
+        anchor={<Button onClick={toggleOpen}>Toggle Popover</Button>}
+        open={open}
+        onOutsideClick={close}
+        xLocation='center'
+        yLocation='top'
+      >
+        Hello!
+      </Popover>
+      <Popover
+        anchor={<Button onClick={toggleOpen}>Toggle Popover</Button>}
+        open={open}
+        onOutsideClick={close}
+        xLocation='snap_right_edge'
+        yLocation='top'
+      >
+        Hello!
+      </Popover>
+      <Popover
+        anchor={<Button onClick={toggleOpen}>Toggle Popover</Button>}
+        open={open}
+        onOutsideClick={close}
+        xLocation='snap_left_edge'
+        yLocation='top_cover_anchor'
+      >
+        Hello!
+      </Popover>
+      <Popover
+        anchor={<Button onClick={toggleOpen}>Toggle Popover</Button>}
+        open={open}
+        onOutsideClick={close}
+        xLocation='center'
+        yLocation='top_cover_anchor'
+      >
+        Hello!
+      </Popover>
+      <Popover
+        anchor={<Button onClick={toggleOpen}>Toggle Popover</Button>}
+        open={open}
+        onOutsideClick={close}
+        xLocation='snap_right_edge'
+        yLocation='top_cover_anchor'
+      >
+        Hello!
+      </Popover>
+      <Popover
+        anchor={<Button onClick={toggleOpen}>Toggle Popover</Button>}
+        open={open}
+        onOutsideClick={close}
+        xLocation='snap_left_edge'
+        yLocation='center'
+      >
+        Hello!
+      </Popover>
+      <Popover
+        anchor={<Button onClick={toggleOpen}>Toggle Popover</Button>}
+        open={open}
+        onOutsideClick={close}
+        xLocation='center'
+        yLocation='center'
+      >
+        Hello!
+      </Popover>
+      <Popover
+        anchor={<Button onClick={toggleOpen}>Toggle Popover</Button>}
+        open={open}
+        onOutsideClick={close}
+        xLocation='snap_right_edge'
+        yLocation='center'
+      >
+        Hello!
+      </Popover>
+      <Popover
+        anchor={<Button onClick={toggleOpen}>Toggle Popover</Button>}
+        open={open}
+        onOutsideClick={close}
+        xLocation='snap_left_edge'
+        yLocation='bottom_cover_anchor'
+      >
+        Hello!
+      </Popover>
+      <Popover
+        anchor={<Button onClick={toggleOpen}>Toggle Popover</Button>}
+        open={open}
+        onOutsideClick={close}
+        xLocation='center'
+        yLocation='bottom_cover_anchor'
+      >
+        Hello!
+      </Popover>
+      <Popover
+        anchor={<Button onClick={toggleOpen}>Toggle Popover</Button>}
+        open={open}
+        onOutsideClick={close}
+        xLocation='snap_right_edge'
+        yLocation='bottom_cover_anchor'
+      >
+        Hello!
+      </Popover>
+      <Popover
+        anchor={<Button onClick={toggleOpen}>Toggle Popover</Button>}
+        open={open}
+        onOutsideClick={close}
+        xLocation='snap_left_edge'
+        yLocation='bottom'
+      >
+        Hello!
+      </Popover>
+      <Popover
+        anchor={<Button onClick={toggleOpen}>Toggle Popover</Button>}
+        open={open}
+        onOutsideClick={close}
+        xLocation='center'
+        yLocation='bottom'
+      >
+        Hello!
+      </Popover>
+      <Popover
+        anchor={<Button onClick={toggleOpen}>Toggle Popover</Button>}
+        open={open}
+        onOutsideClick={close}
+        xLocation='snap_right_edge'
+        yLocation='bottom'
       >
         Hello!
       </Popover>
