@@ -11,7 +11,7 @@
 }
 
 .Select > .Popover.Popover--open > .PopoverAnchor > .SelectAnchor {
-  border: none;
+  border: 1px solid transparent;
 }
 
 .Select > .Popover > div > .PopoverBody > .Card {
