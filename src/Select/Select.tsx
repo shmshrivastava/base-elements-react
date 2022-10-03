@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { ComponentConfig, getClassName } from '../componentConfig';
 import Popover from '../Popover';
+import { ReactComponent as ExpandMoreIcon } from '../icons/ExpandMore.svg';
 import './Select.css';
 
 interface Option {
@@ -22,6 +23,7 @@ interface SelectOptionProps extends React.ComponentPropsWithoutRef<'div'> {
   value?: string;
   onClick?: React.MouseEventHandler<HTMLDivElement>;
   selected?: boolean;
+  rightPaddingExtra?: number;
 }
 
 const selectOptionComponentConfig: ComponentConfig = {
@@ -43,7 +45,12 @@ export const SelectOption = React.forwardRef<
   );
   return (
     <div {...props} ref={ref} className={classNames} data-value={props.value}>
-      {props.children}
+      <div
+        className='SelectOption-Content'
+        style={{ paddingRight: props.rightPaddingExtra || 0 }}
+      >
+        {props.children}
+      </div>
     </div>
   );
 });
@@ -65,6 +72,7 @@ export const Select = React.forwardRef<
   const [showOptions, setShowOptions] = React.useState(false);
   const [width, setWidth] = React.useState(0);
   const popoverRef = React.useRef<HTMLDivElement>(null);
+  const expandIconRef = React.useRef<HTMLDivElement>(null);
 
   const children = Array.isArray(props.children)
     ? props.children
@@ -95,13 +103,21 @@ export const Select = React.forwardRef<
     setShowOptions(false);
   };
 
-  React.useEffect(() => {
-    if (popoverRef.current) {
-      const cardElement =
-        popoverRef.current.children[1].children[0].children[0];
-      setWidth(cardElement.getClientRects()[0].width + 4); //  4 is added to account for border. Consider using border var later
+  let cardElement: Element | null = null;
+  let expandIconWidth: number = 0;
+  let cardElementWidth: number = 0;
+
+  if (popoverRef.current) {
+    cardElement = popoverRef.current.children[1].children[0].children[0];
+    cardElementWidth = cardElement.getClientRects()[0].width;
+    if (expandIconRef) {
+      expandIconWidth = expandIconRef.current?.offsetWidth || 0;
     }
-  }, [children]);
+  }
+
+  React.useEffect(() => {
+    setWidth(cardElementWidth + 4); //  4 is added to account for border. Consider using border var later
+  }, [children, cardElementWidth]);
 
   return (
     <div ref={ref} className={classNames}>
@@ -117,7 +133,10 @@ export const Select = React.forwardRef<
             style={{ width }}
             onClick={() => setShowOptions(!showOptions)}
           >
-            {value}
+            <div className='SelectAnchor-Value'>{value}</div>
+            <div className='SelectAnchor-ExpandIcon' ref={expandIconRef}>
+              <ExpandMoreIcon />
+            </div>
           </div>
         }
         open={showOptions}
@@ -130,6 +149,7 @@ export const Select = React.forwardRef<
           <SelectOption
             className='SelectOption--placeholder'
             onClick={() => handleValueChange(null)}
+            rightPaddingExtra={expandIconWidth}
           >
             {props.placeholder}
           </SelectOption>
@@ -140,6 +160,7 @@ export const Select = React.forwardRef<
             value={option.value}
             key={option.value}
             selected={option.value === props.value}
+            rightPaddingExtra={expandIconWidth}
           >
             {option.label}
           </SelectOption>

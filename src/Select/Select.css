@@ -2,12 +2,27 @@
   width: min-content;
 }
 
-.Select > .Popover > .PopoverAnchor > .SelectAnchor {
+.SelectAnchor {
   padding: var(--paddingSmall) var(--padding);
   cursor: pointer;
   border: 1px solid var(--textFieldBorderColor);
   box-sizing: border-box;
   border-radius: var(--borderRadius);
+  display: flex;
+  align-items: flex-start;
+}
+
+.SelectAnchor > .SelectAnchor-Value {
+  flex-grow: 1;
+}
+
+.SelectAnchor .SelectAnchor-ExpandIcon {
+  height: 18px;
+}
+
+.SelectAnchor .SelectAnchor-ExpandIcon svg {
+  fill: var(--fontColorLighter);
+  margin-top: -1px;
 }
 
 .Select > .Popover.Popover--open > .PopoverAnchor > .SelectAnchor {
@@ -24,9 +39,12 @@
   cursor: pointer;
 }
 
-.SelectOption.SelectOption--placeholder,
-.SelectAnchor.SelectAnchor--placeholder {
+.SelectOption.SelectOption--placeholder {
   color: var(--fontColorLighter);
+}
+
+.SelectAnchor.SelectAnchor--placeholder {
+  color: var(--textFieldBorderColor);
 }
 
 .SelectOption:hover {
