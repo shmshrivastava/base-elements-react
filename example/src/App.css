@@ -15,3 +15,7 @@
 .component-demo > * {
   margin: 5px;
 }
+
+.Select {
+  /* min-width: 400px; */
+}

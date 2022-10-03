@@ -1,5 +1,5 @@
 .Select {
-  width: min-content;
+  width: fit-content;
 }
 
 .SelectAnchor {
@@ -10,6 +10,7 @@
   border-radius: var(--borderRadius);
   display: flex;
   align-items: flex-start;
+  min-width: fit-content;
 }
 
 .SelectAnchor > .SelectAnchor-Value {
@@ -29,7 +30,7 @@
   border: 1px solid transparent;
 }
 
-.Select > .Popover > div > .PopoverBody > .Card {
+.Select > .Popover .PopoverBody > .Card {
   padding: 0;
 }
 
@@ -47,8 +48,10 @@
   color: var(--textFieldBorderColor);
 }
 
-.SelectOption:hover {
+.SelectOption:hover,
+.SelectOption:focus {
   background-color: var(--neutralColorHover);
+  outline: none;
 }
 
 .SelectOption.SelectOption--selected {

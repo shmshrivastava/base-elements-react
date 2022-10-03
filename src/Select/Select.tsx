@@ -21,9 +21,8 @@ interface SelectProps {
 
 interface SelectOptionProps extends React.ComponentPropsWithoutRef<'div'> {
   value?: string;
-  onClick?: React.MouseEventHandler<HTMLDivElement>;
   selected?: boolean;
-  rightPaddingExtra?: number;
+  onOptionSelect?: (value: string | undefined) => void;
 }
 
 const selectOptionComponentConfig: ComponentConfig = {
@@ -43,14 +42,52 @@ export const SelectOption = React.forwardRef<
     selectOptionComponentConfig,
     props
   );
+  const handleKeyPress = (
+    event: React.SyntheticEvent<HTMLDivElement, KeyboardEvent>
+  ) => {
+    var code = event['keyCode'];
+    if (code === 13) {
+      if (props.onOptionSelect) {
+        props.onOptionSelect(props.value);
+      }
+      return;
+    }
+    if (code === 40) {
+      // Down key pressed
+      const nextTarget = event?.target && event?.target['nextSibling'];
+      nextTarget && nextTarget.focus();
+      event.stopPropagation();
+      return;
+    }
+    if (code === 38) {
+      // Up key pressed
+      const previousTarget = event?.target && event?.target['previousSibling'];
+      previousTarget && previousTarget.focus();
+      event.stopPropagation();
+      return;
+    }
+    event.persist();
+    if (props.onKeyDown) {
+      props.onKeyDown(event as any);
+    }
+  };
+
+  const handleSelect = () => {
+    console.log('handle select');
+  };
+  const renderProps = { ...props };
+  delete renderProps.onOptionSelect;
   return (
-    <div {...props} ref={ref} className={classNames} data-value={props.value}>
-      <div
-        className='SelectOption-Content'
-        style={{ paddingRight: props.rightPaddingExtra || 0 }}
-      >
-        {props.children}
-      </div>
+    <div
+      {...renderProps}
+      tabIndex={0}
+      ref={ref}
+      className={classNames}
+      data-value={props.value}
+      onKeyDown={handleKeyPress}
+      onSelect={handleSelect}
+    >
+      <div className='SelectOption-Content'>{props.children}</div>
     </div>
   );
 });
@@ -73,6 +110,7 @@ export const Select = React.forwardRef<
   const [width, setWidth] = React.useState(0);
   const popoverRef = React.useRef<HTMLDivElement>(null);
   const expandIconRef = React.useRef<HTMLDivElement>(null);
+  const firstOptionRef = React.useRef<HTMLDivElement>(null);
 
   const children = Array.isArray(props.children)
     ? props.children
@@ -116,8 +154,40 @@ export const Select = React.forwardRef<
   }
 
   React.useEffect(() => {
-    setWidth(cardElementWidth + 4); //  4 is added to account for border. Consider using border var later
+    setWidth(cardElementWidth);
   }, [children, cardElementWidth]);
+
+  const handleAnchorKeyPress = (event: {
+    keyCode: any;
+    which: any;
+    target: any;
+  }) => {
+    var code = event.keyCode || event.which;
+    console.log(code);
+    if (code === 13 || code === 40) {
+      //  13 is the enter keycode
+      //  Do stuff in here
+      setShowOptions(!showOptions);
+
+      setTimeout(() => {
+        if (code === 40 && firstOptionRef?.current) {
+          firstOptionRef.current.focus();
+        }
+      }, 50);
+    }
+  };
+
+  const handleOptionKeyPress = (event: {
+    keyCode: any;
+    which: any;
+    target: any;
+  }) => {
+    var code = event.keyCode || event.which;
+    if (code === 27) {
+      // escape pressed
+      setShowOptions(false);
+    }
+  };
 
   return (
     <div ref={ref} className={classNames}>
@@ -130,8 +200,10 @@ export const Select = React.forwardRef<
                 ? ' SelectAnchor--placeholder'
                 : '')
             }
-            style={{ width }}
+            style={{ minWidth: width }}
+            tabIndex={0}
             onClick={() => setShowOptions(!showOptions)}
+            onKeyDown={handleAnchorKeyPress}
           >
             <div className='SelectAnchor-Value'>{value}</div>
             <div className='SelectAnchor-ExpandIcon' ref={expandIconRef}>
@@ -145,26 +217,33 @@ export const Select = React.forwardRef<
         yLocation='bottom_cover_anchor'
         ref={popoverRef}
       >
-        {props.placeholder && (
-          <SelectOption
-            className='SelectOption--placeholder'
-            onClick={() => handleValueChange(null)}
-            rightPaddingExtra={expandIconWidth}
-          >
-            {props.placeholder}
-          </SelectOption>
-        )}
-        {options.map((option) => (
-          <SelectOption
-            onClick={() => handleValueChange(option.value)}
-            value={option.value}
-            key={option.value}
-            selected={option.value === props.value}
-            rightPaddingExtra={expandIconWidth}
-          >
-            {option.label}
-          </SelectOption>
-        ))}
+        <div
+          style={{
+            width: popoverRef.current?.offsetWidth || 0 + expandIconWidth
+          }}
+        >
+          {props.placeholder && (
+            <SelectOption
+              className='SelectOption--placeholder'
+              onOptionSelect={() => handleValueChange(null)}
+              onKeyDown={handleOptionKeyPress}
+            >
+              {props.placeholder}
+            </SelectOption>
+          )}
+          {options.map((option, index) => (
+            <SelectOption
+              onOptionSelect={() => handleValueChange(option.value)}
+              value={option.value}
+              key={option.value}
+              selected={option.value === props.value}
+              ref={index === 0 ? firstOptionRef : null}
+              onKeyDown={handleOptionKeyPress}
+            >
+              {option.label}
+            </SelectOption>
+          ))}
+        </div>
       </Popover>
     </div>
   );
