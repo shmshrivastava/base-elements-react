@@ -136,7 +136,11 @@ function SelectDemo() {
   const [value, setValue] = useState<string | undefined | null>(null);
   return (
     <ComponentDemo>
-      <Select value={value} onValueChange={setValue}>
+      <Select
+        value={value}
+        onValueChange={setValue}
+        placeholder={'Select something?'}
+      >
         <SelectOption value='apple'>Apple</SelectOption>
         <SelectOption value='mango'>Mango</SelectOption>
         <SelectOption value='star'>

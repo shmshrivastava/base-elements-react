@@ -11,7 +11,7 @@ function getAdditionalClassesForConfig(
   let classes = props.className || '';
   Object.keys(classGenerator).forEach((prop) => {
     const propConfig = classGenerator[prop];
-    if (propConfig.type === 'value') {
+    if (propConfig.type === 'value' && (props[prop] || propConfig.default)) {
       classes += ` ${baseClassName}--${prop}-${
         props[prop] || propConfig.default
       }`;

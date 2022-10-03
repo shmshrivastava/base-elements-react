@@ -19,7 +19,7 @@ interface SelectProps {
 }
 
 interface SelectOptionProps extends React.ComponentPropsWithoutRef<'div'> {
-  value: string;
+  value?: string;
   onClick?: React.MouseEventHandler<HTMLDivElement>;
   selected?: boolean;
 }
@@ -42,7 +42,7 @@ export const SelectOption = React.forwardRef<
     props
   );
   return (
-    <div ref={ref} className={classNames} data-value={props.value} {...props}>
+    <div {...props} ref={ref} className={classNames} data-value={props.value}>
       {props.children}
     </div>
   );
@@ -121,6 +121,14 @@ export const Select = React.forwardRef<
         yLocation='bottom_cover_anchor'
         ref={popoverRef}
       >
+        {props.placeholder && (
+          <SelectOption
+            className='SelectOption--placeholder'
+            onClick={() => handleValueChange(null)}
+          >
+            {props.placeholder}
+          </SelectOption>
+        )}
         {options.map((option) => (
           <SelectOption
             onClick={() => handleValueChange(option.value)}

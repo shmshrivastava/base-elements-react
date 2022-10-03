@@ -24,6 +24,10 @@
   cursor: pointer;
 }
 
+.SelectOption.SelectOption--placeholder {
+  color: var(--fontColorLighter);
+}
+
 .SelectOption:hover {
   background-color: var(--neutralColorHover);
 }
