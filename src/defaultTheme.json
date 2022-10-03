@@ -16,11 +16,12 @@
       "dangerColorHover": "#E53935",
       "dangerColorDisabled": "#D32F2F",
       "neutralColor": "#FFFFFF",
+      "neutralColorHover": "#F5F5F5",
       "shadowColor": "#00000040",
       "stateSuccessColor": "#4CAF50",
       "stateNeutralColor": "#607D8B",
       "stateErrorColor": "#F44336",
-      "textFieldBorderColor": "#888"
+      "textFieldBorderColor": "#88888888"
     },
     "spacings": {
       "padding": "12px",

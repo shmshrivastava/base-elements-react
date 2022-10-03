@@ -21,7 +21,32 @@ interface SelectProps {
 interface SelectOptionProps extends React.ComponentPropsWithoutRef<'div'> {
   value: string;
   onClick?: React.MouseEventHandler<HTMLDivElement>;
+  selected?: boolean;
 }
+
+const selectOptionComponentConfig: ComponentConfig = {
+  styleKeys: ['padding', 'margin'],
+  classGenerator: {
+    selected: { type: 'boolean', default: false },
+    value: { type: 'value' }
+  }
+};
+
+export const SelectOption = React.forwardRef<
+  HTMLDivElement,
+  React.PropsWithChildren<SelectOptionProps>
+>((props, ref) => {
+  const classNames = getClassName(
+    'SelectOption',
+    selectOptionComponentConfig,
+    props
+  );
+  return (
+    <div ref={ref} className={classNames} data-value={props.value} {...props}>
+      {props.children}
+    </div>
+  );
+});
 
 const componentConfig: ComponentConfig = {
   styleKeys: ['padding', 'margin'],
@@ -31,18 +56,6 @@ const componentConfig: ComponentConfig = {
   }
 };
 
-export const SelectOption = React.forwardRef<
-  HTMLDivElement,
-  React.PropsWithChildren<SelectOptionProps>
->((props, ref) => {
-  const classNames = getClassName('SelectOption', componentConfig, props);
-  return (
-    <div ref={ref} className={classNames} data-value={props.value} {...props}>
-      {props.children}
-    </div>
-  );
-});
-
 export const Select = React.forwardRef<
   HTMLDivElement,
   React.PropsWithChildren<SelectProps>
@@ -50,6 +63,8 @@ export const Select = React.forwardRef<
   const classNames = getClassName('Select', componentConfig, props);
   const options = props.options ? [...props.options] : [];
   const [showOptions, setShowOptions] = React.useState(false);
+  const [width, setWidth] = React.useState(0);
+  const popoverRef = React.useRef<HTMLDivElement>(null);
 
   const children = Array.isArray(props.children)
     ? props.children
@@ -80,20 +95,38 @@ export const Select = React.forwardRef<
     setShowOptions(false);
   };
 
+  React.useEffect(() => {
+    if (popoverRef.current) {
+      const cardElement =
+        popoverRef.current.children[1].children[0].children[0];
+      setWidth(cardElement.getClientRects()[0].width + 4); //  4 is added to account for border. Consider using border var later
+    }
+  }, [children]);
+
   return (
     <div ref={ref} className={classNames}>
       <Popover
-        anchor={<div onClick={() => setShowOptions(!showOptions)}>{value}</div>}
+        anchor={
+          <div
+            className='SelectAnchor'
+            style={{ width }}
+            onClick={() => setShowOptions(!showOptions)}
+          >
+            {value}
+          </div>
+        }
         open={showOptions}
         onOutsideClick={() => setShowOptions(false)}
         xLocation='snap_left_edge'
         yLocation='bottom_cover_anchor'
+        ref={popoverRef}
       >
         {options.map((option) => (
           <SelectOption
             onClick={() => handleValueChange(option.value)}
             value={option.value}
             key={option.value}
+            selected={option.value === props.value}
           >
             {option.label}
           </SelectOption>

@@ -2,10 +2,32 @@
   width: min-content;
 }
 
-.Select > .Popover > .PopoverBody > .Card {
+.Select > .Popover > .PopoverAnchor > .SelectAnchor {
+  padding: var(--paddingSmall) var(--padding);
+  cursor: pointer;
+  border: 1px solid var(--textFieldBorderColor);
+  box-sizing: border-box;
+  border-radius: var(--borderRadius);
+}
+
+.Select > .Popover.Popover--open > .PopoverAnchor > .SelectAnchor {
+  border: none;
+}
+
+.Select > .Popover > div > .PopoverBody > .Card {
   padding: 0;
 }
 
 .SelectOption {
-  padding: var(--paddingSmall);
+  padding: var(--padding);
+  background-color: var(--neutralColor);
+  cursor: pointer;
+}
+
+.SelectOption:hover {
+  background-color: var(--neutralColorHover);
+}
+
+.SelectOption.SelectOption--selected {
+  background-color: var(--primaryColorBackground);
 }

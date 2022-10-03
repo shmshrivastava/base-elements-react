@@ -140,7 +140,7 @@ function SelectDemo() {
         <SelectOption value='apple'>Apple</SelectOption>
         <SelectOption value='mango'>Mango</SelectOption>
         <SelectOption value='star'>
-          <div style={{ backgroundColor: 'red' }}>
+          <div>
             <StarIcon /> Star
           </div>
         </SelectOption>

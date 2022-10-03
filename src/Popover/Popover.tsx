@@ -22,7 +22,9 @@ interface PopoverProps extends CardProps {
 
 const componentConfig: ComponentConfig = {
   styleKeys: [],
-  classGenerator: {}
+  classGenerator: {
+    open: { type: 'boolean', default: false }
+  }
 };
 
 function getLocationX(
