@@ -19,12 +19,13 @@
 }
 
 .SelectOption {
-  padding: var(--padding);
+  padding: var(--paddingSmall) var(--padding);
   background-color: var(--neutralColor);
   cursor: pointer;
 }
 
-.SelectOption.SelectOption--placeholder {
+.SelectOption.SelectOption--placeholder,
+.SelectAnchor.SelectAnchor--placeholder {
   color: var(--fontColorLighter);
 }
 

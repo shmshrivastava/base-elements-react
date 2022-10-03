@@ -108,7 +108,12 @@ export const Select = React.forwardRef<
       <Popover
         anchor={
           <div
-            className='SelectAnchor'
+            className={
+              'SelectAnchor' +
+              (props.placeholder && !props.value
+                ? ' SelectAnchor--placeholder'
+                : '')
+            }
             style={{ width }}
             onClick={() => setShowOptions(!showOptions)}
           >
