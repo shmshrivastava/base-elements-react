@@ -72,9 +72,6 @@ export const SelectOption = React.forwardRef<
     }
   };
 
-  const handleSelect = () => {
-    console.log('handle select');
-  };
   const renderProps = { ...props };
   delete renderProps.onOptionSelect;
   return (
@@ -85,7 +82,11 @@ export const SelectOption = React.forwardRef<
       className={classNames}
       data-value={props.value}
       onKeyDown={handleKeyPress}
-      onSelect={handleSelect}
+      onClick={() => {
+        if (props.onOptionSelect) {
+          props.onOptionSelect(props.value);
+        }
+      }}
     >
       <div className='SelectOption-Content'>{props.children}</div>
     </div>
@@ -163,10 +164,7 @@ export const Select = React.forwardRef<
     target: any;
   }) => {
     var code = event.keyCode || event.which;
-    console.log(code);
     if (code === 13 || code === 40) {
-      //  13 is the enter keycode
-      //  Do stuff in here
       setShowOptions(!showOptions);
 
       setTimeout(() => {

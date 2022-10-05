@@ -1,0 +1,101 @@
+.Stack {
+  display: flex;
+  flex-direction: row;
+}
+
+.Stack.Stack--gap-nogap {
+  gap: 0;
+}
+
+.Stack.Stack--gap-normal,
+.Stack.Stack--gap-true {
+  gap: var(--gap);
+}
+
+.Stack.Stack--gap-small {
+  gap: var(--gapSmall);
+}
+
+.Stack.Stack--gap-large {
+  gap: var(--gapLarge);
+}
+
+.Stack.Stack--vertical {
+  flex-direction: column;
+}
+
+.Stack.Stack--wrapItems-wrap {
+  flex-wrap: wrap;
+}
+
+.Stack.Stack--wrapItems-nowrap {
+  flex-wrap: nowrap;
+}
+
+.Stack.Stack--wrapItems-wrap-reverse {
+  flex-wrap: wrap-reverse;
+}
+
+.Stack.Stack--vertical.Stack--itemsVerticalAlignment-top,
+.Stack.Stack--itemsHorizontalAlignment-left {
+  justify-content: start;
+}
+
+.Stack.Stack--vertical.Stack--itemsVerticalAlignment-center,
+.Stack.Stack--itemsHorizontalAlignment-center {
+  justify-content: center;
+}
+
+.Stack.Stack--vertical.Stack--itemsVerticalAlignment-right,
+.Stack.Stack--itemsHorizontalAlignment-right {
+  justify-content: end;
+}
+
+.Stack.Stack--vertical.Stack--itemsVerticalAlignment-space-between,
+.Stack.Stack--itemsHorizontalAlignment-space-between {
+  justify-content: space-between;
+}
+
+.Stack.Stack--vertical.Stack--itemsVerticalAlignment-space-around,
+.Stack.Stack--itemsHorizontalAlignment-space-around {
+  justify-content: space-around;
+}
+
+.Stack.Stack--vertical.Stack--itemsVerticalAlignment-space-evenly,
+.Stack.Stack--itemsHorizontalAlignment-space-evenly {
+  justify-content: space-evenly;
+}
+
+.Stack.Stack--itemsVerticalAlignment-top,
+.Stack.Stack--vertical.Stack--itemsHorizontalAlignment-left {
+  align-items: start;
+}
+
+.Stack.Stack--itemsVerticalAlignment-center,
+.Stack.Stack--vertical.Stack--itemsHorizontalAlignment-center {
+  align-items: center;
+}
+
+.Stack.Stack--itemsVerticalAlignment-right,
+.Stack.Stack--vertical.Stack--itemsHorizontalAlignment-right {
+  align-items: end;
+}
+
+.Stack.Stack--itemsVerticalAlignment-space-between,
+.Stack.Stack--vertical.Stack--itemsHorizontalAlignment-space-between {
+  align-items: space-between;
+}
+
+.Stack.Stack--itemsVerticalAlignment-space-around,
+.Stack.Stack--vertical.Stack--itemsHorizontalAlignment-space-around {
+  align-items: space-around;
+}
+
+.Stack.Stack--itemsVerticalAlignment-space-evenly,
+.Stack.Stack--vertical.Stack--itemsHorizontalAlignment-space-evenly {
+  align-items: space-evenly;
+}
+
+.Stack > .StackItem--fill {
+  flex-grow: 1;
+}

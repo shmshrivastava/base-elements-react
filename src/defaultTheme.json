@@ -33,16 +33,20 @@
       "borderRadius": "4px",
       "gap": "8px",
       "gapSmall": "4px",
-      "gapLarge": "12px",
-      "textFieldBorderWidth": "1px",
-      "textFieldBorderWidthFocus": "2px"
+      "gapLarge": "12px"
     },
     "others": {
       "shadowDims": "0 0 6px 0",
       "shadowDimsLight": "0 0 3px 0",
       "shadowDimsHeavy": "0 0 10px 0",
       "labelFontWeight": "normal",
-      "requiredMarker": "*"
+      "requiredMarker": "*",
+      "textFieldBorderWidth": "1px",
+      "textFieldBorderWidthFocus": "2px",
+      "checkboxWidth": "16px",
+      "checkboxWidthLarge": "24px",
+      "headingMargin": "0 0 0.67em",
+      "paragraphMargin": "0"
     }
   },
   "components": {

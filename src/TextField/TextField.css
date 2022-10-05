@@ -1,6 +1,5 @@
 .TextFieldElement {
   padding: var(--paddingSmall);
-  outline: none;
   border: var(--textFieldBorderWidth) solid var(--textFieldBorderColor);
   font: inherit;
   border-radius: var(--borderRadius);
@@ -8,5 +7,6 @@
 
 .TextFieldElement:focus {
   border-color: var(--primaryColor);
-  border-width: var(--textFieldBorderWidthFocus);
+  border-width: var(--textFieldBorderWidth);
+  outline-color: var(--primaryColor);
 }

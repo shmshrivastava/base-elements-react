@@ -9,6 +9,20 @@ export { default as Checkbox, CheckboxField } from './Checkbox';
 export { default as Select, SelectOption } from './Select';
 export { default as Card } from './Card';
 export { default as Popover } from './Popover';
+export {
+  default as Text,
+  InlineText,
+  PageTitle,
+  SectionHeading,
+  SubSectionHeading,
+  ComponentTitle
+} from './Text';
+export {
+  default as Stack,
+  HorizontalStack,
+  VerticalStack,
+  CenteredContainer
+} from './Stack';
 
 interface Props {
   text: string;

@@ -1,2 +1,45 @@
-.FormField.Checkbox-Container .FormField-ElementContainer label {
+.Checkbox {
+  -webkit-appearance: none;
+  background-color: var(--neutralColor);
+  border: 1px solid var(--shadowColor);
+  border-radius: var(--borderRadius);
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  margin: 0;
+  width: 0;
+}
+
+.Checkbox,
+.Checkbox--sizeVariant-normal {
+  padding: calc(var(--checkboxWidth) / 2 - 1px);
+}
+
+.Checkbox--sizeVariant-large {
+  padding: calc(var(--checkboxWidthLarge) / 2 - 1px);
+}
+
+.Checkbox:hover,
+.Checkbox:checked:hover {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05),
+    inset 0px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.Checkbox:checked {
+  background-color: var(--primaryColor);
+  border: 1px solid var(--primaryColor);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05),
+    inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05),
+    inset 0 15px 10px -12px rgba(255, 255, 255, 0.1);
+  color: var(--fontColorInverted);
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3E%3C/svg%3E");
+}
+
+.FormField.Checkbox-Container.FormField--labelPosition-right
+  > .FormField-ElementContainer
+  > .FormField-Element,
+.FormField.Checkbox-Container.FormField--labelPosition-left
+  > .FormField-ElementContainer
+  > .FormField-Element {
+  margin-top: 1px;
 }

@@ -6,20 +6,31 @@ import './Checkbox.css';
 interface CheckboxProps extends React.ComponentPropsWithoutRef<'input'> {
   className?: string;
   label?: string;
+  checked?: boolean;
+  sizeVariant?: 'normal' | 'large' | string;
 }
 
 const componentConfig: ComponentConfig = {
   styleKeys: ['padding', 'margin'],
   classGenerator: {
-    disabled: { type: 'boolean', default: false }
+    disabled: { type: 'boolean', default: false },
+    checked: { type: 'boolean', default: false },
+    sizeVariant: { type: 'value' }
   }
 };
 
 export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
   (props, ref) => {
     const classNames = getClassName('Checkbox', componentConfig, props);
+    const renderProps = { ...props };
+    delete renderProps.sizeVariant;
     return (
-      <input {...props} type='checkbox' ref={ref} className={classNames} />
+      <input
+        {...renderProps}
+        type='checkbox'
+        ref={ref}
+        className={classNames}
+      />
     );
   }
 );

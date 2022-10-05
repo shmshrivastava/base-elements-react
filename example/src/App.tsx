@@ -1,19 +1,22 @@
-import React, { SyntheticEvent, useState } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import { ReactComponent as StarIcon } from './icons/star.svg';
 
 import 'base-elements-react/dist/index.css';
 import {
-  Button,
-  TextField,
   ThemeWrapper,
-  Checkbox,
-  CheckboxField,
-  Select,
-  SelectOption,
+  PageTitle,
+  HorizontalStack,
+  VerticalStack,
   Card,
-  Popover
+  Button
 } from 'base-elements-react/dist';
+import ButtonSection from './sections/ButtonSection';
+import TextFieldSection from './sections/TextFieldSection';
+import CheckboxSection from './sections/CheckboxSection';
+import PopoverSection from './sections/PopoverSection';
+import SelectSection from './sections/SelectSection';
+import CardSection from './sections/CardSection';
 
 const themes = [
   {
@@ -29,302 +32,74 @@ const themes = [
   }
 ];
 
-interface ComponentDemoProps {
-  row?: boolean;
-}
+const sectionRouteMap = {
+  button: ButtonSection,
+  textfield: TextFieldSection,
+  checkbox: CheckboxSection,
+  select: SelectSection,
+  card: CardSection,
+  popover: PopoverSection
+};
 
-function ComponentDemo({
-  children,
-  row
-}: React.PropsWithChildren<ComponentDemoProps>) {
-  return <div className={`component-demo ${row ? 'row' : ''}`}>{children}</div>;
-}
+const CurrentSection = ({ hashRoute }: { hashRoute: string }) => {
+  const RenderComponent =
+    sectionRouteMap[hashRoute || 'button'] || ButtonSection;
+  return <RenderComponent />;
+};
 
-function ButtonDemo() {
+const RouteSelectorItem = (props: {
+  route: string;
+  onRouteSelect: (route: string) => void;
+  selected?: boolean;
+}) => {
+  const handleClick = () => {
+    window.location.hash = props.route;
+    props.onRouteSelect(props.route);
+  };
   return (
-    <ComponentDemo>
-      <Button onClick={() => console.log('Primary Button Clicked')}>
-        Primary
-      </Button>{' '}
-      <Button
-        onClick={() => console.log('Secondary Button Clicked')}
-        appearance='secondary'
-      >
-        Secondary
-      </Button>{' '}
-      <Button
-        onClick={() => console.log('Danger Button Clicked')}
-        appearance='danger'
-      >
-        Secondary
-      </Button>{' '}
-      <Button
-        onClick={() => console.log('Outline Button Clicked')}
-        appearance='outline'
-      >
-        Outline
-      </Button>{' '}
-      <Button onClick={() => console.log('Plain Button Clicked')} plain>
-        Plain
-      </Button>{' '}
-      <Button
-        appearance='secondary'
-        onClick={() => console.log('Plain Button Clicked')}
-        plain
-      >
-        Plain Secondary
-      </Button>{' '}
-      <Button onClick={() => console.log('Primary Button Clicked')} disabled>
-        Primary Disabled
-      </Button>
-    </ComponentDemo>
+    <Button
+      onClick={handleClick}
+      appearance={props.selected ? 'primary' : 'secondary'}
+      variation='plainWithPadding'
+    >
+      {sectionRouteMap[props.route].name.split('Section')[0]}
+    </Button>
   );
-}
+};
 
-function TextFieldDemo() {
-  const [singleLineValue, setSingleLineValue] = useState<string>('');
-  const [multiLineValue, setMultiLineValue] = useState('');
+const Sidebar = (props: {
+  onRouteSelect: (route: string) => void;
+  currentRoute: string;
+}) => {
+  const routes = Object.keys(sectionRouteMap);
   return (
-    <ComponentDemo>
-      <TextField
-        label='Form Field 1'
-        error='Invalid data'
-        placeholder='Single line data'
-        required
-        value={singleLineValue}
-        onChange={(e: SyntheticEvent<EventTarget>) =>
-          setSingleLineValue((e.target as HTMLInputElement).value)
-        }
-      />
-      <br />
-      <TextField
-        multiline
-        label='Form Field 2'
-        error='Invalid data'
-        value={multiLineValue}
-        onChange={(e: SyntheticEvent<EventTarget>) =>
-          setMultiLineValue((e.target as HTMLInputElement).value)
-        }
-      />
-    </ComponentDemo>
+    <Card>
+      <VerticalStack gap='large'>
+        {routes.map((route) => (
+          <RouteSelectorItem
+            key={route}
+            route={route}
+            selected={route === props.currentRoute}
+            onRouteSelect={props.onRouteSelect}
+          />
+        ))}
+      </VerticalStack>
+    </Card>
   );
-}
-
-function CheckboxDemo() {
-  const [checked, setChecked] = useState<boolean>(false);
-  return (
-    <ComponentDemo>
-      <Checkbox
-        checked={checked}
-        onChange={(e: SyntheticEvent<EventTarget>) =>
-          setChecked((e.target as HTMLInputElement).checked)
-        }
-      />
-      <br />
-      <CheckboxField
-        checked={checked}
-        onChange={(e: SyntheticEvent<EventTarget>) =>
-          setChecked((e.target as HTMLInputElement).checked)
-        }
-        label='A checkbox'
-      />
-    </ComponentDemo>
-  );
-}
-
-function SelectDemo() {
-  const [value, setValue] = useState<string | undefined | null>(null);
-  return (
-    <ComponentDemo>
-      <Select
-        value={value}
-        onValueChange={setValue}
-        placeholder={'Select something?'}
-      >
-        <SelectOption value='apple'>Apple</SelectOption>
-        <SelectOption value='mango'>Mango</SelectOption>
-        <SelectOption value='star'>
-          <div>
-            <StarIcon /> Star
-          </div>
-        </SelectOption>
-      </Select>
-    </ComponentDemo>
-  );
-}
-
-function CardDemo() {
-  return (
-    <ComponentDemo>
-      <Card elevation='low'>Low card component :p</Card>
-      <br />
-      <Card>Normal card component :p</Card>
-      <br />
-      <Card elevation='high'>High card component :p</Card>
-    </ComponentDemo>
-  );
-}
-
-function PopoverDemo() {
-  const [open, setOpen] = useState<boolean>(false);
-  const toggleOpen = () => setOpen(!open);
-  const close = () => setOpen(false);
-
-  return (
-    <ComponentDemo row>
-      <Popover
-        anchor={<Button onClick={toggleOpen}>Toggle Popover</Button>}
-        open={open}
-        onOutsideClick={close}
-        xLocation='snap_left_edge'
-        yLocation='top'
-      >
-        Hello!
-      </Popover>
-      <Popover
-        anchor={<Button onClick={toggleOpen}>Toggle Popover</Button>}
-        open={open}
-        onOutsideClick={close}
-        xLocation='center'
-        yLocation='top'
-      >
-        Hello!
-      </Popover>
-      <Popover
-        anchor={<Button onClick={toggleOpen}>Toggle Popover</Button>}
-        open={open}
-        onOutsideClick={close}
-        xLocation='snap_right_edge'
-        yLocation='top'
-      >
-        Hello!
-      </Popover>
-      <Popover
-        anchor={<Button onClick={toggleOpen}>Toggle Popover</Button>}
-        open={open}
-        onOutsideClick={close}
-        xLocation='snap_left_edge'
-        yLocation='top_cover_anchor'
-      >
-        Hello!
-      </Popover>
-      <Popover
-        anchor={<Button onClick={toggleOpen}>Toggle Popover</Button>}
-        open={open}
-        onOutsideClick={close}
-        xLocation='center'
-        yLocation='top_cover_anchor'
-      >
-        Hello!
-      </Popover>
-      <Popover
-        anchor={<Button onClick={toggleOpen}>Toggle Popover</Button>}
-        open={open}
-        onOutsideClick={close}
-        xLocation='snap_right_edge'
-        yLocation='top_cover_anchor'
-      >
-        Hello!
-      </Popover>
-      <Popover
-        anchor={<Button onClick={toggleOpen}>Toggle Popover</Button>}
-        open={open}
-        onOutsideClick={close}
-        xLocation='snap_left_edge'
-        yLocation='center'
-      >
-        Hello!
-      </Popover>
-      <Popover
-        anchor={<Button onClick={toggleOpen}>Toggle Popover</Button>}
-        open={open}
-        onOutsideClick={close}
-        xLocation='center'
-        yLocation='center'
-      >
-        Hello!
-      </Popover>
-      <Popover
-        anchor={<Button onClick={toggleOpen}>Toggle Popover</Button>}
-        open={open}
-        onOutsideClick={close}
-        xLocation='snap_right_edge'
-        yLocation='center'
-      >
-        Hello!
-      </Popover>
-      <Popover
-        anchor={<Button onClick={toggleOpen}>Toggle Popover</Button>}
-        open={open}
-        onOutsideClick={close}
-        xLocation='snap_left_edge'
-        yLocation='bottom_cover_anchor'
-      >
-        Hello!
-      </Popover>
-      <Popover
-        anchor={<Button onClick={toggleOpen}>Toggle Popover</Button>}
-        open={open}
-        onOutsideClick={close}
-        xLocation='center'
-        yLocation='bottom_cover_anchor'
-      >
-        Hello!
-      </Popover>
-      <Popover
-        anchor={<Button onClick={toggleOpen}>Toggle Popover</Button>}
-        open={open}
-        onOutsideClick={close}
-        xLocation='snap_right_edge'
-        yLocation='bottom_cover_anchor'
-      >
-        Hello!
-      </Popover>
-      <Popover
-        anchor={<Button onClick={toggleOpen}>Toggle Popover</Button>}
-        open={open}
-        onOutsideClick={close}
-        xLocation='snap_left_edge'
-        yLocation='bottom'
-      >
-        Hello!
-      </Popover>
-      <Popover
-        anchor={<Button onClick={toggleOpen}>Toggle Popover</Button>}
-        open={open}
-        onOutsideClick={close}
-        xLocation='center'
-        yLocation='bottom'
-      >
-        Hello!
-      </Popover>
-      <Popover
-        anchor={<Button onClick={toggleOpen}>Toggle Popover</Button>}
-        open={open}
-        onOutsideClick={close}
-        xLocation='snap_right_edge'
-        yLocation='bottom'
-      >
-        Hello!
-      </Popover>
-    </ComponentDemo>
-  );
-}
+};
 
 const App = () => {
+  const [hashRoute, setHashRoute] = useState(window.location.hash.slice(1));
   return (
     <div className='App'>
-      <div style={{ display: 'flex', alignItems: 'flex-end' }}>
-        Base Elements React - Demo <StarIcon />
-      </div>
-      <br />
       <ThemeWrapper themes={themes} currentThemeId='light'>
-        <ButtonDemo />
-        <TextFieldDemo />
-        <CheckboxDemo />
-        <SelectDemo />
-        <CardDemo />
-        <PopoverDemo />
+        <PageTitle style={{ display: 'flex', alignItems: 'center' }}>
+          Base Elements React - Demo <StarIcon height={'1em'} width='1em' />
+        </PageTitle>
+        <HorizontalStack gap='large'>
+          <Sidebar onRouteSelect={setHashRoute} currentRoute={hashRoute} />
+          <CurrentSection hashRoute={hashRoute} />
+        </HorizontalStack>
       </ThemeWrapper>
     </div>
   );
