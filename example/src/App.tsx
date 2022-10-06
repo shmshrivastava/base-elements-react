@@ -25,7 +25,7 @@ const themes = [
       colors: {
         primaryColor: '#29B6F6',
         primaryColorHover: '#03A9F4',
-        primaryColorDisabled: '#4FC3F7',
+        primaryColorDisabled: '#81D4FA',
         primaryColorBackground: '#E1F5FE'
       }
     }
@@ -73,8 +73,8 @@ const Sidebar = (props: {
 }) => {
   const routes = Object.keys(sectionRouteMap);
   return (
-    <Card>
-      <VerticalStack gap='large'>
+    <Card elevation='low'>
+      <VerticalStack gap='normal'>
         {routes.map((route) => (
           <RouteSelectorItem
             key={route}
@@ -96,7 +96,7 @@ const App = () => {
         <PageTitle style={{ display: 'flex', alignItems: 'center' }}>
           Base Elements React - Demo <StarIcon height={'1em'} width='1em' />
         </PageTitle>
-        <HorizontalStack gap='large'>
+        <HorizontalStack gap='larger'>
           <Sidebar onRouteSelect={setHashRoute} currentRoute={hashRoute} />
           <CurrentSection hashRoute={hashRoute} />
         </HorizontalStack>

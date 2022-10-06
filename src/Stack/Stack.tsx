@@ -20,7 +20,7 @@ export interface StackProps extends React.ComponentPropsWithoutRef<'div'> {
     | 'space-between'
     | 'space-around'
     | 'space-evenly';
-  gap?: 'normal' | 'small' | 'large' | 'nogap' | true;
+  gap?: 'normal' | 'small' | 'smaller' | 'large' | 'larger' | 'nogap' | true;
 }
 
 const componentConfig: ComponentConfig = {

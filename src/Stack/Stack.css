@@ -16,8 +16,16 @@
   gap: var(--gapSmall);
 }
 
+.Stack.Stack--gap-smaller {
+  gap: var(--gapSmaller);
+}
+
 .Stack.Stack--gap-large {
   gap: var(--gapLarge);
+}
+
+.Stack.Stack--gap-larger {
+  gap: var(--gapLarger);
 }
 
 .Stack.Stack--vertical {

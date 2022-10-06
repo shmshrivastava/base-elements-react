@@ -4,7 +4,6 @@ import './Button.css';
 
 interface ButtonProps extends React.ComponentPropsWithoutRef<'button'> {
   className?: string;
-  plain?: boolean;
   appearance?: 'primary' | 'secondary' | 'danger';
   variation?: 'plain' | 'outline' | 'plainWithPadding';
   disableMaxContentWidth?: boolean;
@@ -27,6 +26,9 @@ export const Button = React.forwardRef<
 >((props, ref) => {
   const classNames = getClassName('Button', componentConfig, props);
   const renderProps = { ...props };
+  delete renderProps.variation;
+  delete renderProps.appearance;
+  delete renderProps.disableMaxContentWidth;
   return (
     <button ref={ref} {...renderProps} className={classNames}>
       {props.children}
