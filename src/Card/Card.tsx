@@ -5,12 +5,14 @@ import './Card.css';
 export interface CardProps extends React.ComponentPropsWithoutRef<'div'> {
   className?: string;
   elevation?: 'normal' | 'low' | 'high';
+  noPadding?: boolean;
 }
 
 const componentConfig: ComponentConfig = {
   styleKeys: [],
   classGenerator: {
-    elevation: { type: 'value', default: 'normal' }
+    elevation: { type: 'value', default: 'normal' },
+    noPadding: {type: 'boolean', default: false}
   }
 };
 

@@ -17,6 +17,7 @@ import CheckboxSection from './sections/CheckboxSection';
 import PopoverSection from './sections/PopoverSection';
 import SelectSection from './sections/SelectSection';
 import CardSection from './sections/CardSection';
+import TableSection from './sections/TableSection';
 
 const themes = [
   {
@@ -38,7 +39,8 @@ const sectionRouteMap = {
   checkbox: CheckboxSection,
   select: SelectSection,
   card: CardSection,
-  popover: PopoverSection
+  popover: PopoverSection,
+  table: TableSection
 };
 
 const CurrentSection = ({ hashRoute }: { hashRoute: string }) => {

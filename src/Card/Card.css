@@ -5,6 +5,10 @@
   border-radius: var(--borderRadius);
 }
 
+.Card.Card--noPadding{
+  padding: 0;
+}
+
 .Card.Card--elevation-low {
   box-shadow: var(--shadowDimsLight) var(--shadowColor);
 }

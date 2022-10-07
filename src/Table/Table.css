@@ -1,0 +1,62 @@
+.Table .TableCell {
+  padding: var(--padding);
+  text-align: left;
+}
+
+.Table, .TableCell {
+  border-collapse: collapse;
+}
+
+.Table.Table--hasRowDivider .TableCell {
+  border-top: var(--textFieldBorderWidth) solid var(--shadowColor);
+  border-bottom: var(--textFieldBorderWidth) solid var(--shadowColor);
+}
+
+.Table.Table--hasRowDivider:not(.Table--hasBodyBorder) 
+> .TableHead:first-child > .TableRow:first-child
+> .TableCell,
+.Table.Table--hasRowDivider:not(.Table--hasBodyBorder) 
+> .TableRow:first-child
+> .TableCell,
+.Table.Table--hasRowDivider:not(.Table--hasBodyBorder) 
+> .TableBody:first-child > .TableRow:first-child
+> .TableCell,
+.Table.Table--hasRowDivider:not(.Table--hasBodyBorder) 
+> .TableFooter:first-child > .TableRow:first-child
+> .TableCell {
+  border-top: none;
+}
+
+.Table.Table--hasRowDivider:not(.Table--hasBodyBorder) 
+> .TableHead:last-child > .TableRow:last-child
+> .TableCell,
+.Table.Table--hasRowDivider:not(.Table--hasBodyBorder) 
+> .TableRow:last-child
+> .TableCell,
+.Table.Table--hasRowDivider:not(.Table--hasBodyBorder) 
+> .TableBody:last-child > .TableRow:last-child
+> .TableCell,
+.Table.Table--hasRowDivider:not(.Table--hasBodyBorder) 
+> .TableFooter:last-child > .TableRow:last-child
+> .TableCell {
+  border-bottom: none;
+}
+
+.Table.Table--hasColumnDivider .TableCell {
+  border-left: var(--textFieldBorderWidth) solid var(--shadowColor);
+  border-right: var(--textFieldBorderWidth) solid var(--shadowColor);
+}
+
+.Table.Table--hasRowDivider:not(.Table--hasBodyBorder) .TableRow
+> .TableCell:first-child {
+  border-left: none;
+}
+
+.Table.Table--hasRowDivider:not(.Table--hasBodyBorder) .TableRow
+> .TableCell:last-child {
+  border-right: none;
+}
+
+.Table.Table--headerCentered .TableCell--Head {
+  text-align: center;
+}

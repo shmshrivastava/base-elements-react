@@ -23,6 +23,7 @@ export {
   VerticalStack,
   CenteredContainer
 } from './Stack';
+export { default as Table, TableRow, TableHead, TableBody, TableCell, TableDataCell, TableHeaderCell } from './Table'
 
 interface Props {
   text: string;
