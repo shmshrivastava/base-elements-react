@@ -43,6 +43,8 @@ export const Stack = React.forwardRef<
   delete renderProps.vertical;
   delete renderProps.gap;
   delete renderProps.wrapItems;
+  delete renderProps.itemsHorizontalAlignment;
+  delete renderProps.itemsVerticalAlignment;
   return (
     <div {...renderProps} ref={ref} className={classNames}>
       {props.children}
