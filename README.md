@@ -6,7 +6,7 @@
 
 ## Documentation
 
-### [Components](https://www.markdit.com/shivam/base-elements-react-components#checkbox)
+### [Components](https://www.markdit.com/shivam/base-elements-react-components)
 
 ## Install
 
@@ -138,7 +138,7 @@ const App = () => {
 
 ## Components
 
-**[Docs](https://www.markdit.com/shivam/base-elements-react-components#checkbox)**
+**[Docs](https://www.markdit.com/shivam/base-elements-react-components)**
 
 ### Button
 
