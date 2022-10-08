@@ -4,6 +4,10 @@
 
 [![NPM](https://img.shields.io/npm/v/base-elements-react.svg)](https://www.npmjs.com/package/base-elements-react) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
+## Documentation
+
+[Components Documentation](https://www.markdit.com/shivam/base-elements-react-components#checkbox)
+
 ## Install
 
 ```bash
@@ -188,16 +192,27 @@ class Example extends Component {
 #### Extended Components
 
 - PageTitle
+
   Variation of Text component which has element as `'h1'`
+
 - SectionHeading
+
   Variation of Text component which has element as `'h2'`
+
 - SubSectionHeading
+
   Variation of Text component which has element as `'h3'`
+
 - ComponentTitle
+
   Variation of Text component which has element as `'h3'`
+
 - InlineText
+
   Variation of Text component which has element as `'span'`
+
 - InlineCode
+
   Variation of Text component which has variation as `'code'`
 
 ```jsx
@@ -568,10 +583,15 @@ class Example extends Component {
 #### Extended Components
 
 - TableDataCell
+
   Table cell that specifically renders `'td'` element
+
 - TableHeaderCell
+
   Table cell that specifically renders `'th'` element
+
 - TableHeadRow
+
   Renders as `<TableHead><TableRow>{children}</TableRow></TableHead>
 
 ### HeaderTable
