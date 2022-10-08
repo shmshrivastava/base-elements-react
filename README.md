@@ -141,7 +141,7 @@ Renders styled html `<button>` element
 ```jsx
 import React, { Component } from 'react';
 
-import Button from 'base-elements-react/Button';
+import { Button } from 'base-elements-react';
 import 'base-elements-react/dist/index.css';
 
 class Example extends Component {
@@ -168,7 +168,7 @@ Accepts all html `<button>` props such as `onClick`, `className` etc.
 ```jsx
 import React, { Component } from 'react';
 
-import Text from 'base-elements-react/Text';
+import { Text } from 'base-elements-react';
 import 'base-elements-react/dist/index.css';
 
 class Example extends Component {
@@ -204,23 +204,27 @@ class Example extends Component {
 import React, { Component } from 'react';
 
 import {
-  InlineText,
+  Text,
   PageTitle,
   SectionHeading,
   SubSectionHeading,
-  InlineCode
-} from 'base-elements-react/Text';
-import { VerticalStack } from 'base-elements-react/Stack';
+  InlineCode,
+  VerticalStack
+} from 'base-elements-react';
 import 'base-elements-react/dist/index.css';
 
 class Example extends Component {
   render() {
-    return <VerticalStack>
-    <PageTitle>New Page</PageTitle>
-    <SectionHeading>Component Details</SectionHeading>
-    <SubSectionHeading>Button</SubSectionHeading>
-    <Text>Button is a styled <InlineCode>&gt;button&lt;</InlineCode> element
-    </VerticalStack>;
+    return (
+      <VerticalStack>
+        <PageTitle>New Page</PageTitle>
+        <SectionHeading>Component Details</SectionHeading>
+        <SubSectionHeading>Button</SubSectionHeading>
+        <Text>
+          Button is a styled <InlineCode>&lt;button&gt;</InlineCode> element
+        </Text>
+      </VerticalStack>
+    );
   }
 }
 ```
@@ -230,16 +234,18 @@ class Example extends Component {
 Renders styled html `<div>` element with label, error and children.
 
 ```jsx
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
-import FormField from 'base-elements-react/FormField'
-import 'base-elements-react/dist/index.css'
+import { FormField } from 'base-elements-react';
+import 'base-elements-react/dist/index.css';
 
 class Example extends Component {
   render() {
-    return <FormField label={"Render a labeled input"}>
-      <input>
-    </FormField>
+    return (
+      <FormField label={'Render a labeled input'}>
+        <input />
+      </FormField>
+    );
   }
 }
 ```
@@ -258,16 +264,14 @@ class Example extends Component {
 Renders styled html `<input>` element
 
 ```jsx
-import React, { Component, useState } from 'react'
+import React, { useState } from 'react';
 
-import Input from 'base-elements-react/TextField'
-import 'base-elements-react/dist/index.css'
+import { Input } from 'base-elements-react';
+import 'base-elements-react/dist/index.css';
 
-class Example extends Component {
-  const [value, setValue] = useState('');
-  render() {
-    return <Input value={value} onChange={(e) => setValue(e.target.value)} />
-  }
+function Example() {
+  const [value, setValue] = useState();
+  return <Input value={value} onChange={(e) => setValue(e.target.value)} />;
 }
 ```
 
@@ -276,16 +280,14 @@ class Example extends Component {
 Renders styled html `<textarea>` element
 
 ```jsx
-import React, { Component, useState } from 'react'
+import React, { useState } from 'react';
 
-import TextArea from 'base-elements-react/TextField'
-import 'base-elements-react/dist/index.css'
+import { TextArea } from 'base-elements-react';
+import 'base-elements-react/dist/index.css';
 
-class Example extends Component {
+function Example() {
   const [value, setValue] = useState('');
-  render() {
-    return <TextArea value={value} onChange={(e) => setValue(e.target.value)} />
-  }
+  return <TextArea value={value} onChange={(e) => setValue(e.target.value)} />;
 }
 ```
 
@@ -294,18 +296,20 @@ class Example extends Component {
 Formfield with child element as Input or TextArea component.
 
 ```jsx
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 
-import TextField from 'base-elements-react/TextField';
+import { TextField } from 'base-elements-react';
 import 'base-elements-react/dist/index.css';
 
-class Example extends Component {
+function Example() {
   const [value, setValue] = useState('');
-  render() {
-    return (
-      <TextField label='Enter your name' value={value} onChange={(e) => setValue(e.target.value)} />
-    );
-  }
+  return (
+    <TextField
+      label='Enter your name'
+      value={value}
+      onChange={(e) => setValue(e.target.value)}
+    />
+  );
 }
 ```
 
@@ -322,21 +326,20 @@ Accepts all FormField props - `label`, `labelPosition` and `error`
 Renders styled html `<input>` element with `type='checkbox'`
 
 ```jsx
-import React, { Component, useState } from 'react'
+import React, { useState } from 'react';
 
-import Checkbox from 'base-elements-react/CheckBox'
-import 'base-elements-react/dist/index.css'
+import { Checkbox } from 'base-elements-react';
+import 'base-elements-react/dist/index.css';
 
-class Example extends Component {
+function Example() {
   const [checked, setChecked] = useState(false);
-  render() {
-    return <Checkbox
-              checked={checked}
-              onChange={(e: SyntheticEvent<EventTarget>) =>
-                setChecked((e.target as HTMLInputElement).checked)
-              }
-            />
-  }
+
+  return (
+    <Checkbox
+      checked={checked}
+      onChange={(e) => setChecked(e.target.checked)}
+    />
+  );
 }
 ```
 
@@ -354,22 +357,21 @@ Accepts all input props
 Checkbox component wrapped in FormField
 
 ```jsx
-import React, { Component, useState } from 'react'
+import React, { useState } from 'react';
 
-import CheckboxField from 'base-elements-react/CheckBox'
-import 'base-elements-react/dist/index.css'
+import { CheckboxField } from 'base-elements-react';
+import 'base-elements-react/dist/index.css';
 
-class Example extends Component {
+function Example() {
   const [checked, setChecked] = useState(false);
-  render() {
-    return <CheckboxField
-              checked={checked}
-              onChange={(e: SyntheticEvent<EventTarget>) =>
-                setChecked((e.target as HTMLInputElement).checked)
-              }
-              label="This is a checkbox"
-            />
-  }
+
+  return (
+    <CheckboxField
+      checked={checked}
+      onChange={(e) => setChecked(e.target.checked)}
+      label='This is a checkbox'
+    />
+  );
 }
 ```
 
@@ -382,29 +384,36 @@ Accepts all FormField and Checkbox props
 Renders a select dropdown. Does not use the native html select element.
 
 ```jsx
-import React, { Component, useState } from 'react'
+import React, { useState } from 'react';
 
-import Select from 'base-elements-react/Select'
-import 'base-elements-react/dist/index.css'
-import { ReactComponent as StarIcon } from '../icons/star.svg';
+import {
+  Select,
+  SelectOption,
+  HorizontalStack,
+  Text
+} from 'base-elements-react';
+import 'base-elements-react/dist/index.css';
 
-class Example extends Component {
+function Example() {
   const [value, setValue] = useState();
-  render() {
-    return <Select
-        value={value}
-        onValueChange={setValue}
-        placeholder={'Select something?'}
-      >
-        <SelectOption value='op1'>Option 1 as string</SelectOption>
-        <SelectOption value='op2'>Option 2 as string</SelectOption>
-        <SelectOption value='star'>
-          <HorizontalStack itemsVerticalAlignment='center'>
-            <StarIcon /> Option with component
-          </HorizontalStack>
-        </SelectOption>
-      </Select>
-  }
+
+  return (
+    <Select
+      value={value}
+      onValueChange={setValue}
+      placeholder={'Select something?'}
+    >
+      <SelectOption value='op1'>Option 1 as string</SelectOption>
+      <SelectOption value='op2'>Option 2 as string</SelectOption>
+      <SelectOption value='star'>
+        <HorizontalStack itemsVerticalAlignment='center'>
+          <Text>
+            Option with <Text variation='emphasis'>component</Text>
+          </Text>
+        </HorizontalStack>
+      </SelectOption>
+    </Select>
+  );
 }
 ```
 
@@ -423,15 +432,13 @@ Accepts all input props
 A container with shadow and padding
 
 ```jsx
-import React, { Component } from 'react';
+import React from 'react';
 
-import Card from 'base-elements-react/Card';
+import { Card } from 'base-elements-react';
 import 'base-elements-react/dist/index.css';
 
-class Example extends Component {
-  render() {
-    return <Card>A block text</Card>;
-  }
+function Example() {
+  return <Card>A block text</Card>;
 }
 ```
 
@@ -447,30 +454,28 @@ class Example extends Component {
 A floating container and its controller
 
 ```jsx
-import React, { Component } from 'react';
+mport React, { useState } from "react";
 
-import Popover from 'base-elements-react/Popover';
-import Button from 'base-elements-react/Button';
-import 'base-elements-react/dist/index.css';
+import { Popover, Button } from "base-elements-react";
+import "base-elements-react/dist/index.css";
 
-class Example extends Component {
-  const [open, setOpen] = useState<boolean>(false);
+function Example() {
+  const [open, setOpen] = useState(false);
   const toggleOpen = () => setOpen(!open);
   const close = () => setOpen(false);
-  render() {
-    return (
-      <Popover
-        anchor={<Button onClick={toggleOpen}>Toggle Popover</Button>}
-        open={open}
-        onOutsideClick={close}
-        xLocation='snap_left_edge'
-        yLocation='bottom'
-      >
-        Hello!
-      </Popover>
-      );
-  }
+  return (
+    <Popover
+      anchor={<Button onClick={toggleOpen}>Toggle Popover</Button>}
+      open={open}
+      onOutsideClick={close}
+      xLocation="snap_left_edge"
+      yLocation="bottom"
+    >
+      Hello!
+    </Popover>
+  );
 }
+
 ```
 
 #### Props
@@ -508,7 +513,7 @@ import {
   TableRow,
   TableBody,
   TableCell
-} from 'base-elements-react/Table';
+} from 'base-elements-react';
 import 'base-elements-react/dist/index.css';
 
 class Example extends Component {
@@ -524,18 +529,22 @@ class Example extends Component {
         </TableHead>
         <TableBody>
           <TableRow>
+            <TableCell>1</TableCell>
             <TableCell>Mercury</TableCell>
             <TableCell>46.098 million km</TableCell>
           </TableRow>
           <TableRow>
+            <TableCell>2</TableCell>
             <TableCell>Venus</TableCell>
             <TableCell>107.78 million km</TableCell>
           </TableRow>
           <TableRow>
+            <TableCell>3</TableCell>
             <TableCell>Earth</TableCell>
             <TableCell>149.48 million km</TableCell>
           </TableRow>
           <TableRow>
+            <TableCell>4</TableCell>
             <TableCell>Mars</TableCell>
             <TableCell>219.16 million km</TableCell>
           </TableRow>
@@ -573,12 +582,11 @@ Variant of Table component
 import React, { Component } from 'react';
 
 import {
-  Table,
-  TableHead,
+  HeaderTable,
+  TableHeadRow,
   TableRow,
-  TableBody,
   TableCell
-} from 'base-elements-react/Table';
+} from 'base-elements-react';
 import 'base-elements-react/dist/index.css';
 
 class Example extends Component {
@@ -595,18 +603,22 @@ class Example extends Component {
         }
       >
         <TableRow>
+          <TableCell>1</TableCell>
           <TableCell>Mercury</TableCell>
           <TableCell>46.098 million km</TableCell>
         </TableRow>
         <TableRow>
+          <TableCell>2</TableCell>
           <TableCell>Venus</TableCell>
           <TableCell>107.78 million km</TableCell>
         </TableRow>
         <TableRow>
+          <TableCell>3</TableCell>
           <TableCell>Earth</TableCell>
           <TableCell>149.48 million km</TableCell>
         </TableRow>
         <TableRow>
+          <TableCell>4</TableCell>
           <TableCell>Mars</TableCell>
           <TableCell>219.16 million km</TableCell>
         </TableRow>

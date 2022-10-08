@@ -19,7 +19,7 @@ function PopoverSection() {
         >
           Hello!
         </Popover>
-        <Popover
+        {/* <Popover
           anchor={<Button onClick={toggleOpen}>Toggle Popover</Button>}
           open={open}
           onOutsideClick={close}
@@ -144,7 +144,7 @@ function PopoverSection() {
           yLocation='bottom'
         >
           Hello!
-        </Popover>
+        </Popover> */}
       </HorizontalStack>
     </VerticalStack>
   );

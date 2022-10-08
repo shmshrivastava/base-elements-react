@@ -106,14 +106,18 @@ export const Popover = React.forwardRef<
     }
   }, [anchorRef, bodyRef]);
 
-  React.useEffect(() => {}, [bodyRef, props.onOutsideClick]);
+  const handleOutsideClick = (e: any) => {
+    if (props.onOutsideClick && e.target !== anchorRef.current?.firstChild) {
+      props.onOutsideClick();
+    }
+  };
 
   return (
     <div ref={ref} className={classNames}>
       <div ref={anchorRef} className='PopoverAnchor'>
         {props.anchor}
       </div>
-      <OutsideAlerter onOutsideClick={props.onOutsideClick}>
+      <OutsideAlerter onOutsideClick={handleOutsideClick}>
         <div
           style={{
             top: bodyTop,
