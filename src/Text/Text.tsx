@@ -16,12 +16,12 @@ interface TextHeadingOrParaProps
 
 interface SpanProps extends React.ComponentPropsWithoutRef<'span'> {
   className?: string;
-  variation?: 'strong' | 'emphasis' | 'subdued';
+  variation?: 'strong' | 'emphasis' | 'subdued' | 'code';
   element?: 'span';
 }
 
 interface OtherTextProps {
-  variation?: 'strong' | 'emphasis' | 'subdued';
+  variation?: 'strong' | 'emphasis' | 'subdued' | 'code';
 }
 
 type TextProps = (
@@ -53,6 +53,8 @@ export const Text = React.forwardRef<
       ? 'strong'
       : renderProps.variation === 'emphasis'
       ? 'em'
+      : renderProps.variation === 'code'
+      ? 'code'
       : React.Fragment;
   delete renderProps.variation;
   delete renderProps.element;
@@ -60,13 +62,15 @@ export const Text = React.forwardRef<
     if (props.element === 'span') {
       return (
         <span ref={ref} {...renderProps} className={classNames}>
-          <VariationWrapper ref={ref} {...renderProps} className={classNames}>
-            {props.children}
-          </VariationWrapper>
+          <VariationWrapper>{props.children}</VariationWrapper>
         </span>
       );
     }
-    return <VariationWrapper>{props.children}</VariationWrapper>;
+    return (
+      <VariationWrapper ref={ref} {...renderProps} className={classNames}>
+        {props.children}
+      </VariationWrapper>
+    );
   }
   if (element === 'p') {
     return (
@@ -192,3 +196,23 @@ export const ComponentTitle = React.forwardRef<
 });
 
 ComponentTitle.displayName = 'ComponentTitle';
+
+type InlineCodeProps = SpanProps & OtherTextProps;
+
+export const InlineCode = React.forwardRef<
+  HTMLHeadingElement | HTMLParagraphElement | HTMLSpanElement,
+  React.PropsWithChildren<InlineCodeProps>
+>((props, ref) => {
+  return (
+    <Text
+      {...props}
+      variation='code'
+      ref={ref}
+      className={customTextClassName(props, 'InlineCode')}
+    >
+      {props.children}
+    </Text>
+  );
+});
+
+InlineCode.displayName = 'InlineCode';

@@ -5,7 +5,6 @@ import './Checkbox.css';
 
 interface CheckboxProps extends React.ComponentPropsWithoutRef<'input'> {
   className?: string;
-  label?: string;
   checked?: boolean;
   sizeVariant?: 'normal' | 'large' | string;
 }

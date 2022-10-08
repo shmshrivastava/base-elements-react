@@ -15,7 +15,8 @@ export {
   PageTitle,
   SectionHeading,
   SubSectionHeading,
-  ComponentTitle
+  ComponentTitle,
+  InlineCode
 } from './Text';
 export {
   default as Stack,
@@ -23,7 +24,17 @@ export {
   VerticalStack,
   CenteredContainer
 } from './Stack';
-export { default as Table, TableRow, TableHead, TableBody, TableCell, TableDataCell, TableHeaderCell } from './Table'
+export {
+  default as Table,
+  TableRow,
+  TableHead,
+  TableBody,
+  TableCell,
+  TableDataCell,
+  TableHeaderCell,
+  HeaderTable,
+  TableHeadRow
+} from './Table';
 
 interface Props {
   text: string;

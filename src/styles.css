@@ -1,3 +1,7 @@
 label {
   font-weight: var(--labelFontWeight);
 }
+
+[class$='--fullWidth'] {
+  width: 100%;
+}

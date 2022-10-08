@@ -1,1 +1,11 @@
-export { default, TableRow, TableHead, TableBody, TableCell, TableDataCell, TableHeaderCell } from './Table'
+export {
+  default,
+  TableRow,
+  TableHead,
+  TableBody,
+  TableCell,
+  TableDataCell,
+  TableHeaderCell,
+  TableHeadRow,
+  HeaderTable
+} from './Table';

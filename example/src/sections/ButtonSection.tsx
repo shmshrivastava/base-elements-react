@@ -3,26 +3,27 @@ import {
   Card,
   SectionHeading,
   SubSectionHeading,
-  Text
+  Text,
+  InlineCode,
+  Table,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody,
+  Button
 } from 'base-elements-react/dist';
 import { HorizontalStack, VerticalStack } from 'base-elements-react/dist';
-import { Button } from 'base-elements-react/dist';
 
 function ButtonSection() {
   return (
     <VerticalStack className='section'>
       <SectionHeading>Button</SectionHeading>
       <SubSectionHeading>Props</SubSectionHeading>
-      <VerticalStack gap>
-        <Text>
-          <Text variation='strong'>appearance:</Text> "primary" | "secondary" |
-          "danger"
-        </Text>
-        <Text>
-          <Text variation='emphasis'>default:</Text> "primary"
-        </Text>
+
+      <VerticalStack>
         <Card elevation='low'>
           <VerticalStack gap>
+            <Text element='h4'>appearance</Text>
             <HorizontalStack gap itemsHorizontalAlignment='space-around'>
               <Button onClick={() => console.log('Primary Button Clicked')}>
                 Primary
@@ -41,48 +42,89 @@ function ButtonSection() {
               </Button>
             </HorizontalStack>
           </VerticalStack>
+          <br />
+          <Table hasRowDivider fullWidth>
+            <TableHead>
+              <TableRow>
+                <TableCell>Possible Values</TableCell>
+                <TableCell>Default Value</TableCell>
+                <TableCell>Description</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              <TableRow>
+                <TableCell>
+                  <InlineCode>"primary"</InlineCode> |{' '}
+                  <InlineCode>"secondary"</InlineCode> |{' '}
+                  <InlineCode>"danger"</InlineCode>
+                </TableCell>
+                <TableCell>
+                  <InlineCode>"primary"</InlineCode>
+                </TableCell>
+                <TableCell>Appearance of the button</TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
         </Card>
+
         <br />
-        <Text>
-          <Text variation='strong'>disabled:</Text> true | false
-        </Text>
-        <Text>
-          <Text variation='emphasis'>default:</Text> false
-        </Text>
+        <br />
+        <br />
         <Card elevation='low'>
-          <HorizontalStack gap itemsHorizontalAlignment='space-around'>
-            <Button
-              onClick={() => console.log('Primary Disabled Button Clicked')}
-              disabled
-            >
-              Primary Disabled
-            </Button>
-            <Button
-              onClick={() => console.log('Secondary Disabled Button Clicked')}
-              disabled
-              appearance='secondary'
-            >
-              Secondary Disabled
-            </Button>
-            <Button
-              onClick={() => console.log('Danger Disabled Button Clicked')}
-              disabled
-              appearance='danger'
-            >
-              Danger Disabled
-            </Button>
-          </HorizontalStack>
-        </Card>
-        <br />
-        <Text>
-          <Text variation='strong'>variation:</Text> "plain" | "outline" |
-          "plainWithPadding" | undefined
-        </Text>
-        <Text>
-          <Text variation='emphasis'>default:</Text> undefined
-        </Text>
-        <Card>
           <VerticalStack gap>
+            <Text element='h4'>disabled</Text>
+            <HorizontalStack gap itemsHorizontalAlignment='space-around'>
+              <Button
+                onClick={() => console.log('Primary Disabled Button Clicked')}
+                disabled
+              >
+                Primary Disabled
+              </Button>
+              <Button
+                onClick={() => console.log('Secondary Disabled Button Clicked')}
+                disabled
+                appearance='secondary'
+              >
+                Secondary Disabled
+              </Button>
+              <Button
+                onClick={() => console.log('Danger Disabled Button Clicked')}
+                disabled
+                appearance='danger'
+              >
+                Danger Disabled
+              </Button>
+            </HorizontalStack>
+          </VerticalStack>
+          <br />
+          <Table hasRowDivider fullWidth>
+            <TableHead>
+              <TableRow>
+                <TableCell>Possible Values</TableCell>
+                <TableCell>Default Value</TableCell>
+                <TableCell>Description</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              <TableRow>
+                <TableCell>
+                  <InlineCode>true</InlineCode> | <InlineCode>false</InlineCode>
+                </TableCell>
+                <TableCell>
+                  <InlineCode>false</InlineCode>
+                </TableCell>
+                <TableCell>Make the button disabled</TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </Card>
+
+        <br />
+        <br />
+        <br />
+        <Card elevation='low'>
+          <VerticalStack gap>
+            <Text element='h4'>variation</Text>
             <HorizontalStack gap itemsHorizontalAlignment='space-around'>
               <Button
                 onClick={() => console.log('Primary Outline Button Clicked')}
@@ -156,6 +198,30 @@ function ButtonSection() {
               </Button>
             </HorizontalStack>
           </VerticalStack>
+          <br />
+          <Table hasRowDivider>
+            <TableHead>
+              <TableRow>
+                <TableCell>Possible Values</TableCell>
+                <TableCell>Default Value</TableCell>
+                <TableCell>Description</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              <TableRow>
+                <TableCell>
+                  <InlineCode>"plain"</InlineCode> |{' '}
+                  <InlineCode>"outline"</InlineCode> |{' '}
+                  <InlineCode>"plainWithPadding"</InlineCode> |{' '}
+                  <InlineCode>undefined</InlineCode>
+                </TableCell>
+                <TableCell>
+                  <InlineCode>undefined</InlineCode>
+                </TableCell>
+                <TableCell>Variation in appearance</TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
         </Card>
       </VerticalStack>
     </VerticalStack>

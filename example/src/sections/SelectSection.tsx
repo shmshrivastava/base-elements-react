@@ -1,5 +1,10 @@
 import React from 'react';
-import { Select, SectionHeading, SelectOption } from 'base-elements-react/dist';
+import {
+  Select,
+  SectionHeading,
+  SelectOption,
+  HorizontalStack
+} from 'base-elements-react/dist';
 import { VerticalStack } from 'base-elements-react/dist';
 import { useState } from 'react';
 
@@ -10,17 +15,13 @@ function SelectSection() {
   return (
     <VerticalStack className='section'>
       <SectionHeading>Select</SectionHeading>
-      <Select
-        value={value}
-        onValueChange={setValue}
-        placeholder={'Select something?'}
-      >
-        <SelectOption value='apple'>Apple</SelectOption>
-        <SelectOption value='mango'>Mango</SelectOption>
+      <Select value={value} onValueChange={setValue}>
+        <SelectOption value='op1'>Option 1 as string</SelectOption>
+        <SelectOption value='op2'>Option 2 as string</SelectOption>
         <SelectOption value='star'>
-          <div>
-            <StarIcon /> Star
-          </div>
+          <HorizontalStack itemsVerticalAlignment='center'>
+            <StarIcon /> Option with component
+          </HorizontalStack>
         </SelectOption>
       </Select>
     </VerticalStack>

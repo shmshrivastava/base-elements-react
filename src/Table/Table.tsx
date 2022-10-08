@@ -7,9 +7,9 @@ interface TableProps extends React.ComponentPropsWithoutRef<'table'> {
   className?: string;
   hasRowDivider?: boolean;
   hasColumnDivider?: boolean;
-  hasBodyBorder?: boolean
+  hasBodyBorder?: boolean;
   headerCentered?: boolean;
-
+  fullWidth?: boolean;
 }
 
 const componentConfig: ComponentConfig = {
@@ -18,7 +18,8 @@ const componentConfig: ComponentConfig = {
     hasRowDivider: { type: 'boolean', default: false },
     hasColumnDivider: { type: 'boolean', default: false },
     hasBodyBorder: { type: 'boolean', default: false },
-    headerCentered: { type: 'boolean', default: false }
+    headerCentered: { type: 'boolean', default: false },
+    fullWidth: { type: 'boolean', default: false }
   }
 };
 
@@ -28,6 +29,10 @@ export const Table = React.forwardRef<
 >((props, ref) => {
   const classNames = getClassName('Table', componentConfig, props);
   const renderProps = { ...props };
+  delete renderProps.hasBodyBorder;
+  delete renderProps.hasColumnDivider;
+  delete renderProps.hasRowDivider;
+  delete renderProps.fullWidth;
   return (
     <table ref={ref} {...renderProps} className={classNames}>
       {props.children}
@@ -45,11 +50,10 @@ interface TableHeadProps extends React.ComponentPropsWithoutRef<'thead'> {
 
 const tableHeadComponentConfig: ComponentConfig = {
   styleKeys: [],
-  classGenerator: {
-  }
+  classGenerator: {}
 };
 
-export function TableHead(props: TableHeadProps){
+export function TableHead(props: TableHeadProps) {
   const classNames = getClassName('TableHead', tableHeadComponentConfig, props);
   const renderProps = { ...props };
   return (
@@ -59,7 +63,7 @@ export function TableHead(props: TableHeadProps){
       </thead>
     </TableContext.Provider>
   );
-};
+}
 
 TableHead.displayName = 'TableHead';
 
@@ -69,11 +73,10 @@ interface TableBodyProps extends React.ComponentPropsWithoutRef<'tbody'> {
 
 const tableBodyComponentConfig: ComponentConfig = {
   styleKeys: [],
-  classGenerator: {
-  }
+  classGenerator: {}
 };
 
-export function TableBody(props: TableBodyProps){
+export function TableBody(props: TableBodyProps) {
   const classNames = getClassName('TableBody', tableBodyComponentConfig, props);
   const renderProps = { ...props };
   return (
@@ -83,7 +86,7 @@ export function TableBody(props: TableBodyProps){
       </tbody>
     </TableContext.Provider>
   );
-};
+}
 
 TableBody.displayName = 'TableBody';
 
@@ -93,12 +96,15 @@ interface TableFooterProps extends React.ComponentPropsWithoutRef<'tfoot'> {
 
 const tableFooterComponentConfig: ComponentConfig = {
   styleKeys: [],
-  classGenerator: {
-  }
+  classGenerator: {}
 };
 
-export function TableFooter(props: TableFooterProps){
-  const classNames = getClassName('TableFooter', tableFooterComponentConfig, props);
+export function TableFooter(props: TableFooterProps) {
+  const classNames = getClassName(
+    'TableFooter',
+    tableFooterComponentConfig,
+    props
+  );
   const renderProps = { ...props };
   return (
     <TableContext.Provider value={{ variant: 'footer' }}>
@@ -107,7 +113,7 @@ export function TableFooter(props: TableFooterProps){
       </tfoot>
     </TableContext.Provider>
   );
-};
+}
 
 TableBody.displayName = 'TableFooter';
 
@@ -117,11 +123,10 @@ interface TableRowProps extends React.ComponentPropsWithoutRef<'tr'> {
 
 const tableRowComponentConfig: ComponentConfig = {
   styleKeys: [],
-  classGenerator: {
-  }
+  classGenerator: {}
 };
 
-export function TableRow(props: TableRowProps){
+export function TableRow(props: TableRowProps) {
   const classNames = getClassName('TableRow', tableRowComponentConfig, props);
   const renderProps = { ...props };
   return (
@@ -129,7 +134,7 @@ export function TableRow(props: TableRowProps){
       {props.children}
     </tr>
   );
-};
+}
 
 TableBody.displayName = 'TableRow';
 
@@ -147,17 +152,17 @@ type TableCellProps = TableHeaderCellProps | TableDataCellProps;
 
 const tableCellComponentConfig: ComponentConfig = {
   styleKeys: [],
-  classGenerator: {
-  }
+  classGenerator: {}
 };
 
 export const TableCell = React.forwardRef<
   HTMLTableCellElement,
   React.PropsWithChildren<TableCellProps>
 >((props, ref) => {
-  const tableContext = React.useContext(TableContext)
+  const tableContext = React.useContext(TableContext);
   const renderProps = { ...props };
-  const RenderComponent = props.element || tableContext.variant === 'head' ? 'th' : 'tr';
+  const RenderComponent =
+    props.element || tableContext.variant === 'head' ? 'th' : 'tr';
   const classNames = getClassName(
     'TableCell',
     tableCellComponentConfig,
@@ -165,13 +170,17 @@ export const TableCell = React.forwardRef<
     `TableCell--${RenderComponent === 'th' ? 'Head' : 'Data'}`
   );
   if (RenderComponent === 'th') {
-    return <th ref={ref} {...renderProps} className={classNames}>
-      {props.children}
-    </th>
+    return (
+      <th ref={ref} {...renderProps} className={classNames}>
+        {props.children}
+      </th>
+    );
   } else {
-   return <td ref={ref} {...renderProps} className={classNames}>
-      {props.children}
-    </td>
+    return (
+      <td ref={ref} {...renderProps} className={classNames}>
+        {props.children}
+      </td>
+    );
   }
 });
 
@@ -180,17 +189,48 @@ TableBody.displayName = 'TableCell';
 export const TableHeaderCell = React.forwardRef<
   HTMLTableCellElement,
   React.PropsWithChildren<TableCellProps>
-  >((props, ref) => {
-  return <TableCell ref={ref} {...props} element='th' />
-})
+>((props, ref) => {
+  return <TableCell ref={ref} {...props} element='th' />;
+});
 
 TableHeaderCell.displayName = 'TableHeaderCell';
 
 export const TableDataCell = React.forwardRef<
   HTMLTableCellElement,
   React.PropsWithChildren<TableCellProps>
-  >((props, ref) => {
-  return <TableCell ref={ref} {...props} element='td' />
-})
+>((props, ref) => {
+  return <TableCell ref={ref} {...props} element='td' />;
+});
 
 TableDataCell.displayName = 'TableDataCell';
+
+export function TableHeadRow(props: TableHeadProps) {
+  return (
+    <TableHead {...props}>
+      <TableRow>{props.children}</TableRow>
+    </TableHead>
+  );
+}
+
+TableHeadRow.displayName = 'TableHeadRow';
+
+interface HeaderTableProps extends TableProps {
+  header: React.ReactNode;
+}
+
+export const HeaderTable = React.forwardRef<
+  HTMLTableElement,
+  React.PropsWithChildren<HeaderTableProps>
+>((props, ref) => {
+  const classNames = getClassName('Table', componentConfig, props);
+  const renderProps = { ...props };
+  delete renderProps.header;
+  return (
+    <Table ref={ref} {...renderProps} className={classNames}>
+      {props.header}
+      <TableBody>{props.children}</TableBody>
+    </Table>
+  );
+});
+
+HeaderTable.displayName = 'HeaderTable';

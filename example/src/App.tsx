@@ -75,7 +75,7 @@ const Sidebar = (props: {
 }) => {
   const routes = Object.keys(sectionRouteMap);
   return (
-    <Card elevation='low'>
+    <Card elevation='high'>
       <VerticalStack gap='normal'>
         {routes.map((route) => (
           <RouteSelectorItem
@@ -95,8 +95,10 @@ const App = () => {
   return (
     <div className='App'>
       <ThemeWrapper themes={themes} currentThemeId='light'>
-        <PageTitle style={{ display: 'flex', alignItems: 'center' }}>
-          Base Elements React - Demo <StarIcon height={'1em'} width='1em' />
+        <PageTitle>
+          <HorizontalStack gap itemsVerticalAlignment='center'>
+            Base Elements React - Demo <StarIcon height={'1em'} width='1em' />
+          </HorizontalStack>
         </PageTitle>
         <HorizontalStack gap='larger'>
           <Sidebar onRouteSelect={setHashRoute} currentRoute={hashRoute} />

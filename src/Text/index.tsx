@@ -4,5 +4,6 @@ export {
   PageTitle,
   SectionHeading,
   SubSectionHeading,
-  ComponentTitle
+  ComponentTitle,
+  InlineCode
 } from './Text';

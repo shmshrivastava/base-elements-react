@@ -81,9 +81,10 @@ export type TextFieldProps = TextFieldElementProps & FormFieldProps;
 
 export const TextField = React.forwardRef<HTMLDivElement, TextFieldProps>(
   (props, ref) => {
-    const textFieldElementProps = props;
+    const textFieldElementProps = { ...props };
     delete textFieldElementProps.label;
     delete textFieldElementProps.error;
+    delete textFieldElementProps.labelPosition;
     return (
       <FormField
         ref={ref}

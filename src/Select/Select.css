@@ -38,6 +38,7 @@
 
 .Select > .Popover .PopoverBody > .Card {
   padding: 0;
+  width: max-content;
 }
 
 .SelectOption {
