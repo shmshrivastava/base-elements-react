@@ -18,7 +18,6 @@ import PopoverSection from './sections/PopoverSection';
 import SelectSection from './sections/SelectSection';
 import CardSection from './sections/CardSection';
 import TableSection from './sections/TableSection';
-import Example from './Example';
 
 const themes = [
   {
@@ -95,7 +94,6 @@ const App = () => {
   const [hashRoute, setHashRoute] = useState(window.location.hash.slice(1));
   return (
     <div className='App'>
-      <Example />
       <ThemeWrapper themes={themes} currentThemeId='light'>
         <PageTitle>
           <HorizontalStack gap itemsVerticalAlignment='center'>
