@@ -163,6 +163,68 @@ Accepts all html `<button>` props such as `onClick`, `className` etc.
 | variation  | `'plain'`, `'outline'` , `'plainWithPadding'` | `undefined`   | Appearance variation of the button |
 | disabled   | `true`, `false`                               | false         | Make the button disabled           |
 
+### Text
+
+```jsx
+import React, { Component } from 'react';
+
+import Text from 'base-elements-react/Text';
+import 'base-elements-react/dist/index.css';
+
+class Example extends Component {
+  render() {
+    return <Text>A block text</Text>;
+  }
+}
+```
+
+#### Props
+
+| Name      | Possible Values                                                 | Default Value | Description               |
+| --------- | --------------------------------------------------------------- | ------------- | ------------------------- |
+| element   | `'h1'`, `'h2'`, `'h3'`, `'h4'`, `'h5'`, `'h6'`, `'p'`, `'span'` | `'p'`         | Type of element to render |
+| variation | `'strong'`, `'emphasis'`, `'subdued'`, `'code'`, `'auto'`       | `auto`        | Variation of the text     |
+
+#### Extended Components
+
+- PageTitle
+  Variation of Text component which has element as `'h1'`
+- SectionHeading
+  Variation of Text component which has element as `'h2'`
+- SubSectionHeading
+  Variation of Text component which has element as `'h3'`
+- ComponentTitle
+  Variation of Text component which has element as `'h3'`
+- InlineText
+  Variation of Text component which has element as `'span'`
+- InlineCode
+  Variation of Text component which has variation as `'code'`
+
+```jsx
+import React, { Component } from 'react';
+
+import {
+  InlineText,
+  PageTitle,
+  SectionHeading,
+  SubSectionHeading,
+  InlineCode
+} from 'base-elements-react/Text';
+import { VerticalStack } from 'base-elements-react/Stack';
+import 'base-elements-react/dist/index.css';
+
+class Example extends Component {
+  render() {
+    return <VerticalStack>
+    <PageTitle>New Page</PageTitle>
+    <SectionHeading>Component Details</SectionHeading>
+    <SubSectionHeading>Button</SubSectionHeading>
+    <Text>Button is a styled <InlineCode>&gt;button&lt;</InlineCode> element
+    </VerticalStack>;
+  }
+}
+```
+
 ### FormField
 
 Renders styled html `<div>` element with label, error and children.
@@ -355,6 +417,210 @@ Accepts all input props
 | onValueChange | (value) => {}           | (value) => {} | Callback function when a value is selected                     |
 | value         | current selected value  | first option  | Currently selected value                                       |
 | placeholder   | any string or ReactNode | null          | Rendered as first item in the option list. Selected by default |
+
+### Card
+
+A container with shadow and padding
+
+```jsx
+import React, { Component } from 'react';
+
+import Card from 'base-elements-react/Card';
+import 'base-elements-react/dist/index.css';
+
+class Example extends Component {
+  render() {
+    return <Card>A block text</Card>;
+  }
+}
+```
+
+#### Props
+
+| Name      | Possible Values               | Default Value | Description                  |
+| --------- | ----------------------------- | ------------- | ---------------------------- |
+| elevation | `'low'`, `'normal'`, `'high'` | `'normal'`    | Type of element to render    |
+| noPadding | `true`, `false`               | false         | Removes card padding if true |
+
+### Popover
+
+A floating container and its controller
+
+```jsx
+import React, { Component } from 'react';
+
+import Popover from 'base-elements-react/Popover';
+import Button from 'base-elements-react/Button';
+import 'base-elements-react/dist/index.css';
+
+class Example extends Component {
+  const [open, setOpen] = useState<boolean>(false);
+  const toggleOpen = () => setOpen(!open);
+  const close = () => setOpen(false);
+  render() {
+    return (
+      <Popover
+        anchor={<Button onClick={toggleOpen}>Toggle Popover</Button>}
+        open={open}
+        onOutsideClick={close}
+        xLocation='snap_left_edge'
+        yLocation='bottom'
+      >
+        Hello!
+      </Popover>
+      );
+  }
+}
+```
+
+#### Props
+
+anchor: React.ReactNode;
+open: boolean;
+onOutsideClick?: () => void;
+xLocation?: 'snap_left_edge' | 'center' | 'snap_right_edge';
+yLocation?:
+| 'top'
+| 'top_cover_anchor'
+| 'center'
+| 'bottom_cover_anchor'
+| 'bottom';
+xOffset?: number;
+yOffset?: number;
+
+| Name           | Possible Values                                                                | Default Value | Description                                                                                          |
+| -------------- | ------------------------------------------------------------------------------ | ------------- | ---------------------------------------------------------------------------------------------------- |
+| open           | `true`, `false`                                                                | false         | Shows popover container if true                                                                      |
+| onOutsideClick | () => {}                                                                       |               | A callback function when user clicks outside the component. You can choose to toggle the `open` prop |
+| xLocation      | `'snap_left_edge'`, `'center'`, `'snap_right_edge'`                            | `'center'`    | Location on x axis to render the popover                                                             |
+| elevation      | `'top'`, `'top_cover_anchor'`, `'center'`, `'bottom_cover_anchor'`, `'bottom'` | `'center'`    | Location on y axis to render the popove                                                              |
+| xOffset        | any number                                                                     | 0             | offsets the popover by pixels to the right                                                           |
+| yOffset        | any number                                                                     | 0             | offsets the popover by pixels to the bottom                                                          |
+
+### Table
+
+```jsx
+import React, { Component } from 'react';
+
+import {
+  Table,
+  TableHead,
+  TableRow,
+  TableBody,
+  TableCell
+} from 'base-elements-react/Table';
+import 'base-elements-react/dist/index.css';
+
+class Example extends Component {
+  render() {
+    return (
+      <Table hasRowDivider>
+        <TableHead>
+          <TableRow>
+            <TableCell>Sr. no.</TableCell>
+            <TableCell>Planet</TableCell>
+            <TableCell>Distance from sun</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          <TableRow>
+            <TableCell>Mercury</TableCell>
+            <TableCell>46.098 million km</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>Venus</TableCell>
+            <TableCell>107.78 million km</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>Earth</TableCell>
+            <TableCell>149.48 million km</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>Mars</TableCell>
+            <TableCell>219.16 million km</TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
+    );
+  }
+}
+```
+
+#### Props
+
+| Name             | Possible Values | Default Value | Description                                                                             |
+| ---------------- | --------------- | ------------- | --------------------------------------------------------------------------------------- |
+| hasBodyBorder    | `true`, `false` | false         | Shows border around the body                                                            |
+| hasRowDivider    | `true`, `false` | false         | Shows divider between all rows except top of first row and bottom of last row           |
+| hasColumnDivider | `true`, `false` | false         | Shows divider between all columns except lelft of first column and right of last column |
+| headerCentered   | `true`, `false` | false         | Centers content of all header cells                                                     |
+| fullWidth        | `true`, `false` | false         | makes width as `100%`                                                                   |
+
+#### Extended Components
+
+- TableDataCell
+  Table cell that specifically renders `'td'` element
+- TableHeaderCell
+  Table cell that specifically renders `'th'` element
+- TableHeadRow
+  Renders as `<TableHead><TableRow>{children}</TableRow></TableHead>
+
+### HeaderTable
+
+Variant of Table component
+
+```jsx
+import React, { Component } from 'react';
+
+import {
+  Table,
+  TableHead,
+  TableRow,
+  TableBody,
+  TableCell
+} from 'base-elements-react/Table';
+import 'base-elements-react/dist/index.css';
+
+class Example extends Component {
+  render() {
+    return (
+      <HeaderTable
+        hasRowDivider
+        header={
+          <TableHeadRow>
+            <TableCell>Sr. no.</TableCell>
+            <TableCell>Planet</TableCell>
+            <TableCell>Distance from sun</TableCell>
+          </TableHeadRow>
+        }
+      >
+        <TableRow>
+          <TableCell>Mercury</TableCell>
+          <TableCell>46.098 million km</TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell>Venus</TableCell>
+          <TableCell>107.78 million km</TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell>Earth</TableCell>
+          <TableCell>149.48 million km</TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell>Mars</TableCell>
+          <TableCell>219.16 million km</TableCell>
+        </TableRow>
+      </HeaderTable>
+    );
+  }
+}
+```
+
+#### Props
+
+| Name   | Possible Values                              | Default Value | Description                    |
+| ------ | -------------------------------------------- | ------------- | ------------------------------ |
+| header | `TableHeadRow` or `TableHead` component node | undefined     | Renders as header of the table |
 
 ## License
 
