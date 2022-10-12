@@ -1,47 +1,23 @@
 import React, { Component } from 'react';
 
-import {
-  HeaderTable,
-  TableHeadRow,
-  TableRow,
-  TableCell
-} from 'base-elements-react';
+import { Button, Card, CardHeader } from 'base-elements-react';
 import 'base-elements-react/dist/index.css';
 
 class Example extends Component {
   render() {
     return (
-      <HeaderTable
-        hasRowDivider
-        header={
-          <TableHeadRow>
-            <TableCell>Sr. no.</TableCell>
-            <TableCell>Planet</TableCell>
-            <TableCell>Distance from sun</TableCell>
-          </TableHeadRow>
-        }
-      >
-        <TableRow>
-          <TableCell>1</TableCell>
-          <TableCell>Mercury</TableCell>
-          <TableCell>46.098 million km</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>2</TableCell>
-          <TableCell>Venus</TableCell>
-          <TableCell>107.78 million km</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>3</TableCell>
-          <TableCell>Earth</TableCell>
-          <TableCell>149.48 million km</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>4</TableCell>
-          <TableCell>Mars</TableCell>
-          <TableCell>219.16 million km</TableCell>
-        </TableRow>
-      </HeaderTable>
+      <Card>
+        <CardHeader title='lorem ipsum text'>
+          <Button>Save</Button>
+        </CardHeader>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+        mollit anim id est laborum.
+      </Card>
     );
   }
 }

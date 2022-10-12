@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ComponentConfig, getClassName } from '../componentConfig';
 import './Text.css';
 
-interface TextHeadingOrParaProps
+export interface TextHeadingOrParaProps
   extends React.ComponentPropsWithoutRef<'h1'>,
     React.ComponentPropsWithoutRef<'h2'>,
     React.ComponentPropsWithoutRef<'h3'>,
@@ -24,7 +24,7 @@ interface OtherTextProps {
   variation?: 'strong' | 'emphasis' | 'subdued' | 'code';
 }
 
-type TextProps = (
+export type TextProps = (
   | TextHeadingOrParaProps
   | SpanProps
   | { className?: string; element?: 'auto' }

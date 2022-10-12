@@ -18,6 +18,7 @@ import PopoverSection from './sections/PopoverSection';
 import SelectSection from './sections/SelectSection';
 import CardSection from './sections/CardSection';
 import TableSection from './sections/TableSection';
+import Example from './Example';
 
 const themes = [
   {
@@ -95,6 +96,10 @@ const App = () => {
   return (
     <div className='App'>
       <ThemeWrapper themes={themes} currentThemeId='light'>
+        <Example />
+        <br />
+        <br />
+        <br />
         <PageTitle>
           <HorizontalStack gap itemsVerticalAlignment='center'>
             Base Elements React - Demo <StarIcon height={'1em'} width='1em' />
