@@ -8,6 +8,7 @@ export { default as ThemeWrapper } from './ThemeWrapper';
 export { default as Checkbox, CheckboxField } from './Checkbox';
 export { default as Select, SelectOption } from './Select';
 export { default as Card, CardHeader, CardFooter } from './Card';
+export { default as Modal, ModalHeader, ModalFooter } from './Modal';
 export { default as Popover } from './Popover';
 export {
   default as Text,

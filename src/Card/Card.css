@@ -5,6 +5,14 @@
   border-radius: var(--borderRadius);
 }
 
+.Card-Header-content > .Text {
+  margin: 0;
+}
+
+.Card-Header-content {
+  margin: var(--headingMargin);
+}
+
 .Card.Card--noPadding{
   padding: 0;
 }

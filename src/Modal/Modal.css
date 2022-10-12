@@ -1,0 +1,41 @@
+.ModalContainer {
+  background-color: var(--shadowColor);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Modal {
+  background-color: var(--neutralColor);
+  padding: var(--paddingLarge);
+  border-radius: var(--borderRadius);
+  width: 500px;
+  position: relative;
+}
+
+.Modal-close-icon {
+  position: absolute;
+  right: 0;
+  top: 0;
+  cursor: pointer;
+  padding: var(--paddingSmall);
+}
+
+.Modal-Header-content > .Text {
+  margin: 0;
+}
+
+.Modal-Header-content {
+  margin: var(--headingMargin);
+}
+
+.Modal.Modal--noPadding{
+  padding: 0;
+}
