@@ -169,6 +169,12 @@ Accepts all html `<button>` props such as `onClick`, `className` etc.
 | variation  | `'plain'`, `'outline'` , `'plainWithPadding'` | `undefined`   | Appearance variation of the button |
 | disabled   | `true`, `false`                               | false         | Make the button disabled           |
 
+#### Extended Components
+
+- ClickableIcon
+
+  Variation of Button component which has appearance as `'secondary'`, variation as `'plainWithPadding'` and has padding of `var(--paddingSmall)`
+
 ### Text
 
 ```jsx
@@ -655,6 +661,55 @@ class Example extends Component {
 | Name   | Possible Values                              | Default Value | Description                    |
 | ------ | -------------------------------------------- | ------------- | ------------------------------ |
 | header | `TableHeadRow` or `TableHead` component node | undefined     | Renders as header of the table |
+
+### Modal
+
+A container with shadow and padding
+
+```jsx
+import React, { useState } from 'react';
+
+import { Button, Modal, ModalHeader } from 'base-elements-react';
+import 'base-elements-react/dist/index.css';
+
+export function Example() {
+  const [open, setOpen] = useState(false);
+  return (
+    <Modal open={open} onClose={() => setOpen(false)}>
+      <ModalHeader
+        addCloseAction
+        title='lorem ipsum text'
+        onClose={() => setOpen(false)}
+      >
+        <Button variation='plain'>Save</Button>
+      </ModalHeader>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+      incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+      nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+      eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
+      in culpa qui officia deserunt mollit anim id est laborum.
+    </Modal>
+  );
+}
+```
+
+#### Props
+
+| Name                        | Possible Values                                                 | Default Value | Description                                                                                                                                                                                                                                                                                                                               |
+| --------------------------- | --------------------------------------------------------------- | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| title                       | any string                                                      | ''            | Title of the modal. This renders a `ModalHeader` component .                                                                                                                                                                                                                                                                              |
+| titleElement                | `'h1'`, `'h2'`, `'h3'`, `'h4'`, `'h5'`, `'h6'`, `'p'`, `'span'` | `'p'`         | Type of element to render for title                                                                                                                                                                                                                                                                                                       |
+| open                        | `true`, `false`                                                 | false         | Shows modal if true                                                                                                                                                                                                                                                                                                                       |
+| noPadding                   | `true`, `false`                                                 | false         | Removes card padding if true                                                                                                                                                                                                                                                                                                              |
+| onClose                     | () => {}                                                        |               | A callback function when user clicks close action icon or clicks outside the component or presses escape button                                                                                                                                                                                                                           |
+| disallowCloseOnOutsideClick | `true`, `false`                                                 | false         | If true, modal does not call props.onClose function if user clicks outside the modal                                                                                                                                                                                                                                                      |
+| disallowCloseOnEscape       | `true`, `false`                                                 | false         | If true, modal does not call props.onClose function if user presses 'Escape' button on keyboard                                                                                                                                                                                                                                           |
+| addFloatingCloseAction      | `true`, `false`                                                 | false         | If true, a clickable close icon is added on the modal. When user clicks this icon, `props.onClose` function is called                                                                                                                                                                                                                     |
+| floatingCloseActionLocation | `'left'`, `'right'`                                             | `'right'`     | Location of floating close action button on the modal                                                                                                                                                                                                                                                                                     |
+| floatingCloseActionXOffset  | number                                                          | `0`           | Offset the floating close icon in horizontal direction                                                                                                                                                                                                                                                                                    |
+| floatingCloseActionYOffset  | number                                                          | `0`           | Offset the floating close icon in vertical direction                                                                                                                                                                                                                                                                                      |
+| addFloatingCloseAction      | `true`, `false`                                                 | `false`       | If true, a clickable close icon is added on the modal header. When user clicks this icon, `props.onClose` function is called. The icon is only added in the header generated for title. The icon is not added if you explicitly add `ModalHeader` as a child of `Modal`. In that case, please add `onClose` prop to ModalHeader component |
 
 ## License
 

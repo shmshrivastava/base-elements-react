@@ -74,6 +74,7 @@ export const StackItem = React.forwardRef<
 >((props, ref) => {
   const classNames = getClassName('StackItem', stackItemComponentConfig, props);
   const renderProps = { ...props };
+  delete renderProps.fill;
   return (
     <div {...renderProps} ref={ref} className={classNames}>
       {props.children}

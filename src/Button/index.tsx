@@ -1,1 +1,1 @@
-export { default } from './Button';
+export { default, ClickableIcon } from './Button';

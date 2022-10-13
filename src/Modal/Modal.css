@@ -20,15 +20,20 @@
   position: relative;
 }
 
-.Modal-close-icon {
+.Modal-close-action {
   position: absolute;
-  right: 0;
   top: 0;
-  cursor: pointer;
-  padding: var(--paddingSmall);
 }
 
-.Modal-Header-content > .Text {
+.Modal--floatingCloseActionLocation-right > .Modal-close-action {
+  right: 0;
+}
+
+.Modal--floatingCloseActionLocation-left > .Modal-close-action {
+  left: 0;
+}
+
+.Modal-Header-content > .StackItem > .Text {
   margin: 0;
 }
 
@@ -36,6 +41,6 @@
   margin: var(--headingMargin);
 }
 
-.Modal.Modal--noPadding{
+.Modal.Modal--noPadding {
   padding: 0;
 }

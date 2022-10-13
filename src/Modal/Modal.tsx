@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { ComponentConfig, getClassName } from '../componentConfig';
-import { StackProps, Stack } from '../Stack/Stack';
+import { StackProps, Stack, StackItem } from '../Stack/Stack';
 import Text, { ComponentTitle, TextHeadingOrParaProps } from '../Text/Text';
 import { ReactComponent as CloseIcon } from '../icons/Close.svg';
 import './Modal.css';
+import { ClickableIcon } from '../Button';
 
 export interface ModalProps extends React.ComponentPropsWithoutRef<'div'> {
   className?: string;
@@ -11,13 +12,21 @@ export interface ModalProps extends React.ComponentPropsWithoutRef<'div'> {
   title?: string;
   titleElement?: TextHeadingOrParaProps['element'];
   open?: boolean;
-  onClose?: () => void
+  onClose?: () => void;
+  disallowCloseOnOutsideClick?: boolean;
+  disallowCloseOnEscape?: boolean;
+  addFloatingCloseAction?: boolean;
+  floatingCloseActionLocation?: 'left' | 'right';
+  floatingCloseActionXOffset?: number;
+  floatingCloseActionYOffset?: number;
+  addCloseActionInHeader?: boolean;
 }
 
 const componentConfig: ComponentConfig = {
   styleKeys: [],
   classGenerator: {
-    noPadding: { type: 'boolean', default: false }
+    noPadding: { type: 'boolean', default: false },
+    floatingCloseActionLocation: { type: 'value', default: 'right' }
   }
 };
 
@@ -25,20 +34,86 @@ export const Modal = React.forwardRef<
   HTMLDivElement,
   React.PropsWithChildren<ModalProps>
 >((props, ref) => {
-  const containerClassNames = getClassName('ModalContainer', {styleKeys: [], classGenerator: {}}, props);
-  const modalClassNames = getClassName('Modal', componentConfig, {});
-  const modalRef = React.useRef<HTMLDivElement | null>(null)
-  const handleContainerClick = (e: React.SyntheticEvent) => {
-    if(modalRef.current && !modalRef.current.contains(e.target as HTMLElement) && props?.onClose) {
-      props.onClose()
-    }
+  if (!props.open) {
+    return <React.Fragment />;
   }
+
+  const containerComponentConfig = { styleKeys: [], classGenerator: {} };
+  const containerClassNames = getClassName(
+    'ModalContainer',
+    containerComponentConfig,
+    props
+  );
+
+  const closeActionRef = React.useRef<HTMLDivElement | null>(null);
+  const modalClassNames = getClassName('Modal', componentConfig, {});
+  const modalRef = React.useRef<HTMLDivElement | null>(null);
+
+  const handleContainerClick = (e: React.SyntheticEvent) => {
+    if (
+      modalRef.current &&
+      !modalRef.current.contains(e.target as HTMLElement) &&
+      props?.onClose &&
+      !props.disallowCloseOnOutsideClick
+    ) {
+      props.onClose();
+    }
+  };
+
+  const handleKeyPress = (event: KeyboardEvent) => {
+    if (
+      event.key === 'Escape' &&
+      !props.disallowCloseOnEscape &&
+      props.onClose
+    ) {
+      props.onClose();
+      return;
+    }
+    if (props.onKeyDown) {
+      props.onKeyDown(event as any);
+    }
+  };
+
+  React.useEffect(() => {
+    document.addEventListener('keydown', handleKeyPress);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyPress);
+    };
+  }, []);
+
   return (
-    <div ref={ref} onClick={handleContainerClick} className={containerClassNames}>
+    <div
+      ref={ref}
+      onClick={handleContainerClick}
+      className={containerClassNames}
+    >
       <div ref={modalRef} className={modalClassNames}>
-        <CloseIcon className='Modal-close-icon' />
+        {props.addFloatingCloseAction ? (
+          <div
+            ref={closeActionRef}
+            className='Modal-close-action'
+            style={{
+              transform: `translate(${
+                props.floatingCloseActionXOffset || 0
+              }px, ${props.floatingCloseActionYOffset || 0}px)`
+            }}
+          >
+            <ClickableIcon onClick={props.onClose}>
+              <CloseIcon />
+            </ClickableIcon>
+          </div>
+        ) : (
+          ''
+        )}
+
         {props.title ? (
-          <ModalHeader title={props.title} titleElement={props.titleElement} />
+          <ModalHeader
+            title={props.title}
+            addCloseAction={props.addCloseActionInHeader}
+            titleElement={props.titleElement}
+            onClose={props.onClose}
+          />
         ) : (
           ''
         )}
@@ -58,6 +133,8 @@ export interface ModalHeaderProps
   className?: string;
   title?: string;
   titleElement?: TextHeadingOrParaProps['element'];
+  addCloseAction?: boolean;
+  onClose?: () => void;
 }
 
 const ModalHeaderComponentConfig: ComponentConfig = {
@@ -89,16 +166,26 @@ export const ModalHeader = React.forwardRef<
         {...stackProps}
         className='Modal-Header-content'
       >
-        {props.title ? (
-          props.titleElement ? (
-            <Text element={props.titleElement}>{props.title}</Text>
+        <StackItem fill>
+          {' '}
+          {props.title ? (
+            props.titleElement ? (
+              <Text element={props.titleElement}>{props.title}</Text>
+            ) : (
+              <ComponentTitle>{props.title}</ComponentTitle>
+            )
           ) : (
-            <ComponentTitle>{props.title}</ComponentTitle>
-          )
-        ) : (
-          ''
-        )}
+            ''
+          )}
+        </StackItem>
+
         {props.children}
+
+        {props.addCloseAction && (
+          <ClickableIcon onClick={props.onClose}>
+            <CloseIcon />
+          </ClickableIcon>
+        )}
       </Stack>
     </div>
   );

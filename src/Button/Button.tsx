@@ -39,3 +39,26 @@ export const Button = React.forwardRef<
 export default Button;
 
 Button.displayName = 'Button';
+
+export const ClickableIcon = React.forwardRef<
+  HTMLButtonElement,
+  React.PropsWithChildren<ButtonProps>
+>((props, ref) => {
+  const renderProps = { ...props };
+  delete renderProps.variation;
+  delete renderProps.appearance;
+  delete renderProps.disableMaxContentWidth;
+  return (
+    <Button
+      ref={ref}
+      appearance='secondary'
+      variation='plainWithPadding'
+      className='ClickableIcon'
+      {...renderProps}
+    >
+      {props.children}
+    </Button>
+  );
+});
+
+ClickableIcon.displayName = 'ClickableIcon';

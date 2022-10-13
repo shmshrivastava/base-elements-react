@@ -6,6 +6,7 @@
   padding: calc(var(--paddingSmall) - 2px) calc(var(--padding) - 2px);
   color: var(--fontColorInverted);
   box-shadow: var(--shadowDimsLight) var(--shadowColor);
+  font-size: medium;
 }
 
 .Button:disabled {
@@ -144,4 +145,12 @@
 .Button.Button--variation-plainWithPadding.Button--appearance-danger:disabled,
 .Button.Button--variation-outline.Button--appearance-danger:disabled {
   color: var(--dangerColorDisabled);
+}
+
+.Button.ClickableIcon {
+  padding: calc(var(--paddingSmall) - 2px);
+}
+
+.Button.ClickableIcon > svg {
+  display: block;
 }
