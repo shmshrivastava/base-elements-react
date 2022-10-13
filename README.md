@@ -503,21 +503,9 @@ function Example() {
 
 #### Props
 
-anchor: React.ReactNode;
-open: boolean;
-onOutsideClick?: () => void;
-xLocation?: 'snap_left_edge' | 'center' | 'snap_right_edge';
-yLocation?:
-| 'top'
-| 'top_cover_anchor'
-| 'center'
-| 'bottom_cover_anchor'
-| 'bottom';
-xOffset?: number;
-yOffset?: number;
-
 | Name           | Possible Values                                                                | Default Value | Description                                                                                          |
 | -------------- | ------------------------------------------------------------------------------ | ------------- | ---------------------------------------------------------------------------------------------------- |
+| anchor         | ReactNode                                                                      | undefined     | The react component which triggers popover on click                                                  |
 | open           | `true`, `false`                                                                | false         | Shows popover container if true                                                                      |
 | onOutsideClick | () => {}                                                                       |               | A callback function when user clicks outside the component. You can choose to toggle the `open` prop |
 | xLocation      | `'snap_left_edge'`, `'center'`, `'snap_right_edge'`                            | `'center'`    | Location on x axis to render the popover                                                             |
