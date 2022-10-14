@@ -1,0 +1,160 @@
+.Link {
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: var(--borderRadius);
+  border: 2px solid var(--primaryColor);
+  padding: calc(var(--paddingSmall) - 2px) calc(var(--padding) - 2px);
+  color: var(--fontColorInverted);
+  box-shadow: var(--shadowDimsLight) var(--shadowColor);
+  font-size: medium;
+}
+
+.Link:not(.Link--underline) {
+  text-decoration: none;
+}
+
+.Link:disabled {
+  cursor: not-allowed;
+}
+
+.Link:not(.Link--disableMaxContentWidth) {
+  min-width: max-content;
+}
+
+.Link.Link--appearance-primary {
+  border-color: var(--primaryColor);
+  background-color: var(--primaryColor);
+}
+
+.Link.Link--appearance-primary:hover {
+  border-color: var(--primaryColorHover);
+  background-color: var(--primaryColorHover);
+}
+
+.Link.Link--appearance-primary:disabled {
+  border-color: var(--primaryColorDisabled);
+  background-color: var(--primaryColorDisabled);
+}
+
+.Link.Link--appearance-secondary {
+  border-color: var(--secondaryColor);
+  background-color: var(--secondaryColor);
+}
+
+.Link.Link--appearance-secondary:hover {
+  border-color: var(--secondaryColorHover);
+  background-color: var(--secondaryColorHover);
+}
+
+.Link.Link--appearance-secondary:disabled {
+  border-color: var(--secondaryColorDisabled);
+  background-color: var(--secondaryColorDisabled);
+}
+
+.Link.Link--appearance-danger {
+  border-color: var(--dangerColor);
+  background-color: var(--dangerColor);
+}
+
+.Link.Link--appearance-danger:hover {
+  border-color: var(--dangerColorHover);
+  background-color: var(--dangerColorHover);
+}
+
+.Link.Link--appearance-danger:disabled {
+  border-color: var(--dangerColorDisabled);
+  background-color: var(--dangerColorDisabled);
+}
+
+.Link.Link--variation-plain,
+.Link.Link--variation-outline,
+.Link.Link--variation-plainWithPadding {
+  box-shadow: none;
+}
+
+.Link.Link--variation-outline,
+.Link.Link--variation-outline:hover,
+.Link.Link--variation-outline:disabled {
+  background-color: var(--neutralColor);
+}
+
+.Link.Link--variation-plain,
+.Link.Link--variation-plain:hover,
+.Link.Link--variation-plain:disabled {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+}
+
+.Link.Link--variation-plainWithPadding,
+.Link.Link--variation-plainWithPadding:disabled {
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.Link.Link--variation-plainWithPadding:hover {
+  background-color: var(--neutralColorHover);
+  border-color: var(--neutralColorHover);
+}
+
+.Link.Link--variation-plain.Link--appearance-primary,
+.Link.Link--variation-plainWithPadding.Link--appearance-primary,
+.Link.Link--variation-outline.Link--appearance-primary {
+  color: var(--primaryColor);
+}
+
+.Link.Link--variation-plain.Link--appearance-primary:hover,
+.Link.Link--variation-plainWithPadding.Link--appearance-primary:hover,
+.Link.Link--variation-outline.Link--appearance-primary:hover {
+  color: var(--primaryColorHover);
+}
+
+.Link.Link--variation-plain.Link--appearance-primary:disabled,
+.Link.Link--variation-plainWithPadding.Link--appearance-primary:disabled,
+.Link.Link--variation-outline.Link--appearance-primary:disabled {
+  color: var(--primaryColorDisabled);
+}
+
+.Link.Link--variation-plain.Link--appearance-secondary,
+.Link.Link--variation-plainWithPadding.Link--appearance-secondary,
+.Link.Link--variation-outline.Link--appearance-secondary {
+  color: var(--secondaryColor);
+}
+
+.Link.Link--variation-plain.Link--appearance-secondary:hover,
+.Link.Link--variation-plainWithPadding.Link--appearance-secondary:hover,
+.Link.Link--variation-outline.Link--appearance-secondary:hover {
+  color: var(--secondaryColorHover);
+}
+
+.Link.Link--variation-plain.Link--appearance-secondary:disabled,
+.Link.Link--variation-plainWithPadding.Link--appearance-secondary:disabled,
+.Link.Link--variation-outline.Link--appearance-secondary:disabled {
+  color: var(--secondaryColorDisabled);
+}
+
+.Link.Link--variation-plain.Link--appearance-danger,
+.Link.Link--variation-plainWithPadding.Link--appearance-danger,
+.Link.Link--variation-outline.Link--appearance-danger {
+  color: var(--dangerColor);
+}
+
+.Link.Link--variation-plain.Link--appearance-danger:hover,
+.Link.Link--variation-plainWithPadding.Link--appearance-danger:hover,
+.Link.Link--variation-outline.Link--appearance-danger:hover {
+  color: var(--dangerColorHover);
+}
+
+.Link.Link--variation-plain.Link--appearance-danger:disabled,
+.Link.Link--variation-plainWithPadding.Link--appearance-danger:disabled,
+.Link.Link--variation-outline.Link--appearance-danger:disabled {
+  color: var(--dangerColorDisabled);
+}
+
+.Link.ClickableIcon {
+  padding: calc(var(--paddingSmall) - 2px);
+}
+
+.Link.ClickableIcon > svg {
+  display: block;
+}

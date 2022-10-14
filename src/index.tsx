@@ -37,6 +37,8 @@ export {
   TableHeadRow
 } from './Table';
 
+export { default as Link } from './Link';
+
 interface Props {
   text: string;
 }
