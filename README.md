@@ -699,6 +699,60 @@ export function Example() {
 | floatingCloseActionYOffset  | number                                                          | `0`           | Offset the floating close icon in vertical direction                                                                                                                                                                                                                                                                                      |
 | addFloatingCloseAction      | `true`, `false`                                                 | `false`       | If true, a clickable close icon is added on the modal header. When user clicks this icon, `props.onClose` function is called. The icon is only added in the header generated for title. The icon is not added if you explicitly add `ModalHeader` as a child of `Modal`. In that case, please add `onClose` prop to ModalHeader component |
 
+### Link
+
+Renders styled html `<a>` element
+
+```jsx
+import React from 'react';
+
+import { Link } from 'base-elements-react';
+import 'base-elements-react/dist/index.css';
+
+export function Example() {
+  // const [open, setOpen] = useState<boolean>(false);
+  return (
+    <Link href='https://www.example.com' target='_blank'>
+      Go to example
+    </Link>
+  );
+}
+
+function MyAnchor(props) {
+  return (
+    <a className='hello' {...props}>
+      {props.children}
+    </a>
+  );
+}
+
+export function ExampleTwo() {
+  // const [open, setOpen] = useState<boolean>(false);
+  return (
+    <Link
+      href='https://www.example.com'
+      component={MyAnchor}
+      variation='filled'
+      target='_blank'
+    >
+      Go to example
+    </Link>
+  );
+}
+```
+
+#### Props
+
+Accepts all html `<a>` props such as `href`.
+
+| Name             | Possible Values                                          | Default Value | Description                                                                                                                                                  |
+| ---------------- | -------------------------------------------------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| appearance       | `'primary'`, `'secondary'` , `'danger'`                  | `'primary'`   | Appearance of the link element                                                                                                                               |
+| variation        | `'plain'`, `'outline'`, `'plainWithPadding'`, `'filled'` | `plain`       | Appearance variation of the link element                                                                                                                     |
+| underline        | `true`, `false`                                          | false         | Show default underline on anchor tag                                                                                                                         |
+| underlineOnHover | `true`, `false`                                          | false         | Show default underline on anchor tag on hover                                                                                                                |
+| component        | Any React component                                      | `undefined`   | Link will render this component instead of default html anchor tag. This can be used to render react router's Link component with this Link component styles |
+
 ## License
 
 MIT © [shmshrivastava](https://github.com/shmshrivastava)

@@ -18,7 +18,10 @@ function getAdditionalClassesForConfig(
       return;
     }
     if (propConfig.type === 'boolean') {
-      if (props[prop]) {
+      const propValue = Object.prototype.hasOwnProperty.call(props, prop)
+        ? props[prop]
+        : propConfig.default;
+      if (propValue) {
         classes += ` ${baseClassName}--${prop}`;
       }
     }

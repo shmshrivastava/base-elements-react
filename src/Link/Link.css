@@ -7,14 +7,16 @@
   color: var(--fontColorInverted);
   box-shadow: var(--shadowDimsLight) var(--shadowColor);
   font-size: medium;
+  width: fit-content;
 }
 
-.Link:not(.Link--underline) {
+.Link a {
+  color: inherit;
+}
+
+.Link:not(.Link--underline, .Link.Link--underlineOnHover:hover),
+.Link a:not(.Link--underline a, .Link.Link--underlineOnHover a:hover) {
   text-decoration: none;
-}
-
-.Link:disabled {
-  cursor: not-allowed;
 }
 
 .Link:not(.Link--disableMaxContentWidth) {
@@ -31,11 +33,6 @@
   background-color: var(--primaryColorHover);
 }
 
-.Link.Link--appearance-primary:disabled {
-  border-color: var(--primaryColorDisabled);
-  background-color: var(--primaryColorDisabled);
-}
-
 .Link.Link--appearance-secondary {
   border-color: var(--secondaryColor);
   background-color: var(--secondaryColor);
@@ -44,11 +41,6 @@
 .Link.Link--appearance-secondary:hover {
   border-color: var(--secondaryColorHover);
   background-color: var(--secondaryColorHover);
-}
-
-.Link.Link--appearance-secondary:disabled {
-  border-color: var(--secondaryColorDisabled);
-  background-color: var(--secondaryColorDisabled);
 }
 
 .Link.Link--appearance-danger {
@@ -61,11 +53,6 @@
   background-color: var(--dangerColorHover);
 }
 
-.Link.Link--appearance-danger:disabled {
-  border-color: var(--dangerColorDisabled);
-  background-color: var(--dangerColorDisabled);
-}
-
 .Link.Link--variation-plain,
 .Link.Link--variation-outline,
 .Link.Link--variation-plainWithPadding {
@@ -73,21 +60,18 @@
 }
 
 .Link.Link--variation-outline,
-.Link.Link--variation-outline:hover,
-.Link.Link--variation-outline:disabled {
+.Link.Link--variation-outline:hover {
   background-color: var(--neutralColor);
 }
 
 .Link.Link--variation-plain,
-.Link.Link--variation-plain:hover,
-.Link.Link--variation-plain:disabled {
+.Link.Link--variation-plain:hover {
   background-color: transparent;
   border: none;
   padding: 0;
 }
 
-.Link.Link--variation-plainWithPadding,
-.Link.Link--variation-plainWithPadding:disabled {
+.Link.Link--variation-plainWithPadding {
   background-color: transparent;
   border-color: transparent;
 }
@@ -109,12 +93,6 @@
   color: var(--primaryColorHover);
 }
 
-.Link.Link--variation-plain.Link--appearance-primary:disabled,
-.Link.Link--variation-plainWithPadding.Link--appearance-primary:disabled,
-.Link.Link--variation-outline.Link--appearance-primary:disabled {
-  color: var(--primaryColorDisabled);
-}
-
 .Link.Link--variation-plain.Link--appearance-secondary,
 .Link.Link--variation-plainWithPadding.Link--appearance-secondary,
 .Link.Link--variation-outline.Link--appearance-secondary {
@@ -127,12 +105,6 @@
   color: var(--secondaryColorHover);
 }
 
-.Link.Link--variation-plain.Link--appearance-secondary:disabled,
-.Link.Link--variation-plainWithPadding.Link--appearance-secondary:disabled,
-.Link.Link--variation-outline.Link--appearance-secondary:disabled {
-  color: var(--secondaryColorDisabled);
-}
-
 .Link.Link--variation-plain.Link--appearance-danger,
 .Link.Link--variation-plainWithPadding.Link--appearance-danger,
 .Link.Link--variation-outline.Link--appearance-danger {
@@ -143,12 +115,6 @@
 .Link.Link--variation-plainWithPadding.Link--appearance-danger:hover,
 .Link.Link--variation-outline.Link--appearance-danger:hover {
   color: var(--dangerColorHover);
-}
-
-.Link.Link--variation-plain.Link--appearance-danger:disabled,
-.Link.Link--variation-plainWithPadding.Link--appearance-danger:disabled,
-.Link.Link--variation-outline.Link--appearance-danger:disabled {
-  color: var(--dangerColorDisabled);
 }
 
 .Link.ClickableIcon {

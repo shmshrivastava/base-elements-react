@@ -2,12 +2,16 @@ import * as React from 'react';
 import { ComponentConfig, getClassName } from '../componentConfig';
 import './Link.css';
 
+// interface RenderComponent extends HTMLAnchorElement {}
+
 interface LinkProps extends React.ComponentPropsWithoutRef<'a'> {
   className?: string;
   appearance?: 'primary' | 'secondary' | 'danger';
-  variation?: 'plain' | 'outline' | 'plainWithPadding';
+  variation?: 'plain' | 'outline' | 'plainWithPadding' | 'filled';
   disableMaxContentWidth?: boolean;
   underline?: boolean;
+  underlineOnHover?: boolean;
+  component?: (props: any) => React.ReactElement<HTMLAnchorElement>;
 }
 
 const componentConfig: ComponentConfig = {
@@ -15,27 +19,28 @@ const componentConfig: ComponentConfig = {
   classGenerator: {
     appearance: { type: 'value', default: 'primary' },
     variation: { type: 'value', default: 'plain' },
-    loading: { type: 'boolean', default: false },
-    disabled: { type: 'boolean', default: false },
     underline: { type: 'boolean', default: false },
+    underlineOnHover: { type: 'boolean', default: false },
     disableMaxContentWidth: { type: 'boolean', default: true }
   }
 };
 
-export const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(
-  (props, ref) => {
-    const classNames = getClassName('Link', componentConfig, props);
-    const renderProps = { ...props };
-    delete renderProps.variation;
-    delete renderProps.appearance;
-    delete renderProps.disableMaxContentWidth;
-    return (
-      <a ref={ref} {...renderProps} className={classNames}>
-        {props.children}
-      </a>
-    );
-  }
-);
+export const Link = React.forwardRef<
+  HTMLAnchorElement,
+  React.PropsWithChildren<LinkProps>
+>((props, ref) => {
+  const classNames = getClassName('Link', componentConfig, props);
+  const renderProps = { ...props };
+  delete renderProps.variation;
+  delete renderProps.appearance;
+  delete renderProps.disableMaxContentWidth;
+  const RenderComponent = props.component || 'a';
+  return (
+    <RenderComponent ref={ref} {...renderProps} className={classNames}>
+      {props.children}
+    </RenderComponent>
+  );
+});
 
 export default Link;
 
