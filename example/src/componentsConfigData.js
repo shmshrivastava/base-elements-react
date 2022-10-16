@@ -4,7 +4,11 @@ import {
   Card,
   CardHeader,
   Stack,
-  Text
+  Text,
+  Checkbox,
+  CheckboxField,
+  FormField,
+  Link
 } from 'base-elements-react';
 
 export const components = {
@@ -13,7 +17,11 @@ export const components = {
   Stack,
   Text,
   Card,
-  CardHeader
+  CardHeader,
+  Checkbox,
+  CheckboxField,
+  FormField,
+  Link
 };
 
 export const propTypes = {
@@ -132,6 +140,126 @@ export const propTypes = {
       type: 'enum',
       options: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p'],
       default: 'h3'
+    },
+    children: {
+      type: 'component'
+    }
+  },
+  Checkbox: {
+    className: {
+      type: 'string',
+      default: ''
+    },
+    checked: {
+      type: 'boolean',
+      default: false
+    },
+    titleElement: {
+      type: 'enum',
+      options: ['normal', 'large', '<any string>'],
+      sizeVariant: 'normal'
+    },
+    disabled: {
+      type: 'boolean',
+      default: false
+    }
+  },
+  CheckboxField: {
+    className: {
+      type: 'string',
+      default: ''
+    },
+    checked: {
+      type: 'boolean',
+      default: false
+    },
+    sizeVariant: {
+      type: 'enum',
+      options: ['normal', 'large', '<any string>'],
+      default: 'normal'
+    },
+    disabled: {
+      type: 'boolean',
+      default: false
+    },
+    label: {
+      type: 'string',
+      default: ''
+    },
+    labelPosition: {
+      type: 'enum',
+      options: ['top', 'right', 'bottom', 'left'],
+      default: 'right'
+    },
+    error: {
+      type: 'string',
+      default: ''
+    },
+    required: {
+      type: 'boolean',
+      default: false
+    }
+  },
+  FormField: {
+    className: {
+      type: 'string',
+      default: ''
+    },
+    label: {
+      type: 'string',
+      default: ''
+    },
+    labelPosition: {
+      type: 'enum',
+      options: ['top', 'right', 'bottom', 'left'],
+      default: 'right'
+    },
+    error: {
+      type: 'string',
+      default: ''
+    },
+    required: {
+      type: 'boolean',
+      default: false
+    },
+    children: {
+      type: 'component'
+    }
+  },
+  Link: {
+    className: {
+      type: 'string',
+      default: ''
+    },
+    href: {
+      type: 'string',
+      default: ''
+    },
+    disableMaxContentWidth: {
+      type: 'boolean',
+      default: false
+    },
+    underline: {
+      type: 'boolean',
+      default: false
+    },
+    underlineOnHover: {
+      type: 'boolean',
+      default: false
+    },
+    appearance: {
+      type: 'enum',
+      options: ['primary', 'secondary', 'danger'],
+      default: 'primary'
+    },
+    variation: {
+      type: 'enum',
+      options: ['plain', 'outline', 'plainWithPadding', 'filled'],
+      default: 'filled'
+    },
+    component: {
+      type: 'componentDef',
+      default: 'a'
     },
     children: {
       type: 'component'

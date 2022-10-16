@@ -11,6 +11,7 @@ import { ComponentGenerator, ComponentJSX } from './ComponentGenerator';
 const config = {
   comp: 'Card',
   props: {
+    title: 'Config example',
     children: [
       {
         comp: 'Stack',
@@ -20,7 +21,22 @@ const config = {
               comp: 'Text',
               props: {
                 children: 'A code',
-                variation: 'code'
+                variation: 'strong'
+              }
+            },
+            {
+              comp: 'Checkbox',
+              props: {
+                checked: true
+              }
+            },
+            {
+              comp: 'Text',
+              props: {
+                children: 'A code',
+                variation: 'strong',
+                element: 'p',
+                className: 'lorem-ipsum-dolar-sit-amet-howmuchlngcanyougo'
               }
             },
             {
@@ -34,7 +50,9 @@ const config = {
             }
           ],
           itemsVerticalAlignment: 'center',
-          gap: 'nogap'
+          gap: 'nogap',
+          vertical: true,
+          itemsHorizontalAlignment: 'left'
         }
       }
     ]
@@ -42,9 +60,6 @@ const config = {
 };
 
 function Example() {
-  // const [open, setOpen] = useState<boolean>(false);
-  // const jsx = getJSX(config, 0);
-  // console.log({ components, config, jsx });
   return (
     <div>
       <ComponentGenerator compConfig={config} />

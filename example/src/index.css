@@ -13,3 +13,22 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+div.block-code-parent {
+  position: relative;
+}
+
+div.block-code-parent .code-copy {
+  position: absolute;
+  opacity: 0.9;
+  background: #8884;
+  top: 0;
+  right: 0;
+  border-radius: 4px;
+  padding: 4px;
+}
+
+div.block-code-parent .code-copy svg {
+  height: 18px;
+  width: 18px;
+}

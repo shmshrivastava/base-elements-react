@@ -19,6 +19,7 @@ import SelectSection from './sections/SelectSection';
 import CardSection from './sections/CardSection';
 import TableSection from './sections/TableSection';
 import Example from './Example';
+import { MyComponent } from './ExampleTwo';
 
 const themes = [
   {
@@ -98,6 +99,7 @@ const App = () => {
       <ThemeWrapper themes={themes} currentThemeId='light'>
         <Example />
         <br />
+        <MyComponent />
         <PageTitle>
           <HorizontalStack gap itemsVerticalAlignment='center'>
             Base Elements React - Demo <StarIcon height={'1em'} width='1em' />

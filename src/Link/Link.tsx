@@ -11,6 +11,7 @@ interface LinkProps extends React.ComponentPropsWithoutRef<'a'> {
   disableMaxContentWidth?: boolean;
   underline?: boolean;
   underlineOnHover?: boolean;
+  href?: string;
   component?: (props: any) => React.ReactElement<HTMLAnchorElement>;
 }
 
