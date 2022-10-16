@@ -5,7 +5,7 @@ import './Button.css';
 interface ButtonProps extends React.ComponentPropsWithoutRef<'button'> {
   className?: string;
   appearance?: 'primary' | 'secondary' | 'danger';
-  variation?: 'plain' | 'outline' | 'plainWithPadding';
+  variation?: 'plain' | 'outline' | 'plainWithPadding' | 'filled';
   disableMaxContentWidth?: boolean;
 }
 
@@ -40,6 +40,13 @@ export default Button;
 
 Button.displayName = 'Button';
 
+function customButtonClassName(
+  props: ButtonProps,
+  customComponentName: string
+) {
+  return `${props.className || ''} Button-${customComponentName}`;
+}
+
 export const ClickableIcon = React.forwardRef<
   HTMLButtonElement,
   React.PropsWithChildren<ButtonProps>
@@ -53,7 +60,7 @@ export const ClickableIcon = React.forwardRef<
       ref={ref}
       appearance='secondary'
       variation='plainWithPadding'
-      className='ClickableIcon'
+      className={customButtonClassName(props, 'ClickableIcon')}
       {...renderProps}
     >
       {props.children}

@@ -147,10 +147,10 @@
   color: var(--dangerColorDisabled);
 }
 
-.Button.ClickableIcon {
+.Button.Button-ClickableIcon {
   padding: calc(var(--paddingSmall) - 2px);
 }
 
-.Button.ClickableIcon > svg {
+.Button.Button-ClickableIcon > svg {
   display: block;
 }
