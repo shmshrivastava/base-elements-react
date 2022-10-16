@@ -100,6 +100,24 @@ const App = () => {
         <br />
         <br />
         <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
         <PageTitle>
           <HorizontalStack gap itemsVerticalAlignment='center'>
             Base Elements React - Demo <StarIcon height={'1em'} width='1em' />

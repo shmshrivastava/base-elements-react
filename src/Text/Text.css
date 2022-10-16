@@ -11,7 +11,7 @@ p.Text {
   margin: var(--paragraphMargin);
 }
 
-.Text.Text-InlineCode {
+.Text.Text--variation-code {
   font-size: 0.9em;
   border-radius: 2px;
   background: var(--codeBackgroundColor);
@@ -19,6 +19,6 @@ p.Text {
   font-variant-ligatures: none;
   font-family: 'Fira Mono', 'Andale Mono', 'Consolas', monospace;
   letter-spacing: 0px;
-  width: min-content;
+  width: fit-content;
   display: inline;
 }
