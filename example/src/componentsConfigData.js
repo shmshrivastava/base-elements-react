@@ -8,7 +8,8 @@ import {
   Checkbox,
   CheckboxField,
   FormField,
-  Link
+  Link,
+  Modal
 } from 'base-elements-react';
 
 export const components = {
@@ -21,14 +22,34 @@ export const components = {
   Checkbox,
   CheckboxField,
   FormField,
-  Link
+  Link,
+  Modal
 };
 
 export const propTypes = {
   Stack: {
     itemsVerticalAlignment: {
       type: 'enum',
-      options: ['top', 'center', 'bottom'],
+      options: [
+        'top',
+        'center',
+        'bottom',
+        'space-around',
+        'space-between',
+        'space-evenly'
+      ],
+      default: 'top'
+    },
+    itemsHorizontalAlignment: {
+      type: 'enum',
+      options: [
+        'top',
+        'center',
+        'bottom',
+        'space-around',
+        'space-between',
+        'space-evenly'
+      ],
       default: 'top'
     },
     gap: {
@@ -270,6 +291,11 @@ export const propTypes = {
       type: 'enum',
       options: ['strong', 'emphasis', 'subdued', 'code'],
       default: undefined
+    },
+    element: {
+      type: 'enum',
+      options: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'span', 'auto'],
+      default: 'auto'
     }
   }
 };

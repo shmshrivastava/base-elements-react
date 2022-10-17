@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { components, propTypes } from './componentsConfigData';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import {
@@ -8,31 +8,50 @@ import {
 import { ReactComponent as CopyIcon } from './icons/ContentCopy.svg';
 import { ReactComponent as DoneIcon } from './icons/Done.svg';
 import { ClickableIcon } from 'base-elements-react';
+import { getScopedEval } from './scopedEval';
 
-interface ComponentConfig {
+interface ComponentTree {
   comp: string;
   props?: any;
 }
 
+interface ComponentState {
+  [key: string]: {
+    default: any;
+  };
+}
+
 const INDENT_SPACES = 2;
 
-export function ComponentGenerator({
-  compConfig
+// Function(`"use strict"; return ${script}`).bind(scope)();
+
+function getChildrenValue(compTree: ComponentTree, scopedEval?: any) {
+  const children = compTree.props?.children;
+  if (typeof children === 'string') {
+    return scopedEval(children);
+  }
+  return children || [];
+}
+
+function ComponentTreeGenerator({
+  compTree,
+  scopedEval
 }: {
-  compConfig: ComponentConfig;
+  compTree: ComponentTree;
+  scopedEval: any;
 }) {
-  const RenderComponent = components[compConfig.comp] || 'div';
-  const renderProps = { ...compConfig.props };
+  const RenderComponent = components[compTree.comp] || 'div';
+  const renderProps = { ...compTree.props };
   delete renderProps.children;
+  let children = getChildrenValue(compTree, scopedEval);
 
-  let children = compConfig.props.children || [];
-
-  Object.keys(propTypes[compConfig.comp]).forEach((prop) => {
+  Object.keys(propTypes[compTree.comp]).forEach((prop) => {
     if (
-      propTypes[compConfig.comp][prop].type === 'function' &&
+      prop !== 'children' &&
+      typeof renderProps[prop] === 'string' &&
       renderProps[prop]
     ) {
-      renderProps[prop] = eval(renderProps[prop]);
+      renderProps[prop] = scopedEval(renderProps[prop]);
     }
   });
   if (!children || children.length === 0) {
@@ -41,43 +60,83 @@ export function ComponentGenerator({
   return (
     <RenderComponent {...renderProps}>
       {Array.isArray(children)
-        ? children.map((child: ComponentConfig) => (
-            <ComponentGenerator compConfig={child} />
+        ? children.map((child: ComponentTree) => (
+            <ComponentTreeGenerator compTree={child} scopedEval={scopedEval} />
           ))
         : children}
     </RenderComponent>
   );
 }
 
-function getJSX(compConfig: ComponentConfig, level: number = 0): string {
-  let attributes: string[] = [];
-  const indentation = Array(level * INDENT_SPACES + 1).join(' ');
-  if (typeof compConfig !== 'object' || !compConfig.comp) {
-    return `${indentation}${compConfig}`;
+function capitalizeFirstLetter(string: string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+export function ComponentGenerator({
+  compTree,
+  compState
+}: {
+  compTree: ComponentTree;
+  compState: ComponentState;
+}) {
+  const scope = {};
+  const stateKeys = Object.keys(compState);
+  for (let i = 0; i < stateKeys.length; i++) {
+    const key = stateKeys[i];
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const keyState = useState(compState[key].default);
+    scope[key] = keyState[0];
+    scope[`set${capitalizeFirstLetter(key)}`] = keyState[1];
   }
-  const childrenIndentation = Array((level + 1) * INDENT_SPACES + 1).join(' ');
-  const hasChildren =
-    compConfig.props.children && compConfig.props.children.length > 0;
-  Object.keys(compConfig.props || {}).forEach((prop) => {
+
+  const scopedEval = getScopedEval(scope);
+
+  // makingScopedEval.call(scope);
+
+  return <ComponentTreeGenerator compTree={compTree} scopedEval={scopedEval} />;
+}
+
+function stringifiedStatement(stringScript: string, withQuotes: boolean) {
+  const stringQuote = stringScript[0];
+  if (stringQuote !== '"' && stringQuote !== "'") {
+    return `{${stringScript}}`;
+  }
+  if (stringScript[stringScript.length - 1] !== stringQuote) {
+    return `{${stringScript}}`;
+  }
+  if (stringScript.split(stringQuote).length > 3) {
+    return `{${stringScript}}`;
+  }
+  return `${withQuotes ? "'" : ''}${stringScript.split(stringQuote)[1]}${
+    withQuotes ? "'" : ''
+  }`;
+}
+
+function getAttributesFromConfig(compTree: ComponentTree) {
+  let attributes: string[] = [];
+  Object.keys(compTree.props || {}).forEach((prop) => {
     if (prop === 'children') {
       return;
     }
-    let value = '""';
-    if (
-      (propTypes[compConfig.comp][prop] &&
-        propTypes[compConfig.comp][prop].type === 'function') ||
-      typeof compConfig.props[prop] !== 'string'
-    ) {
-      value = `{${compConfig.props[prop]}}`;
-    } else {
-      value = `"${compConfig.props[prop]}"`;
-    }
+    let value = stringifiedStatement(compTree.props[prop], true);
     attributes.push(`${prop}=${value}`);
   });
+  return attributes;
+}
+
+function getJSX(compTree: ComponentTree, level: number = 0): string {
+  const indentation = Array(level * INDENT_SPACES + 1).join(' ');
+  if (typeof compTree !== 'object' || !compTree.comp) {
+    return `${indentation}${compTree}`;
+  }
+  const childrenIndentation = Array((level + 1) * INDENT_SPACES + 1).join(' ');
+  const hasChildren =
+    compTree.props.children && compTree.props.children.length > 0;
+  let attributes: string[] = getAttributesFromConfig(compTree);
   let openingTag =
     indentation +
     '<' +
-    compConfig.comp +
+    compTree.comp +
     ' ' +
     attributes.join(' ') +
     (hasChildren ? '' : ' /') +
@@ -86,14 +145,17 @@ function getJSX(compConfig: ComponentConfig, level: number = 0): string {
     openingTag =
       indentation +
       '<' +
-      compConfig.comp +
+      compTree.comp +
       `\n${childrenIndentation}` +
       attributes.join(`\n${childrenIndentation}`) +
       (hasChildren ? '' : ' /') +
       `\n${indentation}>`;
   }
-  let closingTag = hasChildren ? `</${compConfig.comp}>` : '';
-  const children = compConfig.props.children || [];
+  let closingTag = hasChildren ? `</${compTree.comp}>` : '';
+  const children =
+    typeof compTree.props?.children === 'string'
+      ? stringifiedStatement(compTree.props?.children, false)
+      : compTree.props?.children || [];
   if (
     !Array.isArray(children) &&
     openingTag.length + closingTag.length + children.length < 80
@@ -104,7 +166,7 @@ function getJSX(compConfig: ComponentConfig, level: number = 0): string {
   return `${openingTag}${hasChildren ? '\n' : ''}${
     Array.isArray(children)
       ? children
-          .map((child: ComponentConfig) => getJSX(child, level + 1))
+          .map((child: ComponentTree) => getJSX(child, level + 1))
           .join(`\n`)
       : childrenIndentation + children
   }${hasChildren ? '\n' : ''}${closingTag}`;
@@ -133,25 +195,28 @@ function removeDuplicates(arr: string[]) {
   return arr.filter((item, index) => arr.indexOf(item) === index);
 }
 
-function getAllComponentNames(compConfig: ComponentConfig) {
-  if (typeof compConfig !== 'object') {
+function getAllComponentNames(compTree: ComponentTree) {
+  if (typeof compTree !== 'object') {
     return [];
   }
-  if (
-    !compConfig.props.children ||
-    typeof compConfig.props.children !== 'object'
-  ) {
-    return [compConfig.comp];
+  if (!compTree.props.children || typeof compTree.props.children !== 'object') {
+    return [compTree.comp];
   }
   return [
-    compConfig.comp,
-    ...(compConfig.props.children || []).map((comp: ComponentConfig) =>
+    compTree.comp,
+    ...(compTree.props.children || []).map((comp: ComponentTree) =>
       getAllComponentNames(comp)
     )
   ];
 }
 
-export function ComponentJSX({ compConfig }: { compConfig: ComponentConfig }) {
+export function ComponentJSX({
+  compTree,
+  compState
+}: {
+  compTree: ComponentTree;
+  compState: ComponentState;
+}) {
   const theme = 'light';
   const styleProp =
     theme === 'light'
@@ -161,12 +226,23 @@ export function ComponentJSX({ compConfig }: { compConfig: ComponentConfig }) {
     theme === 'light' ? { backgroundColor: '#F5F8FA', border: 'none' } : {};
 
   const importComponents = removeDuplicates(
-    getAllComponentNames(compConfig).flat(Infinity)
+    getAllComponentNames(compTree).flat(Infinity)
   );
-  const compJsx = `export function MyComponent(){\n  return (\n${getJSX(
-    compConfig,
-    2
-  )}\n  )\n}`;
+
+  const stateDeclares = [];
+
+  const stateKeys = Object.keys(compState);
+  for (let i = 0; i < stateKeys.length; i++) {
+    const key = stateKeys[i];
+    stateDeclares.push(
+      `  const [${key}, set${capitalizeFirstLetter(
+        key
+      )}] = React.useState(${JSON.stringify(compState[key].default)});\n`
+    );
+  }
+  const compJsx = `export function MyComponent(){\n${stateDeclares.join(
+    ''
+  )}  return (\n${getJSX(compTree, 2)}\n  )\n}`;
   const jsx =
     importComponents.length > 0
       ? `import React from 'react';\nimport { ${importComponents.join(

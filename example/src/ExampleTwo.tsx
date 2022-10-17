@@ -2,24 +2,33 @@ import React from 'react';
 import { Card, Stack, Text, Checkbox, Button } from 'base-elements-react';
 
 export function MyComponent() {
+  const [open, setOpen] = React.useState(false);
+  const [name] = React.useState('John Doe');
   return (
-    <Card title='Config example'>
-      <Stack itemsVerticalAlignment='center' gap='nogap'>
-        <Text variation='strong'>A code</Text>
+    <Card title={'Config example'}>
+      <Stack
+        itemsVerticalAlignment={'center'}
+        gap={'nogap'}
+        vertical={true}
+        itemsHorizontalAlignment={'left'}
+      >
+        <Text variation={'strong'}>{name}</Text>
         <Checkbox checked={true} />
         <Text
-          variation='strong'
-          element='p'
-          className='lorem-ipsum-dolar-sit-amet-howmuchlngcanyougo'
+          variation={'strong'}
+          element={'p'}
+          className={'lorem-ipsum-dolar-sit-amet-howmuchlngcanyougo'}
         >
-          A code
+          {'A code ' + 2}
         </Text>
         <Button
-          appearance='secondary'
-          variation='plainWithPadding'
-          onClick={() => console.log('buttonClicked')}
+          appearance={open ? 'secondary' : 'primary'}
+          variation={'plainWithPadding'}
+          onClick={() => {
+            setOpen(!open);
+          }}
         >
-          Click here
+          {'Click here'}
         </Button>
       </Stack>
     </Card>

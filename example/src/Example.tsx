@@ -8,10 +8,10 @@ import { ComponentGenerator, ComponentJSX } from './ComponentGenerator';
 //   props?: any;
 // }
 
-const config = {
+const componentTree = {
   comp: 'Card',
   props: {
-    title: 'Config example',
+    title: '"Config example"',
     children: [
       {
         comp: 'Stack',
@@ -20,51 +20,65 @@ const config = {
             {
               comp: 'Text',
               props: {
-                children: 'A code',
-                variation: 'strong'
+                children: '"A code"',
+                variation: '"strong"'
               }
             },
             {
               comp: 'Checkbox',
               props: {
-                checked: true
+                checked: 'true'
               }
             },
             {
               comp: 'Text',
               props: {
-                children: 'A code',
-                variation: 'strong',
-                element: 'p',
-                className: 'lorem-ipsum-dolar-sit-amet-howmuchlngcanyougo'
+                children: 'name',
+                variation: '"strong"',
+                element: '"p"',
+                className: '"lorem-ipsum-dolar-sit-amet-howmuchlngcanyougo"'
               }
             },
             {
               comp: 'Button',
               props: {
-                children: 'Click here',
-                appearance: 'secondary',
-                variation: 'plainWithPadding',
-                onClick: "() => console.log('buttonClicked')"
+                children: '"Click here"',
+                appearance: 'open ? "secondary" : "primary"',
+                variation: '"plainWithPadding"',
+                onClick: '() => { setOpen(!open) }'
               }
             }
           ],
-          itemsVerticalAlignment: 'center',
-          gap: 'nogap',
-          vertical: true,
-          itemsHorizontalAlignment: 'left'
+          itemsVerticalAlignment: '"center"',
+          gap: '"nogap"',
+          vertical: 'true',
+          itemsHorizontalAlignment: '"left"'
         }
       }
     ]
   }
 };
 
+const componentState = {
+  open: {
+    default: false
+  },
+  name: {
+    default: 'John Doe'
+  }
+};
+
+const componentVars = {
+  className: '`customclass-${open ? "open" : "close"}`'
+};
+
 function Example() {
+  console.log('dummy', componentState, componentVars);
   return (
     <div>
-      <ComponentGenerator compConfig={config} />
+      <ComponentGenerator compTree={componentTree} compState={componentState} />
       <br />
-      <ComponentJSX compConfig={config} />
+      <ComponentJSX compTree={componentTree} compState={componentState} />
     </div>
   );
 }
