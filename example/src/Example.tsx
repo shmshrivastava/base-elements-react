@@ -18,6 +18,14 @@ const componentTree = {
         props: {
           children: [
             {
+              comp: 'TextField',
+              props: {
+                label: '"Trying text field"',
+                value: 'name',
+                onChange: '(e) => setName(e.target.value)'
+              }
+          },
+            {
               comp: 'Text',
               props: {
                 children: '"A code"',

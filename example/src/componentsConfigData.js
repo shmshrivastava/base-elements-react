@@ -28,7 +28,16 @@ import {
   // TableDataCell,
   // TableHeaderCell,
   // HeaderTable,
-  DataTable
+  DataTable,
+  InlineText,
+  PageTitle,
+  SectionHeading,
+  SubSectionHeading,
+  InlineCode,
+  ComponentTitle,
+  TextField,
+  Input,
+  TextArea
 } from 'base-elements-react';
 
 export const components = {
@@ -61,7 +70,16 @@ export const components = {
   // TableDataCell,
   // TableHeaderCell,
   // HeaderTable,
-  DataTable
+  DataTable,
+  InlineText,
+  PageTitle,
+  SectionHeading,
+  SubSectionHeading,
+  InlineCode,
+  ComponentTitle,
+  TextField,
+  Input,
+  TextArea
 };
 
 export const propTypes = {
@@ -200,6 +218,9 @@ export const propTypes = {
     checked: {
       type: 'boolean',
       default: false
+    },
+    onChange: {
+      type: 'function'
     },
     sizeVariant: {
       type: 'enum',
@@ -778,6 +799,10 @@ export const propTypes = {
     }
   },
   Text: {
+    className: {
+      type: 'string',
+      default: ''
+    },
     variation: {
       type: 'enum',
       options: ['strong', 'emphasis', 'subdued', 'code'],
@@ -787,6 +812,172 @@ export const propTypes = {
       type: 'enum',
       options: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'span', 'auto'],
       default: 'auto'
+    },
+    children: {
+      type: 'component'
+    }
+  },
+  InlineText: {
+    className: {
+      type: 'string',
+      default: ''
+    },
+    variation: {
+      type: 'enum',
+      options: ['strong', 'emphasis', 'subdued', 'code'],
+      default: undefined
+    },
+    children: {
+      type: 'component'
+    }
+  },
+  PageTitle: {
+    className: {
+      type: 'string',
+      default: ''
+    },
+    variation: {
+      type: 'enum',
+      options: ['strong', 'emphasis', 'subdued', 'code'],
+      default: undefined
+    },
+    children: {
+      type: 'component'
+    }
+  },
+  SectionHeading: {
+    className: {
+      type: 'string',
+      default: ''
+    },
+    variation: {
+      type: 'enum',
+      options: ['strong', 'emphasis', 'subdued', 'code'],
+      default: undefined
+    },
+    children: {
+      type: 'component'
+    }
+  },
+  SubSectionHeading: {
+    className: {
+      type: 'string',
+      default: ''
+    },
+    variation: {
+      type: 'enum',
+      options: ['strong', 'emphasis', 'subdued', 'code'],
+      default: undefined
+    },
+    children: {
+      type: 'component'
+    }
+  },
+  ComponentTitle: {
+    className: {
+      type: 'string',
+      default: ''
+    },
+    variation: {
+      type: 'enum',
+      options: ['strong', 'emphasis', 'subdued', 'code'],
+      default: undefined
+    },
+    children: {
+      type: 'component'
+    }
+  },
+  InlineCode: {
+    className: {
+      type: 'string',
+      default: ''
+    },
+    children: {
+      type: 'component'
+    }
+  },
+  TextField: {
+    className: {
+      type: 'string',
+      default: ''
+    },
+    value: {
+      type: 'boolean',
+      default: false
+    },
+    onChange: {
+      type: 'function'
+    },
+    disabled: {
+      type: 'boolean',
+      default: false
+    },
+    multiline: {
+      type: 'boolean',
+      default: false
+    },
+    placeholder: {
+      type: 'string',
+      default: ''
+    },
+    label: {
+      type: 'string',
+      default: ''
+    },
+    labelPosition: {
+      type: 'enum',
+      options: ['top', 'right', 'bottom', 'left'],
+      default: 'right'
+    },
+    error: {
+      type: 'string',
+      default: ''
+    },
+    required: {
+      type: 'boolean',
+      default: false
+    }
+  },
+  Input: {
+    className: {
+      type: 'string',
+      default: ''
+    },
+    value: {
+      type: 'boolean',
+      default: false
+    },
+    onChange: {
+      type: 'function'
+    },
+    disabled: {
+      type: 'boolean',
+      default: false
+    },
+    placeholder: {
+      type: 'string',
+      default: ''
+    }
+  },
+  TextArea: {
+    className: {
+      type: 'string',
+      default: ''
+    },
+    value: {
+      type: 'boolean',
+      default: false
+    },
+    onChange: {
+      type: 'function'
+    },
+    disabled: {
+      type: 'boolean',
+      default: false
+    },
+    placeholder: {
+      type: 'string',
+      default: ''
     }
   }
 };
