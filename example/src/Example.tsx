@@ -27,7 +27,8 @@ const componentTree = {
             {
               comp: 'Checkbox',
               props: {
-                checked: 'true'
+                checked: 'checked',
+                onChange: '() => setChecked(!checked)'
               }
             },
             {
@@ -44,8 +45,8 @@ const componentTree = {
               props: {
                 children: '"Click here"',
                 appearance: 'open ? "secondary" : "primary"',
-                variation: '"plainWithPadding"',
-                onClick: '() => { setOpen(!open) }'
+                variation: '"filled"',
+                onClick: '() => { setOpen(!open); setShowModal(!showModal) }'
               }
             }
           ],
@@ -53,6 +54,23 @@ const componentTree = {
           gap: '"nogap"',
           vertical: 'true',
           itemsHorizontalAlignment: '"left"'
+        }
+      },
+      {
+        comp: 'Modal',
+        props: {
+          title: '"Hello World"',
+          children: '"Wasssuppp"',
+          open: 'showModal',
+          addFloatingCloseAction: 'true',
+          onClose: '() => setShowModal(false)'
+        }
+      },
+      {
+        comp: 'DataTable',
+        props: {
+          columns: '[{key: "name", label: "Name"}, {key: "age", label: "Age"}]',
+          data: '[{name: "John", age: 25}, {name: "Jane", age: 25}]'
         }
       }
     ]
@@ -65,6 +83,12 @@ const componentState = {
   },
   name: {
     default: 'John Doe'
+  },
+  checked: {
+    default: true
+  },
+  showModal: {
+    default: false
   }
 };
 

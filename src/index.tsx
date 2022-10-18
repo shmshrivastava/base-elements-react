@@ -23,7 +23,8 @@ export {
   default as Stack,
   HorizontalStack,
   VerticalStack,
-  CenteredContainer
+  CenteredContainer,
+  StackItem
 } from './Stack';
 export {
   default as Table,
@@ -34,7 +35,8 @@ export {
   TableDataCell,
   TableHeaderCell,
   HeaderTable,
-  TableHeadRow
+  TableHeadRow,
+  DataTable
 } from './Table';
 
 export { default as Link } from './Link';

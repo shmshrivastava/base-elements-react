@@ -133,7 +133,6 @@ export const CenteredContainer = React.forwardRef<
       {...props}
       ref={ref}
       className={customStackClassName(props, 'CenteredContainer')}
-      vertical={false}
       itemsHorizontalAlignment='center'
       itemsVerticalAlignment='center'
     >

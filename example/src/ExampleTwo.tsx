@@ -1,36 +1,65 @@
 import React from 'react';
-import { Card, Stack, Text, Checkbox, Button } from 'base-elements-react';
+import {
+  Card,
+  Stack,
+  Text,
+  Checkbox,
+  Button,
+  Modal,
+  DataTable
+} from 'base-elements-react';
 
 export function MyComponent() {
   const [open, setOpen] = React.useState(false);
   const [name] = React.useState('John Doe');
+  const [checked, setChecked] = React.useState(true);
+  const [showModal, setShowModal] = React.useState(false);
   return (
-    <Card title={'Config example'}>
+    <Card title='Config example'>
       <Stack
-        itemsVerticalAlignment={'center'}
-        gap={'nogap'}
+        itemsVerticalAlignment='center'
+        gap='nogap'
         vertical={true}
-        itemsHorizontalAlignment={'left'}
+        itemsHorizontalAlignment='left'
       >
-        <Text variation={'strong'}>{name}</Text>
-        <Checkbox checked={true} />
+        <Text variation='strong'>A code</Text>
+        <Checkbox checked={checked} onChange={() => setChecked(!checked)} />
         <Text
-          variation={'strong'}
-          element={'p'}
-          className={'lorem-ipsum-dolar-sit-amet-howmuchlngcanyougo'}
+          variation='strong'
+          element='p'
+          className='lorem-ipsum-dolar-sit-amet-howmuchlngcanyougo'
         >
-          {'A code ' + 2}
+          {name}
         </Text>
         <Button
           appearance={open ? 'secondary' : 'primary'}
-          variation={'plainWithPadding'}
+          variation='filled'
           onClick={() => {
             setOpen(!open);
+            setShowModal(!showModal);
           }}
         >
-          {'Click here'}
+          Click here
         </Button>
       </Stack>
+      <Modal
+        title='Hello World'
+        open={showModal}
+        addFloatingCloseAction={true}
+        onClose={() => setShowModal(false)}
+      >
+        Wasssuppp
+      </Modal>
+      <DataTable
+        columns={[
+          { key: 'name', label: 'Name' },
+          { key: 'age', label: 'Age' }
+        ]}
+        data={[
+          { name: 'John', age: 25 },
+          { name: 'Jane', age: 25 }
+        ]}
+      />
     </Card>
   );
 }

@@ -124,7 +124,10 @@ function getAttributesFromConfig(compTree: ComponentTree) {
   return attributes;
 }
 
-function getJSX(compTree: ComponentTree, level: number = 0): string {
+function getComponentTreeJSX(
+  compTree: ComponentTree,
+  level: number = 0
+): string {
   const indentation = Array(level * INDENT_SPACES + 1).join(' ');
   if (typeof compTree !== 'object' || !compTree.comp) {
     return `${indentation}${compTree}`;
@@ -166,7 +169,7 @@ function getJSX(compTree: ComponentTree, level: number = 0): string {
   return `${openingTag}${hasChildren ? '\n' : ''}${
     Array.isArray(children)
       ? children
-          .map((child: ComponentTree) => getJSX(child, level + 1))
+          .map((child: ComponentTree) => getComponentTreeJSX(child, level + 1))
           .join(`\n`)
       : childrenIndentation + children
   }${hasChildren ? '\n' : ''}${closingTag}`;
@@ -210,6 +213,44 @@ function getAllComponentNames(compTree: ComponentTree) {
   ];
 }
 
+export function getComponentJSX(
+  compTree: ComponentTree,
+  compState: ComponentState
+) {
+  const stateDeclares = [];
+
+  const stateKeys = Object.keys(compState);
+  for (let i = 0; i < stateKeys.length; i++) {
+    const key = stateKeys[i];
+    stateDeclares.push(
+      `  const [${key}, set${capitalizeFirstLetter(
+        key
+      )}] = React.useState(${JSON.stringify(compState[key].default)});\n`
+    );
+  }
+  const compJsx = `export function MyComponent(){\n${stateDeclares.join(
+    ''
+  )}  return (\n${getComponentTreeJSX(compTree, 2)}\n  )\n}`;
+  return compJsx;
+}
+
+export function getComponentFileJSX(
+  compTree: ComponentTree,
+  compState: ComponentState
+) {
+  const importComponents = removeDuplicates(
+    getAllComponentNames(compTree).flat(Infinity)
+  );
+  const compJsx = getComponentJSX(compTree, compState);
+  const jsx =
+    importComponents.length > 0
+      ? `import React from 'react';\nimport { ${importComponents.join(
+          ', '
+        )} } from 'base-elements-react';\n\n${compJsx}`
+      : compJsx;
+  return jsx;
+}
+
 export function ComponentJSX({
   compTree,
   compState
@@ -225,30 +266,7 @@ export function ComponentJSX({
   const customStyleAux =
     theme === 'light' ? { backgroundColor: '#F5F8FA', border: 'none' } : {};
 
-  const importComponents = removeDuplicates(
-    getAllComponentNames(compTree).flat(Infinity)
-  );
-
-  const stateDeclares = [];
-
-  const stateKeys = Object.keys(compState);
-  for (let i = 0; i < stateKeys.length; i++) {
-    const key = stateKeys[i];
-    stateDeclares.push(
-      `  const [${key}, set${capitalizeFirstLetter(
-        key
-      )}] = React.useState(${JSON.stringify(compState[key].default)});\n`
-    );
-  }
-  const compJsx = `export function MyComponent(){\n${stateDeclares.join(
-    ''
-  )}  return (\n${getJSX(compTree, 2)}\n  )\n}`;
-  const jsx =
-    importComponents.length > 0
-      ? `import React from 'react';\nimport { ${importComponents.join(
-          ', '
-        )} } from 'base-elements-react';\n\n${compJsx}`
-      : compJsx;
+  const jsx = getComponentFileJSX(compTree, compState);
   return (
     <div
       style={{
@@ -256,19 +274,22 @@ export function ComponentJSX({
       }}
     >
       <div className='block-code-parent'>
-        <SyntaxHighlighter
-          children={jsx}
-          language={'jsx'}
-          PreTag='div'
-          customStyle={{
-            padding: '10px',
-            borderRadius: '5px',
-            fontSize: '85%',
-            lineHeight: 1.4,
-            ...customStyleAux
-          }}
-          {...styleProp}
-        />
+        <div>
+          <SyntaxHighlighter
+            children={jsx}
+            language={'jsx'}
+            PreTag='div'
+            customStyle={{
+              padding: '10px',
+              borderRadius: '5px',
+              fontSize: '85%',
+              lineHeight: 1.4,
+              ...customStyleAux
+            }}
+            {...styleProp}
+          />
+        </div>
+
         <CodeCopy content={jsx} />
       </div>
     </div>

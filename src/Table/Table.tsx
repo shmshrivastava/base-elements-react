@@ -162,7 +162,7 @@ export const TableCell = React.forwardRef<
   const tableContext = React.useContext(TableContext);
   const renderProps = { ...props };
   const RenderComponent =
-    props.element || tableContext.variant === 'head' ? 'th' : 'tr';
+    props.element || (tableContext.variant === 'head' ? 'th' : 'tr');
   const classNames = getClassName(
     'TableCell',
     tableCellComponentConfig,
@@ -214,6 +214,10 @@ export function TableHeadRow(props: TableHeadProps) {
 
 TableHeadRow.displayName = 'TableHeadRow';
 
+function customTableClassName(props: TableProps, customComponentName: string) {
+  return `${props.className || ''} Table-${customComponentName}`;
+}
+
 interface HeaderTableProps extends TableProps {
   header: React.ReactNode;
 }
@@ -222,7 +226,7 @@ export const HeaderTable = React.forwardRef<
   HTMLTableElement,
   React.PropsWithChildren<HeaderTableProps>
 >((props, ref) => {
-  const classNames = getClassName('Table', componentConfig, props);
+  const classNames = customTableClassName(props, 'HeaderTable');
   const renderProps = { ...props };
   delete renderProps.header;
   return (
@@ -234,3 +238,48 @@ export const HeaderTable = React.forwardRef<
 });
 
 HeaderTable.displayName = 'HeaderTable';
+
+interface DataColumnProps {
+  key: string;
+  label: string;
+}
+
+interface DataTableProps extends TableProps {
+  columns?: DataColumnProps[];
+  data: any[];
+}
+
+export const DataTable = React.forwardRef<HTMLTableElement, DataTableProps>(
+  (props, ref) => {
+    const classNames = customTableClassName(props, 'DataTable');
+    const renderProps = { ...props };
+    delete renderProps.columns;
+    return (
+      <Table ref={ref} {...renderProps} className={classNames}>
+        <TableHeadRow>
+          {props.columns &&
+            props.columns.map((column) => (
+              <TableHeaderCell key={column.key}>
+                {column.label || column.key}
+              </TableHeaderCell>
+            ))}
+        </TableHeadRow>
+        <TableBody>
+          {props.data &&
+            props.data.map((row, idx) => (
+              <TableRow key={idx}>
+                {props.columns &&
+                  props.columns.map((column, index) => (
+                    <TableDataCell key={'' + column.key + index}>
+                      {row[column.key]}
+                    </TableDataCell>
+                  ))}
+              </TableRow>
+            ))}
+        </TableBody>
+      </Table>
+    );
+  }
+);
+
+DataTable.displayName = 'DataTable';

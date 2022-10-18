@@ -7,5 +7,6 @@ export {
   TableDataCell,
   TableHeaderCell,
   TableHeadRow,
-  HeaderTable
+  HeaderTable,
+  DataTable
 } from './Table';

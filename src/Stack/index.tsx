@@ -2,5 +2,6 @@ export {
   default,
   HorizontalStack,
   VerticalStack,
-  CenteredContainer
+  CenteredContainer,
+  StackItem
 } from './Stack';

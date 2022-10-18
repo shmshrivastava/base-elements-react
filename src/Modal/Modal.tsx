@@ -34,10 +34,6 @@ export const Modal = React.forwardRef<
   HTMLDivElement,
   React.PropsWithChildren<ModalProps>
 >((props, ref) => {
-  if (!props.open) {
-    return <React.Fragment />;
-  }
-
   const containerComponentConfig = { styleKeys: [], classGenerator: {} };
   const containerClassNames = getClassName(
     'ModalContainer',
@@ -60,28 +56,29 @@ export const Modal = React.forwardRef<
     }
   };
 
-  const handleKeyPress = (event: KeyboardEvent) => {
-    if (
-      event.key === 'Escape' &&
-      !props.disallowCloseOnEscape &&
-      props.onClose
-    ) {
-      props.onClose();
-      return;
-    }
-    if (props.onKeyDown) {
-      props.onKeyDown(event as any);
-    }
-  };
-
   React.useEffect(() => {
+    const handleKeyPress = (event: KeyboardEvent) => {
+      if (
+        event.key === 'Escape' &&
+        !props.disallowCloseOnEscape &&
+        props.onClose
+      ) {
+        props.onClose();
+        return;
+      }
+      if (props.onKeyDown) {
+        props.onKeyDown(event as any);
+      }
+    };
     document.addEventListener('keydown', handleKeyPress);
 
     return () => {
       document.removeEventListener('keydown', handleKeyPress);
     };
   }, []);
-
+  if (!props.open) {
+    return <React.Fragment />;
+  }
   return (
     <div
       ref={ref}
@@ -157,6 +154,7 @@ export const ModalHeader = React.forwardRef<
   delete stackProps.className;
   delete stackProps.title;
   delete stackProps.titleElement;
+  delete stackProps.addCloseAction;
 
   return (
     <div ref={ref} className={classNames}>

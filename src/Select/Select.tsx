@@ -20,6 +20,7 @@ interface SelectProps {
 }
 
 interface SelectOptionProps extends React.ComponentPropsWithoutRef<'div'> {
+  className?: string;
   value?: string;
   selected?: boolean;
   onOptionSelect?: (value: string | undefined) => void;
