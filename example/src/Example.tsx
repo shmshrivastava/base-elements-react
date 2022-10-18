@@ -22,9 +22,10 @@ const componentTree = {
               props: {
                 label: '"Trying text field"',
                 value: 'name',
-                onChange: '(e) => setName(e.target.value)'
+                onChange: '(e) => setName(e.target.value)',
+                multiline: 'true'
               }
-          },
+            },
             {
               comp: 'Text',
               props: {

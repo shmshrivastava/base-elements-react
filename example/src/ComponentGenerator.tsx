@@ -40,7 +40,7 @@ function ComponentTreeGenerator({
   compTree: ComponentTree;
   scopedEval: any;
 }) {
-  const RenderComponent = components[compTree.comp] || 'div';
+  const RenderComponent = components[compTree.comp]['comp'] || 'div';
   const renderProps = { ...compTree.props };
   delete renderProps.children;
   let children = getChildrenValue(compTree, scopedEval);
@@ -151,8 +151,8 @@ function getComponentTreeJSX(
       compTree.comp +
       `\n${childrenIndentation}` +
       attributes.join(`\n${childrenIndentation}`) +
-      (hasChildren ? '' : ' /') +
-      `\n${indentation}>`;
+      // (hasChildren ? '' : ' /') +
+      `\n${indentation}${hasChildren ? '' : '/'}>`;
   }
   let closingTag = hasChildren ? `</${compTree.comp}>` : '';
   const children =
@@ -234,19 +234,43 @@ export function getComponentJSX(
   return compJsx;
 }
 
+function getGroupedImportsStatement(allImportedComponents: string[]) {
+  const groupedImports = {};
+  allImportedComponents.forEach((comp) => {
+    const compDef = components[comp];
+    groupedImports[compDef.importPath] =
+      groupedImports[compDef.importPath] || [];
+    groupedImports[compDef.importPath].push(comp);
+  });
+  const groupedImportStatements: string[] = [];
+  Object.keys(groupedImports).forEach((path) => {
+    const importComponents = groupedImports[path];
+    let componentsImportStatement = `import { ${importComponents.join(
+      ', '
+    )} } from '${path}';`;
+    if (componentsImportStatement.length > 80) {
+      componentsImportStatement = `import {\n  ${importComponents.join(
+        ',\n  '
+      )}\n} from '${path}';`;
+    }
+    groupedImportStatements.push(componentsImportStatement);
+  });
+  return groupedImportStatements.join('\n');
+}
+
 export function getComponentFileJSX(
   compTree: ComponentTree,
   compState: ComponentState
 ) {
+  const compJsx = getComponentJSX(compTree, compState);
   const importComponents = removeDuplicates(
     getAllComponentNames(compTree).flat(Infinity)
   );
-  const compJsx = getComponentJSX(compTree, compState);
+  const componentsImportStatement =
+    getGroupedImportsStatement(importComponents);
   const jsx =
     importComponents.length > 0
-      ? `import React from 'react';\nimport { ${importComponents.join(
-          ', '
-        )} } from 'base-elements-react';\n\n${compJsx}`
+      ? `import React from 'react';\n${componentsImportStatement}\n\n${compJsx}`
       : compJsx;
   return jsx;
 }

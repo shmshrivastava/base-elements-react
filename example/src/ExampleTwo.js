@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Card,
   Stack,
+  TextField,
   Text,
   Checkbox,
   Button,
@@ -11,7 +12,7 @@ import {
 
 export function MyComponent() {
   const [open, setOpen] = React.useState(false);
-  const [name] = React.useState('John Doe');
+  const [name, setName] = React.useState('John Doe');
   const [checked, setChecked] = React.useState(true);
   const [showModal, setShowModal] = React.useState(false);
   return (
@@ -22,6 +23,12 @@ export function MyComponent() {
         vertical={true}
         itemsHorizontalAlignment='left'
       >
+        <TextField
+          label='Trying text field'
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          multiline={true}
+        />
         <Text variation='strong'>A code</Text>
         <Checkbox checked={checked} onChange={() => setChecked(!checked)} />
         <Text
