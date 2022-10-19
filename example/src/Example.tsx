@@ -9,7 +9,7 @@ import { ComponentGenerator, ComponentJSX } from './ComponentGenerator';
 // }
 
 const componentTree = {
-  comp: 'Card',
+  comp: 'Page',
   props: {
     title: '"Config example"',
     children: [
@@ -23,7 +23,8 @@ const componentTree = {
                 label: '"Trying text field"',
                 value: 'name',
                 onChange: '(e) => setName(e.target.value)',
-                multiline: 'true'
+                multiline: 'true',
+                error: '"Name exists"'
               }
             },
             {
@@ -60,7 +61,7 @@ const componentTree = {
             }
           ],
           itemsVerticalAlignment: '"center"',
-          gap: '"nogap"',
+          gap: '"normal"',
           vertical: 'true',
           itemsHorizontalAlignment: '"left"'
         }
@@ -79,7 +80,8 @@ const componentTree = {
         comp: 'DataTable',
         props: {
           columns: '[{key: "name", label: "Name"}, {key: "age", label: "Age"}]',
-          data: '[{name: "John", age: 25}, {name: "Jane", age: 25}]'
+          data: '[{name: "John", age: 25}, {name: "Jane", age: 25}]',
+          hasRowDivider: 'true'
         }
       }
     ]

@@ -151,7 +151,6 @@ function getComponentTreeJSX(
       compTree.comp +
       `\n${childrenIndentation}` +
       attributes.join(`\n${childrenIndentation}`) +
-      // (hasChildren ? '' : ' /') +
       `\n${indentation}${hasChildren ? '' : '/'}>`;
   }
   let closingTag = hasChildren ? `</${compTree.comp}>` : '';

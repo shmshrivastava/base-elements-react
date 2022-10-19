@@ -39,6 +39,7 @@ import {
   Input,
   TextArea
 } from 'base-elements-react';
+import { Page } from './Page';
 
 export const components = {
   ClickableIcon: { comp: ClickableIcon, importPath: 'base-elements-react' },
@@ -85,7 +86,8 @@ export const components = {
   ComponentTitle: { comp: ComponentTitle, importPath: 'base-elements-react' },
   TextField: { comp: TextField, importPath: 'base-elements-react' },
   Input: { comp: Input, importPath: 'base-elements-react' },
-  TextArea: { comp: TextArea, importPath: 'base-elements-react' }
+  TextArea: { comp: TextArea, importPath: 'base-elements-react' },
+  Page: { comp: Page, importPath: './Page' }
 };
 
 export const propTypes = {
@@ -984,6 +986,15 @@ export const propTypes = {
     placeholder: {
       type: 'string',
       default: ''
+    }
+  },
+  Page: {
+    title: {
+      type: 'component',
+      default: ''
+    },
+    children: {
+      type: 'component'
     }
   }
 };

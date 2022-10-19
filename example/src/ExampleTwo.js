@@ -1,6 +1,6 @@
 import React from 'react';
+import { Page } from './Page';
 import {
-  Card,
   Stack,
   TextField,
   Text,
@@ -16,7 +16,7 @@ export function MyComponent() {
   const [checked, setChecked] = React.useState(true);
   const [showModal, setShowModal] = React.useState(false);
   return (
-    <Card title='Config example'>
+    <Page title='Config example'>
       <Stack
         itemsVerticalAlignment='center'
         gap='nogap'
@@ -67,6 +67,6 @@ export function MyComponent() {
           { name: 'Jane', age: 25 }
         ]}
       />
-    </Card>
+    </Page>
   );
 }
