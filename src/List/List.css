@@ -1,0 +1,59 @@
+.List-ListContent {
+  display: flex;
+  flex: 1;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  padding: 5px;
+  margin: -5px;
+}
+
+.List {
+  display: flex;
+  height: 100%;
+  overflow: visible;
+  box-sizing: border-box;
+}
+
+.List.List--direction-horizontal {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.List.List--direction-horizontal > .List-ListContent {
+  flex-direction: row;
+}
+
+.List.List--direction-vertical {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.List.List--direction-vertical > .List-ListContent {
+  flex-direction: column;
+}
+
+.List.List--gap-nogap > .List-ListContent {
+  gap: 0;
+}
+
+.List.List--gap-normal > .List-ListContent,
+.List.List--gap-true > .List-ListContent {
+  gap: var(--gap);
+}
+
+.List.List--gap-small > .List-ListContent {
+  gap: var(--gapSmall);
+}
+
+.List.List--gap-smaller > .List-ListContent {
+  gap: var(--gapSmaller);
+}
+
+.List.List--gap-large > .List-ListContent {
+  gap: var(--gapLarge);
+}
+
+.List.List--gap-larger > .List-ListContent {
+  gap: var(--gapLarger);
+}

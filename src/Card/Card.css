@@ -3,6 +3,7 @@
   box-shadow: var(--shadowDims) var(--shadowColor);
   padding: var(--padding);
   border-radius: var(--borderRadius);
+  z-index: 10;
 }
 
 .Card-Header-content > .Text {
@@ -13,7 +14,7 @@
   margin: var(--headingMargin);
 }
 
-.Card.Card--noPadding{
+.Card.Card--noPadding {
   padding: 0;
 }
 
