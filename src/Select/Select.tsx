@@ -119,6 +119,9 @@ export const Select = React.forwardRef<
     : [props.children];
 
   children.forEach((element: React.ReactElement) => {
+    if (!element || !element.props) {
+      return;
+    }
     options.push({
       value: element.props.value,
       label: element.props.children
