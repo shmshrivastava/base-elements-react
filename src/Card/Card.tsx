@@ -25,8 +25,14 @@ export const Card = React.forwardRef<
   React.PropsWithChildren<CardProps>
 >((props, ref) => {
   const classNames = getClassName('Card', componentConfig, props);
+  const renderProps = { ...props };
+  delete renderProps.elevation;
+  delete renderProps.className;
+  delete renderProps.noPadding;
+  delete renderProps.title;
+  delete renderProps.titleElement;
   return (
-    <div ref={ref} className={classNames}>
+    <div ref={ref} className={classNames} {...renderProps}>
       {props.title ? (
         <CardHeader title={props.title} titleElement={props.titleElement} />
       ) : (

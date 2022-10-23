@@ -26,6 +26,15 @@ function getAdditionalClassesForConfig(
       }
     }
   });
+  if (Object.prototype.hasOwnProperty.call(props, 'visibility')) {
+    if (props.visibility === true) {
+      classes += ` visibility-visible`;
+    } else if (props.visibility === false) {
+      classes += ` display-none`;
+    } else {
+      classes += ` visibility-${props.visibility}`;
+    }
+  }
   return classes;
 }
 

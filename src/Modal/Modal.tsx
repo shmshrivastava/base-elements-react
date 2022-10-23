@@ -41,7 +41,6 @@ export const Modal = React.forwardRef<
     props
   );
 
-  const closeActionRef = React.useRef<HTMLDivElement | null>(null);
   const modalClassNames = getClassName('Modal', componentConfig, {});
   const modalRef = React.useRef<HTMLDivElement | null>(null);
 
@@ -85,10 +84,9 @@ export const Modal = React.forwardRef<
       onClick={handleContainerClick}
       className={containerClassNames}
     >
-      <div ref={modalRef} className={modalClassNames}>
+      <div ref={modalRef!} className={modalClassNames}>
         {props.addFloatingCloseAction ? (
           <div
-            ref={closeActionRef}
             className='Modal-close-action'
             style={{
               transform: `translate(${

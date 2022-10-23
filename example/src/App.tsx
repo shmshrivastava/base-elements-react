@@ -10,7 +10,7 @@ import {
   VerticalStack,
   Card,
   Button
-} from 'base-elements-react/dist';
+} from 'base-elements-react';
 import ButtonSection from './sections/ButtonSection';
 import TextFieldSection from './sections/TextFieldSection';
 import CheckboxSection from './sections/CheckboxSection';

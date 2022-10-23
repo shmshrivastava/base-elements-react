@@ -3,5 +3,21 @@ label {
 }
 
 [class$='--fullWidth'] {
-  width: 100%;
+  width: 100% !important;
+}
+
+.visibility-hidden {
+  visibility: hidden !important;
+}
+
+.visibility-visible {
+  visibility: visible !important;
+}
+
+.visibility-collapse {
+  visibility: collapse !important;
+}
+
+.display-none {
+  display: none !important;
 }
