@@ -21,7 +21,11 @@ const componentConfig: ComponentConfig = {
 
 export const List = React.forwardRef<HTMLDivElement, ListProps>(
   (props, ref) => {
-    const data = Array.isArray(props.data) ? props.data : [];
+    const data = Array.isArray(props.data)
+      ? props.data
+      : props.data === null || typeof props.data === 'undefined'
+      ? []
+      : [props.data];
     const classNames = getClassName('List', componentConfig, props);
     const RenderComponent = props.component || 'div';
     return (

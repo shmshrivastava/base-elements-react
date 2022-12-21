@@ -58,7 +58,7 @@ export const ClickableIcon = React.forwardRef<
   return (
     <Button
       ref={ref}
-      appearance='secondary'
+      appearance={renderProps.appearance || 'secondary'}
       variation='plainWithPadding'
       className={customButtonClassName(props, 'ClickableIcon')}
       {...renderProps}
